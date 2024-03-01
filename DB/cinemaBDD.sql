@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `acteur` (
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.acteur : ~44 rows (environ)
-REPLACE INTO `acteur` (`id_acteur`, `id_personne`) VALUES
+INSERT INTO `acteur` (`id_acteur`, `id_personne`) VALUES
 	(1, 1),
 	(2, 3),
 	(4, 4),
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `casting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.casting : ~52 rows (environ)
-REPLACE INTO `casting` (`id_film`, `id_acteur`, `id_role`) VALUES
+INSERT INTO `casting` (`id_film`, `id_acteur`, `id_role`) VALUES
 	(1, 1, 1),
 	(2, 1, 1),
 	(3, 1, 7),
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `categoriser` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.categoriser : ~15 rows (environ)
-REPLACE INTO `categoriser` (`id_film`, `id_genre`) VALUES
+INSERT INTO `categoriser` (`id_film`, `id_genre`) VALUES
 	(1, 1),
 	(2, 1),
 	(3, 1),
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `film` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.film : ~10 rows (environ)
-REPLACE INTO `film` (`id_film`, `titre_film`, `date_sortie`, `duree`, `synopsis`, `note`, `affiche`, `id_realisateur`) VALUES
+INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie`, `duree`, `synopsis`, `note`, `affiche`, `id_realisateur`) VALUES
 	(1, 'Terminator', '1984-10-26', 107, NULL, NULL, NULL, 1),
 	(2, 'Terminator 2 : Le Jugement dernier', '1991-07-03', 137, NULL, NULL, NULL, 1),
 	(3, 'Predator', '1987-06-12', 107, NULL, NULL, NULL, 2),
@@ -206,8 +206,8 @@ CREATE TABLE IF NOT EXISTS `genre` (
   PRIMARY KEY (`id_genre`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.genre : ~0 rows (environ)
-REPLACE INTO `genre` (`id_genre`, `nom_genre`) VALUES
+-- Listage des données de la table antoine_cinema.genre : ~5 rows (environ)
+INSERT INTO `genre` (`id_genre`, `nom_genre`) VALUES
 	(1, 'Science Fiction'),
 	(2, 'Horreur'),
 	(3, 'Action'),
@@ -221,62 +221,63 @@ CREATE TABLE IF NOT EXISTS `personne` (
   `prenom` varchar(50) NOT NULL,
   `sexe` varchar(50) NOT NULL,
   `date_naissance` date NOT NULL,
+  `biographie` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
   `photo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.personne : ~50 rows (environ)
-REPLACE INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`, `photo`) VALUES
-	(1, 'Schwarzenegger', 'Arnold', 'H', '1947-06-30', NULL),
-	(2, 'Cameron', 'James', 'H', '1954-08-16', NULL),
-	(3, 'Hamilton', 'Linda', 'F', '1956-09-26', NULL),
-	(4, 'Patrick', 'Robert', 'H', '1958-11-05', NULL),
-	(5, 'Biehn', 'Michael', 'H', '1956-07-31', NULL),
-	(6, 'Furlong', 'Edward', 'H', '1977-08-02', NULL),
-	(7, 'McTiernan', 'John', 'H', '1951-01-08', NULL),
-	(8, 'Peter Hall', 'Kevin', 'H', '1955-05-09', NULL),
-	(9, 'Weathers', 'Carl', 'H', '1948-01-14', NULL),
-	(10, 'Scott', 'Ridley', 'H', '1937-11-30', NULL),
-	(11, 'Carrillo', 'Elpidia', 'F', '1961-08-16', NULL),
-	(12, 'Duke', 'Bill', 'H', '1943-02-26', NULL),
-	(13, 'Landham', 'Sonny', 'H', '1941-02-11', NULL),
-	(14, 'Chaves', 'Richard', 'H', '1951-10-09', NULL),
-	(15, 'Ventura', 'Jesse', 'H', '1951-07-15', NULL),
-	(16, 'Black', 'Shane', 'H', '1961-12-16', NULL),
-	(17, 'Armstrong', 'R. G.', 'H', '1917-04-07', NULL),
-	(18, 'Thorsen', 'Sven-Ole', 'H', '1944-09-24', NULL),
-	(19, 'Cartwright', 'Veronica', 'F', '1949-04-20', NULL),
-	(20, 'Holm', 'Ian', 'H', '1931-09-12', NULL),
-	(21, 'Hurt', 'John', 'H', '1940-01-22', NULL),
-	(22, 'Kotto', 'Yaphet', 'H', '1939-11-15', NULL),
-	(23, 'Skerritt', 'Tom', 'H', '1933-08-25', NULL),
-	(24, 'Stanton', 'Harry Dean', 'H', '1926-07-14', NULL),
-	(25, 'Weaver', 'Sigourney', 'F', '1949-10-08', NULL),
-	(26, 'Badejo', 'Bolaji', 'H', '1953-08-23', NULL),
-	(27, 'Horton', 'Helen', 'F', '1923-11-21', NULL),
-	(28, 'Reiser', 'Paul', 'H', '1956-03-30', NULL),
-	(29, 'Henriksen', 'Lance', 'H', '1940-05-05', NULL),
-	(30, 'Henn', 'Carrie', 'F', '1976-05-07', NULL),
-	(31, 'Paxton', 'Bill', 'H', '1955-05-17', NULL),
-	(32, 'Goldstein', 'Jenette', 'F', '1960-02-04', NULL),
-	(33, 'Hope', 'William', 'H', '1955-03-02', NULL),
-	(34, 'Matthews', 'Al', 'H', '1942-11-21', NULL),
-	(35, 'Honda', 'Ishirou', 'H', '1911-05-07', NULL),
-	(36, 'Takarada', 'Akira', 'H', '1634-04-29', NULL),
-	(37, 'Kouchi', 'Momoko', 'F', '1932-03-07', NULL),
-	(38, 'Hirata', 'Akihiko', 'H', '1927-12-26', NULL),
-	(39, 'Anno', 'Hideaki', 'H', '1960-05-22', NULL),
-	(40, 'Hasegawa', 'Hiroki', 'H', '1977-03-07', NULL),
-	(41, 'Ishihara', 'Satomi ', 'F', '1986-12-24', NULL),
-	(42, 'Takenouchi', 'Yutaka', 'H', '1971-01-02', NULL),
-	(45, 'Chaplin', 'Charlie', 'H', '1889-04-16', NULL),
-	(46, 'Goddard', 'Paulette', 'F', '1910-06-03', NULL),
-	(47, 'Villeneuve', 'Denis', 'H', '1967-10-03', NULL),
-	(48, 'Chalamet', 'Timothée', 'H', '1995-12-27', NULL),
-	(49, 'Ferguson', 'Rebecca', 'F', '1983-10-19', NULL),
-	(50, 'Isaac', 'Oscar', 'H', '1979-03-09', NULL),
-	(51, 'Coleman', 'Zendaya', 'F', '1996-09-01', NULL),
-	(52, 'Momoa', 'Jason', 'H', '1979-08-01', NULL);
+INSERT INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`, `biographie`, `photo`) VALUES
+	(1, 'Schwarzenegger', 'Arnold', 'H', '1947-06-30', NULL, NULL),
+	(2, 'Cameron', 'James', 'H', '1954-08-16', NULL, NULL),
+	(3, 'Hamilton', 'Linda', 'F', '1956-09-26', NULL, NULL),
+	(4, 'Patrick', 'Robert', 'H', '1958-11-05', NULL, NULL),
+	(5, 'Biehn', 'Michael', 'H', '1956-07-31', NULL, NULL),
+	(6, 'Furlong', 'Edward', 'H', '1977-08-02', NULL, NULL),
+	(7, 'McTiernan', 'John', 'H', '1951-01-08', NULL, NULL),
+	(8, 'Peter Hall', 'Kevin', 'H', '1955-05-09', NULL, NULL),
+	(9, 'Weathers', 'Carl', 'H', '1948-01-14', NULL, NULL),
+	(10, 'Scott', 'Ridley', 'H', '1937-11-30', NULL, NULL),
+	(11, 'Carrillo', 'Elpidia', 'F', '1961-08-16', NULL, NULL),
+	(12, 'Duke', 'Bill', 'H', '1943-02-26', NULL, NULL),
+	(13, 'Landham', 'Sonny', 'H', '1941-02-11', NULL, NULL),
+	(14, 'Chaves', 'Richard', 'H', '1951-10-09', NULL, NULL),
+	(15, 'Ventura', 'Jesse', 'H', '1951-07-15', NULL, NULL),
+	(16, 'Black', 'Shane', 'H', '1961-12-16', NULL, NULL),
+	(17, 'Armstrong', 'R. G.', 'H', '1917-04-07', NULL, NULL),
+	(18, 'Thorsen', 'Sven-Ole', 'H', '1944-09-24', NULL, NULL),
+	(19, 'Cartwright', 'Veronica', 'F', '1949-04-20', NULL, NULL),
+	(20, 'Holm', 'Ian', 'H', '1931-09-12', NULL, NULL),
+	(21, 'Hurt', 'John', 'H', '1940-01-22', NULL, NULL),
+	(22, 'Kotto', 'Yaphet', 'H', '1939-11-15', NULL, NULL),
+	(23, 'Skerritt', 'Tom', 'H', '1933-08-25', NULL, NULL),
+	(24, 'Stanton', 'Harry Dean', 'H', '1926-07-14', NULL, NULL),
+	(25, 'Weaver', 'Sigourney', 'F', '1949-10-08', NULL, NULL),
+	(26, 'Badejo', 'Bolaji', 'H', '1953-08-23', NULL, NULL),
+	(27, 'Horton', 'Helen', 'F', '1923-11-21', NULL, NULL),
+	(28, 'Reiser', 'Paul', 'H', '1956-03-30', NULL, NULL),
+	(29, 'Henriksen', 'Lance', 'H', '1940-05-05', NULL, NULL),
+	(30, 'Henn', 'Carrie', 'F', '1976-05-07', NULL, NULL),
+	(31, 'Paxton', 'Bill', 'H', '1955-05-17', NULL, NULL),
+	(32, 'Goldstein', 'Jenette', 'F', '1960-02-04', NULL, NULL),
+	(33, 'Hope', 'William', 'H', '1955-03-02', NULL, NULL),
+	(34, 'Matthews', 'Al', 'H', '1942-11-21', NULL, NULL),
+	(35, 'Honda', 'Ishirou', 'H', '1911-05-07', NULL, NULL),
+	(36, 'Takarada', 'Akira', 'H', '1634-04-29', NULL, NULL),
+	(37, 'Kouchi', 'Momoko', 'F', '1932-03-07', NULL, NULL),
+	(38, 'Hirata', 'Akihiko', 'H', '1927-12-26', NULL, NULL),
+	(39, 'Anno', 'Hideaki', 'H', '1960-05-22', NULL, NULL),
+	(40, 'Hasegawa', 'Hiroki', 'H', '1977-03-07', NULL, NULL),
+	(41, 'Ishihara', 'Satomi ', 'F', '1986-12-24', NULL, NULL),
+	(42, 'Takenouchi', 'Yutaka', 'H', '1971-01-02', NULL, NULL),
+	(45, 'Chaplin', 'Charlie', 'H', '1889-04-16', NULL, NULL),
+	(46, 'Goddard', 'Paulette', 'F', '1910-06-03', NULL, NULL),
+	(47, 'Villeneuve', 'Denis', 'H', '1967-10-03', NULL, NULL),
+	(48, 'Chalamet', 'Timothée', 'H', '1995-12-27', NULL, NULL),
+	(49, 'Ferguson', 'Rebecca', 'F', '1983-10-19', NULL, NULL),
+	(50, 'Isaac', 'Oscar', 'H', '1979-03-09', NULL, NULL),
+	(51, 'Coleman', 'Zendaya', 'F', '1996-09-01', NULL, NULL),
+	(52, 'Momoa', 'Jason', 'H', '1979-08-01', NULL, NULL);
 
 -- Listage de la structure de table antoine_cinema. realisateur
 CREATE TABLE IF NOT EXISTS `realisateur` (
@@ -288,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `realisateur` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.realisateur : ~7 rows (environ)
-REPLACE INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
+INSERT INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
 	(1, 2),
 	(2, 7),
 	(3, 10),
@@ -305,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.role : ~46 rows (environ)
-REPLACE INTO `role` (`id_role`, `nom_role`) VALUES
+INSERT INTO `role` (`id_role`, `nom_role`) VALUES
 	(1, 'T-800'),
 	(2, 'Sarah Connor'),
 	(3, 'Kyle Reese'),
