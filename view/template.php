@@ -13,7 +13,9 @@
             <div class="navbarContent">
                 <div class="navlogo"><i class="fa-solid fa-film"></i></div>
 
-                <span class="navtitle">CINEMA DB</span>
+                <span class="navtitle">
+                    <a href="view/homePage.php">CINEMA DB</a>
+                </span>
                 
                 <div class="searchbar"><i class="fa-solid fa-magnifying-glass"></i></div>
 
@@ -26,16 +28,16 @@
                 <div class="menu">
                     <ul>
                         <li>
-                            <a href="view/listFilms.php">MOVIES</a>
+                            <a href="index.php?action='listMovies'">MOVIES</a>
                         </li>
                         <li>
-                            <a href="view/listActors.php">ACTORS</a>
+                            <a href="view/lists/listActors.php">ACTORS</a>
                         </li>
                         <li>
-                            <a href="view/listDirectors.php">DIRECTORS</a>
+                            <a href="view/lists/listDirectors.php">DIRECTORS</a>
                         </li>
                         <li>
-                            <a href="view/contact.php">CONTACT US</a>
+                            <a href="view/lists/contact.php">CONTACT US</a>
                         </li>
                     </ul>
                 </div>
@@ -46,7 +48,6 @@
 
     <main>
         <div id="content">
-            <?= $title_secondary ?>
             <?= $content ?>
         </div>
     </main>
