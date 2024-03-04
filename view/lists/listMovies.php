@@ -14,7 +14,7 @@
     </form>
 
     <div class="opt">
-        <a href="view/addFilm.php">Add movie</a>
+        <a href="view/addpage/addMovie.php">Add movie</a>
     </div>
 </div>
 
