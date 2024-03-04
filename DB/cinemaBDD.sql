@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `acteur` (
   CONSTRAINT `acteur_ibfk_1` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.acteur : ~44 rows (environ)
+-- Listage des données de la table antoine_cinema.acteur : ~0 rows (environ)
 INSERT INTO `acteur` (`id_acteur`, `id_personne`) VALUES
 	(1, 1),
 	(2, 3),
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `casting` (
   CONSTRAINT `casting_ibfk_3` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.casting : ~52 rows (environ)
+-- Listage des données de la table antoine_cinema.casting : ~0 rows (environ)
 INSERT INTO `casting` (`id_film`, `id_acteur`, `id_role`) VALUES
 	(1, 1, 1),
 	(2, 1, 1),
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `categoriser` (
   CONSTRAINT `categoriser_ibfk_2` FOREIGN KEY (`id_genre`) REFERENCES `genre` (`id_genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.categoriser : ~15 rows (environ)
+-- Listage des données de la table antoine_cinema.categoriser : ~0 rows (environ)
 INSERT INTO `categoriser` (`id_film`, `id_genre`) VALUES
 	(1, 1),
 	(2, 1),
@@ -180,24 +180,25 @@ CREATE TABLE IF NOT EXISTS `film` (
   `synopsis` text,
   `note` int DEFAULT NULL,
   `affiche` varchar(255) DEFAULT NULL,
-  `id_realisateur` int NOT NULL,
+  `img_large` varchar(255) DEFAULT NULL,
+  `id_realisateur` int DEFAULT NULL,
   PRIMARY KEY (`id_film`),
   KEY `id_realisateur` (`id_realisateur`),
   CONSTRAINT `film_ibfk_1` FOREIGN KEY (`id_realisateur`) REFERENCES `realisateur` (`id_realisateur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.film : ~10 rows (environ)
-INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie`, `duree`, `synopsis`, `note`, `affiche`, `id_realisateur`) VALUES
-	(1, 'Terminator', '1984-10-26', 107, NULL, NULL, NULL, 1),
-	(2, 'Terminator 2 : Le Jugement dernier', '1991-07-03', 137, NULL, NULL, NULL, 1),
-	(3, 'Predator', '1987-06-12', 107, NULL, NULL, NULL, 2),
-	(4, 'Alien, Le Huitième Passager', '1979-05-25', 117, NULL, NULL, NULL, 3),
-	(5, 'Aliens, le retour', '1986-07-18', 137, NULL, NULL, NULL, 1),
-	(6, 'Godzilla (1954)', '1954-11-03', 97, NULL, NULL, NULL, 4),
-	(7, 'Shin Godzilla', '2016-01-29', 120, NULL, NULL, NULL, 5),
-	(8, 'Le Dictateur', '1940-10-15', 124, NULL, NULL, NULL, 6),
-	(9, 'Dune ', '2021-09-15', 155, NULL, NULL, NULL, 7),
-	(10, 'Dune, deuxième partie', '2024-02-28', 166, NULL, NULL, NULL, 7);
+INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie`, `duree`, `synopsis`, `note`, `affiche`, `img_large`, `id_realisateur`) VALUES
+	(1, 'Terminator', '1984-10-26', 107, NULL, NULL, 'public/img/terminator_affiche.jpg', 'public/img/terminator_large.jpg', 1),
+	(2, 'Terminator 2 : Le Jugement dernier', '1991-07-03', 137, NULL, NULL, 'public/img/terminator2_affiche.jpg', 'public/img/terminator2_large.jpg', 1),
+	(3, 'Predator', '1987-06-12', 107, NULL, NULL, NULL, NULL, 2),
+	(4, 'Alien, Le Huitième Passager', '1979-05-25', 117, NULL, NULL, NULL, NULL, 3),
+	(5, 'Aliens, le retour', '1986-07-18', 137, NULL, NULL, NULL, NULL, 1),
+	(6, 'Godzilla (1954)', '1954-11-03', 97, NULL, NULL, NULL, NULL, 4),
+	(7, 'Shin Godzilla', '2016-01-29', 120, NULL, NULL, NULL, NULL, 5),
+	(8, 'Le Dictateur', '1940-10-15', 124, NULL, NULL, NULL, NULL, 6),
+	(9, 'Dune ', '2021-09-15', 155, NULL, NULL, NULL, NULL, 7),
+	(10, 'Dune, deuxième partie', '2024-02-28', 166, NULL, NULL, NULL, NULL, 7);
 
 -- Listage de la structure de table antoine_cinema. genre
 CREATE TABLE IF NOT EXISTS `genre` (
@@ -206,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `genre` (
   PRIMARY KEY (`id_genre`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.genre : ~5 rows (environ)
+-- Listage des données de la table antoine_cinema.genre : ~0 rows (environ)
 INSERT INTO `genre` (`id_genre`, `nom_genre`) VALUES
 	(1, 'Science Fiction'),
 	(2, 'Horreur'),
@@ -226,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `personne` (
   PRIMARY KEY (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.personne : ~50 rows (environ)
+-- Listage des données de la table antoine_cinema.personne : ~4 rows (environ)
 INSERT INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`, `biographie`, `photo`) VALUES
 	(1, 'Schwarzenegger', 'Arnold', 'H', '1947-06-30', NULL, NULL),
 	(2, 'Cameron', 'James', 'H', '1954-08-16', NULL, NULL),
@@ -288,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `realisateur` (
   CONSTRAINT `realisateur_ibfk_1` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.realisateur : ~7 rows (environ)
+-- Listage des données de la table antoine_cinema.realisateur : ~0 rows (environ)
 INSERT INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
 	(1, 2),
 	(2, 7),
@@ -312,37 +313,37 @@ INSERT INTO `role` (`id_role`, `nom_role`) VALUES
 	(3, 'Kyle Reese'),
 	(4, 'T-1000'),
 	(6, 'John Connor'),
-	(7, 'Major Alan "Dutch" Schaefer'),
+	(7, 'Alan "Dutch" Schaefer'),
 	(8, 'le Predator'),
 	(9, 'George Dillon'),
 	(10, 'Anna Goncalves'),
-	(11, 'Sgt. Mac Elliot'),
+	(11, 'Mac Elliot'),
 	(12, 'Billy Sole'),
 	(13, 'Jorge "Poncho" Ramirez'),
 	(14, 'Blain Cooper'),
 	(15, 'Rick Hawkins'),
-	(16, 'Général Homer Phillips'),
+	(16, 'Homer Phillips'),
 	(17, 'le conseiller militaire soviétique'),
-	(18, 'la navigatrice Joan Marie Lambert'),
-	(19, 'l\'officier scientifique Ash'),
-	(20, 'l\'officier en second Gilbert Ward « Thomas » Kane'),
-	(21, 'le chef-ingénieur Dennis Monroe Parker'),
-	(22, 'le capitaine Arthur Koblenz Dallas'),
-	(23, 'le technicien Samuel Elias Brett'),
-	(24, 'le lieutenant Ellen Louise Ripley'),
+	(18, 'Joan Marie Lambert'),
+	(19, 'Ash'),
+	(20, 'Gilbert Ward « Thomas » Kane'),
+	(21, 'Dennis Monroe Parker'),
+	(22, 'Arthur Koblenz Dallas'),
+	(23, 'Samuel Elias Brett'),
+	(24, 'Ellen Louise Ripley'),
 	(25, 'le Xenomorph'),
 	(26, 'l\'ordinateur de bord "Maman" (voix)'),
-	(27, 'le caporal Dwayne Hicks'),
+	(27, 'Dwayne Hicks'),
 	(28, 'Carter J. Burke'),
-	(29, 'l’androïde Bishop (341-B)'),
+	(29, 'Bishop (341-B)'),
 	(30, 'Rebecca "Newt" Jorden'),
-	(31, 'le 1re classe Hudson'),
-	(32, 'la 1re classe Vasquez'),
-	(33, 'le lieutenant Gorman'),
-	(34, 'le sergent Apone'),
+	(31, 'Hudson'),
+	(32, 'Vasquez'),
+	(33, 'Gorman'),
+	(34, 'Apone'),
 	(35, 'Hideto Ogata'),
 	(36, 'Emiko Yamane'),
-	(37, 'le professeur Daisuke Serizawa'),
+	(37, 'Daisuke Serizawa'),
 	(38, 'Rando Yaguchi'),
 	(39, 'Kayoko Ann Patterson'),
 	(40, 'Hideki Akasaka'),
