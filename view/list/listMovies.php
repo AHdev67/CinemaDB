@@ -17,7 +17,7 @@
         </form>
 
         <div class="opt">
-            <a href="view/addpage/addMovie.php">Add movie</a>
+            <a href="">Add movie</a>
         </div>
     </div>
 
@@ -26,8 +26,9 @@
             <?php
                 foreach($queryMovieInfo -> fetchALL() as $film){?>
                     <tr>
-                        <td><?= $film["titre_film"] ?></td>
-                        <td>(<?= $film["date_sortie"] ?>)</td>
+                        <td><a href=""><?= $film["titre_film"] ?></a></td>
+                        <td><a href="">(<?= $film["date"] ?>)</a></td>
+                        <td><a href=""><?= $film["realisateurFilm"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>
