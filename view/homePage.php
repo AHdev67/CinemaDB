@@ -4,11 +4,17 @@
     <h1>DISCOVER</h1>
     <div class="caroussel">
         <div class="arrow" id="next"><i class="fa-solid fa-chevron-right"></i></div>
-
-        <figure class="carousselitem">
-            <img src="" alt="background dune 1">
-        </figure>
-
+        <?php
+            foreach($queryMovieDiscover -> fetchALL() as $film){?>
+                <div class="carousselitem">
+                    <figure class="carousselimage">
+                        <img src="<?=$film["affiche"] ?>" alt="background dune 1">
+                    </figure>
+                    <div class="carousseltitle">
+                        <?=$film["titre_film"].", ".$film["date"].", ".$film["realisateurFilm"] ?>
+                    </div>
+                </div>
+        <?php } ?>
         <div class="arrow" id="previous"><i class="fa-solid fa-chevron-left"></i></div>
     </div>
 </div>
