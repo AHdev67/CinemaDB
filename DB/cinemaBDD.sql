@@ -16,7 +16,7 @@
 
 
 -- Listage de la structure de la base pour antoine_cinema
-CREATE DATABASE IF NOT EXISTS `antoine_cinema` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `antoine_cinema` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `antoine_cinema`;
 
 -- Listage de la structure de table antoine_cinema. acteur
@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS `acteur` (
   CONSTRAINT `acteur_ibfk_1` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.acteur : ~0 rows (environ)
-INSERT INTO `acteur` (`id_acteur`, `id_personne`) VALUES
+-- Listage des données de la table antoine_cinema.acteur : ~44 rows (environ)
+REPLACE INTO `acteur` (`id_acteur`, `id_personne`) VALUES
 	(1, 1),
 	(2, 3),
 	(4, 4),
@@ -88,8 +88,8 @@ CREATE TABLE IF NOT EXISTS `casting` (
   CONSTRAINT `casting_ibfk_3` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.casting : ~0 rows (environ)
-INSERT INTO `casting` (`id_film`, `id_acteur`, `id_role`) VALUES
+-- Listage des données de la table antoine_cinema.casting : ~52 rows (environ)
+REPLACE INTO `casting` (`id_film`, `id_acteur`, `id_role`) VALUES
 	(1, 1, 1),
 	(2, 1, 1),
 	(3, 1, 7),
@@ -153,8 +153,8 @@ CREATE TABLE IF NOT EXISTS `categoriser` (
   CONSTRAINT `categoriser_ibfk_2` FOREIGN KEY (`id_genre`) REFERENCES `genre` (`id_genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.categoriser : ~0 rows (environ)
-INSERT INTO `categoriser` (`id_film`, `id_genre`) VALUES
+-- Listage des données de la table antoine_cinema.categoriser : ~15 rows (environ)
+REPLACE INTO `categoriser` (`id_film`, `id_genre`) VALUES
 	(1, 1),
 	(2, 1),
 	(3, 1),
@@ -174,13 +174,13 @@ INSERT INTO `categoriser` (`id_film`, `id_genre`) VALUES
 -- Listage de la structure de table antoine_cinema. film
 CREATE TABLE IF NOT EXISTS `film` (
   `id_film` int NOT NULL AUTO_INCREMENT,
-  `titre_film` varchar(50) NOT NULL,
+  `titre_film` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date_sortie` date NOT NULL,
   `duree` int NOT NULL,
-  `synopsis` text,
+  `synopsis` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `note` int DEFAULT NULL,
-  `affiche` varchar(255) DEFAULT NULL,
-  `img_large` varchar(255) DEFAULT NULL,
+  `affiche` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `img_large` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `id_realisateur` int DEFAULT NULL,
   PRIMARY KEY (`id_film`),
   KEY `id_realisateur` (`id_realisateur`),
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `film` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.film : ~10 rows (environ)
-INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie`, `duree`, `synopsis`, `note`, `affiche`, `img_large`, `id_realisateur`) VALUES
+REPLACE INTO `film` (`id_film`, `titre_film`, `date_sortie`, `duree`, `synopsis`, `note`, `affiche`, `img_large`, `id_realisateur`) VALUES
 	(1, 'Terminator', '1984-10-26', 107, NULL, NULL, 'public/img/terminator_affiche.jpg', 'public/img/terminator_large.jpg', 1),
 	(2, 'Terminator 2 : Le Jugement dernier', '1991-07-03', 137, NULL, NULL, 'public/img/terminator2_affiche.jpg', 'public/img/terminator2_large.jpg', 1),
 	(3, 'Predator', '1987-06-12', 107, NULL, NULL, NULL, NULL, 2),
@@ -203,12 +203,12 @@ INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie`, `duree`, `synopsis`,
 -- Listage de la structure de table antoine_cinema. genre
 CREATE TABLE IF NOT EXISTS `genre` (
   `id_genre` int NOT NULL AUTO_INCREMENT,
-  `nom_genre` varchar(50) NOT NULL,
+  `nom_genre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id_genre`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.genre : ~0 rows (environ)
-INSERT INTO `genre` (`id_genre`, `nom_genre`) VALUES
+-- Listage des données de la table antoine_cinema.genre : ~5 rows (environ)
+REPLACE INTO `genre` (`id_genre`, `nom_genre`) VALUES
 	(1, 'Science Fiction'),
 	(2, 'Horreur'),
 	(3, 'Action'),
@@ -218,17 +218,17 @@ INSERT INTO `genre` (`id_genre`, `nom_genre`) VALUES
 -- Listage de la structure de table antoine_cinema. personne
 CREATE TABLE IF NOT EXISTS `personne` (
   `id_personne` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(50) NOT NULL,
-  `prenom` varchar(50) NOT NULL,
-  `sexe` varchar(50) NOT NULL,
+  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `prenom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `sexe` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date_naissance` date NOT NULL,
-  `biographie` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
-  `photo` varchar(255) DEFAULT NULL,
+  `biographie` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.personne : ~4 rows (environ)
-INSERT INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`, `biographie`, `photo`) VALUES
+-- Listage des données de la table antoine_cinema.personne : ~50 rows (environ)
+REPLACE INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`, `biographie`, `photo`) VALUES
 	(1, 'Schwarzenegger', 'Arnold', 'H', '1947-06-30', NULL, NULL),
 	(2, 'Cameron', 'James', 'H', '1954-08-16', NULL, NULL),
 	(3, 'Hamilton', 'Linda', 'F', '1956-09-26', NULL, NULL),
@@ -263,7 +263,7 @@ INSERT INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`
 	(32, 'Goldstein', 'Jenette', 'F', '1960-02-04', NULL, NULL),
 	(33, 'Hope', 'William', 'H', '1955-03-02', NULL, NULL),
 	(34, 'Matthews', 'Al', 'H', '1942-11-21', NULL, NULL),
-	(35, 'Honda', 'Ishirou', 'H', '1911-05-07', NULL, NULL),
+	(35, 'Honda', 'Ishirō', 'H', '1911-05-07', NULL, NULL),
 	(36, 'Takarada', 'Akira', 'H', '1634-04-29', NULL, NULL),
 	(37, 'Kouchi', 'Momoko', 'F', '1932-03-07', NULL, NULL),
 	(38, 'Hirata', 'Akihiko', 'H', '1927-12-26', NULL, NULL),
@@ -289,8 +289,8 @@ CREATE TABLE IF NOT EXISTS `realisateur` (
   CONSTRAINT `realisateur_ibfk_1` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table antoine_cinema.realisateur : ~0 rows (environ)
-INSERT INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
+-- Listage des données de la table antoine_cinema.realisateur : ~7 rows (environ)
+REPLACE INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
 	(1, 2),
 	(2, 7),
 	(3, 10),
@@ -302,12 +302,12 @@ INSERT INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
 -- Listage de la structure de table antoine_cinema. role
 CREATE TABLE IF NOT EXISTS `role` (
   `id_role` int NOT NULL AUTO_INCREMENT,
-  `nom_role` varchar(50) NOT NULL,
+  `nom_role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id_role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table antoine_cinema.role : ~46 rows (environ)
-INSERT INTO `role` (`id_role`, `nom_role`) VALUES
+REPLACE INTO `role` (`id_role`, `nom_role`) VALUES
 	(1, 'T-800'),
 	(2, 'Sarah Connor'),
 	(3, 'Kyle Reese'),
