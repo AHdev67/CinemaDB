@@ -11,7 +11,7 @@ class CinemaController{
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-                LIMIT 5
+                LIMIT 1
             ");
             $queryPerson = $pdo -> query("
                 SELECT prenom, nom
@@ -24,7 +24,7 @@ class CinemaController{
     public function listMovies(){
         $pdo = Connect::seConnecter();
         $queryMovieInfo = $pdo -> query("
-            SELECT titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+            SELECT id_film, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
             FROM film
             INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
             INNER JOIN personne ON realisateur.id_personne = personne.id_personne
@@ -73,5 +73,24 @@ class CinemaController{
             ORDER BY nom_role
         ");
         require "view/list/listRoles.php";
+    }
+
+    public function infoMovie($id){
+        $pdo = Connect::seConnecter();
+        $queryMovieInfo = $pdo -> prepare("
+            SELECT titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm, duree, note, affiche
+            FROM film
+            INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+            INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+            WHERE film.id_film = :id
+        ");
+        $queryMovieInfo->execute(["id" => $id]);
+
+        $reqCasting = $pdo -> prepare("
+            
+        ");
+        $reqCasting->execute(["id" => $id]);
+
+        require "view/infopage/infoMovie.php";
     }
 }
