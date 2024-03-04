@@ -7,11 +7,12 @@ spl_autoload_register(function ($class_name) {
 });
 
 $ctrlCinema = new CinemaController();
-
+//verify that id exists, if not, set to null
 $id = (isset($_GET["id"]) ? $_GET["id"] : null);
 
 if(isset($_GET["action"])){
 
+    //switch for every redirect action
     switch($_GET["action"]){
 
         case "homePage" :
@@ -41,6 +42,8 @@ if(isset($_GET["action"])){
             break;
 
     }
-} else {
+} 
+//by default when connecting to site, display home page
+else {
     $ctrlCinema-> homePage();
 }

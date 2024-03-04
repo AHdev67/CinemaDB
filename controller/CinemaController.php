@@ -4,6 +4,8 @@ namespace Controller;
 use Model\Connect;
 
 class CinemaController{
+
+    //function to call necessary data from DB when loading home page
     public function homePage(){
             $pdo = Connect::seConnecter();
             $queryMovieDiscover = $pdo -> query("
@@ -21,6 +23,7 @@ class CinemaController{
             require "view/homePage.php";
         }
 
+    //function for movies list page, selects movie id for redirecting to correct movie info page, title, release year and director name for display
     public function listMovies(){
         $pdo = Connect::seConnecter();
         $queryMovieInfo = $pdo -> query("
@@ -33,10 +36,11 @@ class CinemaController{
         require "view/list/listMovies.php";
     }
 
+    //function for directors list page, selects director id for redirect to info, name for display
     public function listDirectors(){
         $pdo = Connect::seConnecter();
         $queryDirectorInfo = $pdo -> query("
-            SELECT CONCAT(prenom, ' ', nom) AS nomRealisateur
+            SELECT realisateur.id_personne, CONCAT(prenom, ' ', nom) AS nomRealisateur
             FROM realisateur
             INNER JOIN personne ON realisateur.id_personne = personne.id_personne
             ORDER BY nom
@@ -44,10 +48,11 @@ class CinemaController{
         require "view/list/listDirectors.php";
     }
 
+    //function for actors list page, selects actor id for redirect to info, name for display
     public function listActors(){
         $pdo = Connect::seConnecter();
         $queryActorInfo = $pdo -> query("
-            SELECT CONCAT(prenom, ' ', nom) AS nomActeur
+            SELECT acteur.id_personne, CONCAT(prenom, ' ', nom) AS nomActeur
             FROM acteur
             INNER JOIN personne ON acteur.id_personne = personne.id_personne
             ORDER BY nom
@@ -55,16 +60,18 @@ class CinemaController{
         require "view/list/listActors.php";
     }
 
+    //function for genres list page, same thing as before but for genre
     public function listGenres(){
         $pdo = Connect::seConnecter();
         $queryGenreInfo = $pdo -> query("
-            SELECT nom_genre
+            SELECT id_genre, nom_genre
             FROM genre
             ORDER BY nom_genre
         ");
         require "view/list/listGenres.php";
     }
 
+    //you get it by now
     public function listRoles(){
         $pdo = Connect::seConnecter();
         $queryRoleInfo = $pdo -> query("
@@ -75,6 +82,7 @@ class CinemaController{
         require "view/list/listRoles.php";
     }
 
+    //function for movie info page, selects from film table the overall info of the film, plus the poster, then selects the movie's casting.
     public function infoMovie($id){
         $pdo = Connect::seConnecter();
         $queryMovieInfo = $pdo -> prepare("

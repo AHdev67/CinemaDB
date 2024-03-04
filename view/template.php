@@ -8,6 +8,7 @@
     <title><?= $title ?></title>
 </head>
 <body>
+    <!-- NAVBAR -->
     <header>
         <nav>
             <div class="navbarContent">
@@ -54,6 +55,7 @@
         </nav>
     </header>
 
+    <!-- MAIN -->
     <main>
         <div id="content">
             <?= $content ?>
