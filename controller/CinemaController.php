@@ -87,7 +87,8 @@ class CinemaController{
         $queryMovieInfo->execute(["id" => $id]);
 
         $reqCasting = $pdo -> prepare("
-            
+            SELECT prenom, nom, nom_role
+            FROM casting
         ");
         $reqCasting->execute(["id" => $id]);
 
