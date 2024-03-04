@@ -5,13 +5,27 @@ use Model\Connect;
 
 class CinemaController{
 
-    public function listFilms(){
+    public function listMovies(){
         $pdo = Connect::seConnecter();
-        $requete = pdo->query("
-            SELECT titre, annee_sortie
+        $queryMovieInfo = $pdo -> query("
+            SELECT titre_film, date_sortie
             FROM film
         ");
 
-        require "view/listFilms.php";
+        require "view/list/listMovies.php";
+    }
+
+    public function homePage(){
+        $pdo = Connect::seConnecter();
+        $queryMovieDisplay = $pdo -> query("
+            SELECT affiche, titre_film, date_sortie
+            FROM film
+        ");
+        $queryPersonDisplay = $pdo -> query("
+            SELECT photo, prenom, nom
+            FROM personne
+        ");
+
+        require "view/homePage.php";
     }
 }
