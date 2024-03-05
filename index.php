@@ -19,20 +19,30 @@ if(isset($_GET["action"])){
             $ctrlCinema-> homePage();
             break;
 
+        case "listMovies" :
+            $ctrlCinema -> listMovies();
+            break;
+
+            case "infoMovie" :
+                $ctrlCinema -> infoMovie($id);
+                break;
+
         case "listDirectors" :
             $ctrlCinema -> listDirectors();
             break;   
 
+            case "infoDirector" :
+                $ctrlCinema -> infoDirector($id);
+                break;
+
         case "listActors" :
             $ctrlCinema -> listActors();
             break;
-            
-        case "listMovies" :
-            $ctrlCinema -> listMovies();
-            break;
-        case "infoMovie" :
-            $ctrlCinema -> infoMovie($id);
-            break;
+
+            case "infoActor" :
+                $ctrlCinema -> infoActor($id);
+                break;
+
         case "listGenres" :
             $ctrlCinema -> listGenres();
             break;
