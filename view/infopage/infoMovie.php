@@ -1,6 +1,6 @@
 <?php
     $movie = $queryMovieInfo->fetch();
-    $casting = $reqCasting->fetchAll();
+    $casting = $queryCasting->fetchAll();
 ?>
 
 <div class="wrapper">
@@ -41,12 +41,25 @@
     <div class="casting">
         <h3>Casting :</h3>
     <?php
-    foreach ($casting as $c) {
-        # code...
-    }
-    ?>
+    foreach ($casting as $c) {?>
+        <div class="castingitem">
+            <div class="actorinfomini">
+                <p>
+                    <?=$c["prenom"]?>
+                    <?=$c["nom"]?>
+                </p>
+                
+                <p>
+                    dans le rôle de : <?=$c["nom_role"]?>
+                </p>
+            </div>
+
+            <figure class="actorphotomini">
+                <img src="" alt="photo acteur">
+            </figure>
+        </div>
+    <?php } ?>
+
     </div>
 
-
-    
 </div>
