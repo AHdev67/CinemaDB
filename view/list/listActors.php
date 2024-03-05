@@ -24,9 +24,9 @@
     <table class="list">
         <tbody>
             <?php
-                foreach($queryActorInfo -> fetchALL() as $actor){?>
+                foreach($queryActor -> fetchALL() as $actor){?>
                     <tr>
-                        <td><a href=""><?= $actor["nomActeur"] ?></a></td>
+                        <td><a href="index.php?action=infoActor&id=<?= $actor["id_acteur"] ?>"><?= $actor["nomActeur"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>

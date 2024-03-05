@@ -23,7 +23,7 @@
     <table class="list">
         <tbody>
             <?php
-                foreach($queryGenreInfo -> fetchALL() as $genre){?>
+                foreach($queryGenre -> fetchALL() as $genre){?>
                     <tr>
                         <td><?= $genre["nom_genre"] ?></td>
                     </tr>

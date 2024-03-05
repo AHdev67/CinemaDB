@@ -23,7 +23,7 @@
     <table class="list">
         <tbody>
             <?php
-                foreach($queryRoleInfo -> fetchALL() as $role){?>
+                foreach($queryRole -> fetchALL() as $role){?>
                     <tr>
                         <td><?= $role["nom_role"] ?></td>
                     </tr>

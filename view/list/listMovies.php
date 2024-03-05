@@ -24,11 +24,11 @@
     <table class="list">
         <tbody>
             <?php
-                foreach($queryMovieInfo -> fetchALL() as $film){?>
+                foreach($queryMovie -> fetchALL() as $film){?>
                     <tr>
                         <td><a href="index.php?action=infoMovie&id=<?= $film["id_film"] ?>"><?= $film["titre_film"] ?></a></td>
                         <td><?= $film["date"] ?></td>
-                        <td><a href=""><?= $film["realisateurFilm"] ?></a></td>
+                        <td><a href="index.php?action=infoDirector&id=<?= $film["id_realisateur"] ?>"><?= $film["realisateurFilm"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>

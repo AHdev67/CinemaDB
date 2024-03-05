@@ -24,9 +24,9 @@
     <table class="list">
         <tbody>
             <?php
-                foreach($queryDirectorInfo -> fetchALL() as $director){?>
+                foreach($queryDirector -> fetchALL() as $director){?>
                     <tr>
-                        <td><a href=""><?= $director["nomRealisateur"] ?></a></td>
+                        <td><a href="index.php?action=infoDirector&id=<?= $director["id_realisateur"] ?>"><?= $director["nomRealisateur"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>
