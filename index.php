@@ -43,13 +43,21 @@ if(isset($_GET["action"])){
                 $ctrlCinema -> infoActor($id);
                 break;
 
+        case "listRoles" :
+            $ctrlCinema -> listRoles();
+            break;
+
+            case "infoRole" :
+                $ctrlCinema -> infoRole($id);
+                break;
+
         case "listGenres" :
             $ctrlCinema -> listGenres();
             break;
 
-        case "listRoles" :
-            $ctrlCinema -> listRoles();
-            break;
+            case "infoGenre" :
+                $ctrlCinema -> infoGenre($id);
+                break;
 
     }
 } 
