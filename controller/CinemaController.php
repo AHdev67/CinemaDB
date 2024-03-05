@@ -5,7 +5,9 @@ use Model\Connect;
 
 class CinemaController{
 
-    //function to call necessary data from DB when loading home page
+
+    //HOME PAGE
+
     public function homePage(){
             $pdo = Connect::seConnecter();
             $queryMovieDiscover = $pdo -> query("
@@ -93,6 +95,7 @@ class CinemaController{
                 SELECT titre_film, DATE_FORMAT (date_sortie, '%Y') as date, duree, note, affiche
                 FROM film
                 WHERE film.id_realisateur = :id
+                ORDER BY date
             ");
             $queryFilmography->execute(["id" => $id]);
 
@@ -130,6 +133,7 @@ class CinemaController{
                 INNER JOIN film ON casting.id_film = film.id_film
                 INNER JOIN role ON casting.id_role = role.id_role
                 WHERE casting.id_acteur = :id
+                ORDER BY date
             ");
             $queryFilmography->execute(["id" => $id]);
 
@@ -137,28 +141,75 @@ class CinemaController{
         }
 
 
+    //LIST OF ROLES
+
+    public function listRoles(){
+        $pdo = Connect::seConnecter();
+        $queryRole = $pdo -> query("
+            SELECT role.id_role, nom_role
+            FROM role
+            ORDER BY nom_role
+        ");
+        require "view/list/listRoles.php";
+    }
+
+        //ROLE INFO
+        public function infoRole($id){
+            $pdo = Connect::seConnecter();
+            $queryRoleInfo = $pdo -> prepare("
+                SELECT nom_role
+                FROM role
+                WHERE role.id_role = :id
+            ");
+            $queryRoleInfo->execute(["id" => $id]);
+
+            $queryRoleActor = $pdo -> prepare("
+                SELECT CONCAT(prenom, ' ', nom) AS nomActeur, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                FROM role
+                INNER JOIN casting ON role.id_role = casting.id_role
+                INNER JOIN film ON casting.id_film = film.id_film
+                INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
+                INNER JOIN personne ON acteur.id_personne = personne.id_personne
+                WHERE role.id_role = :id
+            ");
+            $queryRoleActor->execute(["id" => $id]);
+
+            require "view/infopage/infoRole.php";
+        }
+
+
     //LIST OF GENRES
 
     public function listGenres(){
         $pdo = Connect::seConnecter();
-        $queryGenr = $pdo -> query("
-            SELECT id_genre, nom_genre
+        $queryGenre = $pdo -> query("
+            SELECT genre.id_genre, nom_genre
             FROM genre
             ORDER BY nom_genre
         ");
         require "view/list/listGenres.php";
     }
 
-
-    //LIST OF ROLES
-
-    public function listRoles(){
+    //GENRE INFO
+    public function infoGenre($id){
         $pdo = Connect::seConnecter();
-        $queryRole = $pdo -> query("
-            SELECT nom_role
-            FROM role
-            ORDER BY nom_role
+        $queryGenreInfo = $pdo -> prepare("
+            SELECT nom_genre
+            FROM genre
+            WHERE genre.id_genre = :id
         ");
-        require "view/list/listRoles.php";
+        $queryGenreInfo->execute(["id" => $id]);
+
+        $queryMoviesPerGenre = $pdo -> prepare("
+            SELECT titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS nomRealisateur
+            FROM film
+            INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+            INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+            INNER JOIN categoriser ON film.id_film = categoriser.id_film
+            WHERE categoriser.id_genre = :id
+        ");
+        $queryMoviesPerGenre->execute(["id" => $id]);
+
+        require "view/infopage/infoGenre.php";
     }
 }
