@@ -50,7 +50,7 @@
                 </p>
                 
                 <p>
-                    dans le rôle de : <?=$c["nom_role"]?>
+                    , playing : <?=$c["nom_role"]?>
                 </p>
             </div>
 
