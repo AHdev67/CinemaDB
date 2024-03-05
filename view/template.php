@@ -40,10 +40,10 @@
                             <a href="index.php?action=listActors">ACTORS</a>
                         </li>
                         <li>
-                            <a href="index.php?action=listGenres">GENRES</a>
+                            <a href="index.php?action=listRoles">ROLES</a>
                         </li>
                         <li>
-                            <a href="index.php?action=listRoles">ROLES</a>
+                            <a href="index.php?action=listGenres">GENRES</a>
                         </li>
                         <li>
                             <a href="">CONTACT US</a>
