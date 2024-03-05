@@ -32,7 +32,7 @@
         <div class="filmographyitem">
             <div class="movieinfomini">
                 <p>
-                    <?=$f["titre_film"]?>, (<?=$f["date"]?>), dans le rôle de : <?=$f["nom_role"]?>
+                    <?=$f["titre_film"]?>, (<?=$f["date"]?>), playing : <?=$f["nom_role"]?>
                 </p>
             </div>
         </div>
