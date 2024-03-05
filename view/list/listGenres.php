@@ -25,7 +25,7 @@
             <?php
                 foreach($queryGenre -> fetchALL() as $genre){?>
                     <tr>
-                        <td><?= $genre["nom_genre"] ?></td>
+                        <td><a href="index.php?action=infoGenre&id=<?= $genre["id_genre"] ?>"><?= $genre["nom_genre"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>
