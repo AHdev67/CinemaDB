@@ -25,7 +25,7 @@
             <?php
                 foreach($queryRole -> fetchALL() as $role){?>
                     <tr>
-                        <td><?= $role["nom_role"] ?></td>
+                        <td><a href="index.php?action=infoRole&id=<?= $role["id_role"] ?>"><?= $role["nom_role"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>
