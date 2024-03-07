@@ -1,4 +1,5 @@
 <?php
+    ob_start();
     $director = $queryDirectorInfo->fetch();
     $filmography = $queryFilmography->fetchAll();
 ?>
@@ -16,12 +17,11 @@
             <img src="" alt="photo of director">
         </figure>
     </div>
+
     <article>
         <h3>Biography :</h3>
         <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit dignissimos atque voluptatem! Aliquid similique, provident reprehenderit error nemo ipsam esse quis fugit. A, veniam nihil! Sapiente eos magnam error vero.
-            Nisi tempore expedita maxime id eum enim omnis? Facilis officiis neque architecto accusantium debitis consectetur consequuntur repellat totam, quisquam perspiciatis fuga suscipit placeat vero ipsam odit est voluptatum. Placeat, doloremque.
-            Eligendi aperiam pariatur ea quod optio explicabo quasi non voluptatum accusantium ducimus blanditiis excepturi sequi fugit delectus quibusdam sed, ipsa quas? Suscipit facere, voluptatibus ipsa eaque dolore soluta sed maxime.
+        <?= $director["biographie"] ?>
         </p>
     </article>
 
@@ -48,3 +48,9 @@
     </div>
 
 </div>
+
+<?php
+
+$title= "DIRECTOR INFO";
+$content= ob_get_clean();
+require "view/template.php";
