@@ -19,7 +19,7 @@
         </form>
 
         <div class="opt">
-            <a href="index.php?action=addMovie">Add movie</a>
+            <a href="index.php?action=addMovieDisplay">Add movie</a>
         </div>
     </div>
 

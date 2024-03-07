@@ -29,9 +29,12 @@ if(isset($_GET["action"])){
                 $ctrlCinema -> infoMovie($id);
                 break;
             
-                case "addMovie" :
+                case "addMovieDisplay" :
                     $ctrlCinema -> addMovieDisplay();
                     break;
+                
+                case "submitMovie" :
+                    $ctrlCinema -> submitMovie();
 
         case "listDirectors" :
             $ctrlCinema -> listDirectors();

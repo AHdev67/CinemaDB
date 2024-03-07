@@ -1,7 +1,10 @@
 <?php
 
 namespace Controller;
+use DateTime;
 use Model\Connect;
+
+session_start();
 
 class CinemaController{
 
@@ -23,7 +26,6 @@ class CinemaController{
                 SELECT prenom, nom
                 FROM personne
             ");
-
             require "view/homePage.php";
         }
 
@@ -69,16 +71,48 @@ class CinemaController{
                 WHERE casting.id_film = :id
             ");
             $queryCasting->execute(["id" => $id]);
-
             require "view/infopage/infoMovie.php";
         }
 
+        //ADD MOVIE
         public function addMovieDisplay(){
+            $pdo = Connect::Connexion();
+            //query : selects full name of director
+            //used for displaying list of director as select options in add movie form
+            $queryInputDirector = $pdo -> query("
+                SELECT realisateur.id_realisateur, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                FROM realisateur r
+                INNER JOIN personne p ON r.id_personne = p.id_personne
+                ORDER BY nom
+            ");
+            //query : selects name of genre
+            //used for displaying list of genres as checkboxes in add movie form
+            $queryInputGenre = $pdo -> query("
+                SELECT genre.id_genre, nom_genre
+                FROM genre
+                ORDER BY nom_genre
+            ");
             require "view/addPage/addMovie.php";
         }
 
-        public function addMovieTreatment($id){
+        public function submitMovie() {
+            $pdo = Connect::Connexion();
+            //sanitizing string inputs to avoid XSS vulnerability
+            $title = filter_input(INPUT_POST,"inputTile", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $date = new \DateTime(filter_input(INPUT_POST,"inputReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $duration = filter_input(INPUT_POST,"inputDuration", FILTER_VALIDATE_INT);
             
+            $querySubmitMovie = $pdo -> prepare("
+                INSERT INTO film (titre_film, date_sortie, duree)
+                VALUES (:title, :date, :duration)
+            ");
+            $querySubmitMovie->execute([
+                "title"=> $title,
+                "date"=> $date->format("Y-m-d"),
+                "duration"=> $duration
+            ]);
+            
+            header("Location:index.php?action=listMovies");
         }
 
 
@@ -118,7 +152,6 @@ class CinemaController{
                 ORDER BY date
             ");
             $queryFilmography->execute(["id" => $id]);
-
             require "view/infopage/infoDirector.php";
         }
 
@@ -161,7 +194,6 @@ class CinemaController{
                 ORDER BY date
             ");
             $queryFilmography->execute(["id" => $id]);
-
             require "view/infopage/infoActor.php";
         }
 
@@ -203,7 +235,6 @@ class CinemaController{
                 WHERE role.id_role = :id
             ");
             $queryRoleActor->execute(["id" => $id]);
-
             require "view/infopage/infoRole.php";
         }
 
@@ -244,7 +275,6 @@ class CinemaController{
                 WHERE categoriser.id_genre = :id
             ");
             $queryMoviesPerGenre->execute(["id" => $id]);
-
             require "view/infopage/infoGenre.php";
         }
 }
