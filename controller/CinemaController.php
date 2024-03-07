@@ -16,7 +16,6 @@ class CinemaController{
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-                LIMIT 1
             ");
             //query : selects surname and name of any given person
             //used for person cards in sections 4 and 5 of the home page
@@ -72,6 +71,14 @@ class CinemaController{
             $queryCasting->execute(["id" => $id]);
 
             require "view/infopage/infoMovie.php";
+        }
+
+        public function addMovieDisplay(){
+            require "view/addPage/addMovie.php";
+        }
+
+        public function addMovieTreatment($id){
+            
         }
 
 

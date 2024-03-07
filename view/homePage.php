@@ -1,21 +1,22 @@
-<?php ob_start(); ?>
+<?php 
+    ob_start();
+    $movie = $queryMovieCard->fetch();
+    $person = $queryPersonCard->fetch();
+?>
 
 <!-- SECTION 1 : CAROUSSEL -->
 <div id="section1">
     <h1>DISCOVER</h1>
     <div class="caroussel">
         <div class="arrow" id="next"><i class="fa-solid fa-chevron-right"></i></div>
-        <?php
-            foreach($queryMovieDiscover -> fetchALL() as $film){?>
-                <div class="carousselitem">
-                    <figure class="carousselimage">
-                        <img src="<?=$film["affiche"] ?>" alt="background dune 1">
-                    </figure>
-                    <div class="carousseltitle">
-                        <?=$film["titre_film"].", ".$film["date"].", ".$film["realisateurFilm"] ?>
-                    </div>
+            <div class="carousselitem">
+                <figure class="carousselimage">
+                    <img src="<?= $movie["affiche"]?>" alt="background caroussel">
+                </figure>
+                <div class="carousseltitle">
+                    <?= $movie["titre_film"]?> (<?= $movie["date"]?>), <?= $movie["realisateurFilm"]?>
                 </div>
-        <?php } ?>
+            </div>
         <div class="arrow" id="previous"><i class="fa-solid fa-chevron-left"></i></div>
     </div>
 </div>

@@ -28,6 +28,10 @@ if(isset($_GET["action"])){
             case "infoMovie" :
                 $ctrlCinema -> infoMovie($id);
                 break;
+            
+                case "addMovie" :
+                    $ctrlCinema -> addMovieDisplay();
+                    break;
 
         case "listDirectors" :
             $ctrlCinema -> listDirectors();

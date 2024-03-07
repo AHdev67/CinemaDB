@@ -6,18 +6,20 @@
     <div class="options">
         <form action="controller/CinemaController.php" method="post">
             <select name="sortby" id="sort1" class="opt">
+                <option value="" disabled selected>Sort by</option>
                 <option value="title">Title</option>
                 <option value="date">Date</option>
             </select>
 
             <select name="orderby" id="order1" class="opt">
+                <option value="" disabled selected>Order</option>
                 <option value="asc">Ascendent</option>
                 <option value="desc">Descendent</option>
             </select>
         </form>
 
         <div class="opt">
-            <a href="">Add movie</a>
+            <a href="index.php?action=addMovie">Add movie</a>
         </div>
     </div>
 
