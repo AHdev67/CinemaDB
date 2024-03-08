@@ -36,23 +36,22 @@
         <br>
 
         <span>Genre* :</span><br>
-        <select name="inputGenre[]" id="genreInput" multiple>
-            <option value="" disabled selected>Select genre</option>
-            <?php
-            foreach($queryInputGenre->fetchALL() as $genre) { ?>
-                <option value="<?= $genre["id_genre"]?>"><?= $genre["nom_genre"] ?></option>
-            <?php } ?>
-        </select>
+        <?php
+        foreach($queryInputGenre->fetchALL() as $genre) { ?>
+            <input type="checkbox" value="<?= $genre["id_genre"]?>" name="<?= "inputGenre".$genre["id_genre"] ?>" id="<?= $genre["id_genre"] ?>">
+            <label for="<?= $genre["id_genre"] ?>"><?= $genre["nom_genre"] ?></label>
+            <br>
+        <?php } ?>
 
-        <label for="scoreInput">Score out of 5:</label>
+        <label for="scoreInput">Score :</label>
         <select name="inputScore" id="scoreInput">
-            <option value="" disabled selected>Select score</option>
-            <option value="1">1/5, F tier, don't watch</option>
-            <option value="2">2/5, bad movie, but there's worse</option>
-            <option value="3">3/5, passable, watchable</option>
-            <option value="4">4/5, pretty good movie all in all</option>
-            <option value="5">5/5, excellent movie, must watch</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
         </select>
+        <span> stars</span>
 
         <br>
 
@@ -61,8 +60,8 @@
 
         <br>
 
-        <label for="posterInput"></label>
-        <input type="file" name="inputPoster" id="posterInput">
+        <label for="posterInput">Poster URL :</label>
+        <input type="text" name="inputPoster" id="posterInput">
 
         <br>
 
