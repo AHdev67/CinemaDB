@@ -19,7 +19,7 @@
         </form>
 
         <div class="opt">
-            <a href="">Add director</a>
+            <a href="index.php?action=addDirectorDisplay">Add director</a>
         </div>
     </div>
 
