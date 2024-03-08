@@ -36,11 +36,13 @@
         <br>
 
         <span>Genre* :</span><br>
+        <select name="inputGenre[]" id="genreInput" multiple>
+            <option value="" disabled selected>Select genre</option>
             <?php
             foreach($queryInputGenre->fetchALL() as $genre) { ?>
-                <input type="checkbox" name="inputGenre" id="<?= $genre["id_genre"] ?>">
-                <label for="<?= $genre["id_genre"] ?>"><?= $genre["nom_genre"] ?></label><br>
+                <option value="<?= $genre["id_genre"]?>"><?= $genre["nom_genre"] ?></option>
             <?php } ?>
+        </select>
 
         <label for="scoreInput">Score out of 5:</label>
         <select name="inputScore" id="scoreInput">
