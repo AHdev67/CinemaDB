@@ -29,6 +29,7 @@ class CinemaController{
             require "view/homePage.php";
         }
 
+//-------------------------------------MOVIES-------------------------------------------
 
     // LIST OF MOVIES
     public function listMovies(){
@@ -44,7 +45,6 @@ class CinemaController{
         ");
         require "view/list/listMovies.php";
     }
-
 
         //MOVIE INFO
         public function infoMovie($id){
@@ -92,24 +92,31 @@ class CinemaController{
                 FROM genre
                 ORDER BY nom_genre
             ");
+
             require "view/addPage/addMovie.php";
         }
 
         public function submitMovie() {
             if(isset($_POST['submitForm'])) {
                 $pdo = Connect::Connexion();
+
                 //sanitizing string inputs to avoid XSS vulnerability
+
+                //mandatory fields
                 $title = filter_input(INPUT_POST,"inputTile", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $director = $_POST["inputDirector"];
+                //converting retrieved release date as string to datetime
                 $date = new \DateTime(filter_input(INPUT_POST,"inputReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
                 $duration = filter_input(INPUT_POST,"inputDuration", FILTER_VALIDATE_INT);
-                $synopsis = filter_input(INPUT_POST,"inputSynopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                //retrieving values of select fields
-                $director = $_POST["inputDirector"];
                 $score = $_POST["inputScore"];
 
+                //optional fields
+                $synopsis = filter_input(INPUT_POST,"inputSynopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $poster = filter_input(INPUT_POST,"inputPoster", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
                 $querySubmitMovie = $pdo -> prepare("
-                    INSERT INTO film (titre_film, date_sortie, duree, note, synopsis, id_realisateur)
-                    VALUES (:title, :date, :duration, :score, :synopsis, :director)
+                    INSERT INTO film (titre_film, date_sortie, duree, note, synopsis, affiche, id_realisateur)
+                    VALUES (:title, :date, :duration, :score, :synopsis, :poster, :director)
                 ");
 
                 $querySubmitMovie->execute([
@@ -118,15 +125,16 @@ class CinemaController{
                     "duration"=> $duration,
                     "score"=>$score,
                     "synopsis"=> $synopsis,
+                    "poster"=> $poster,
                     "director"=> $director
                 ]);
 
                 $movieId = $pdo->lastInsertId();
 
-
-                foreach($_POST["inputGenre"] as $inputGenre){
-                    $genre = $inputGenre; 
-
+                foreach($_POST as $name =>$value){
+                     
+                    if (str_contains($name, "inputGenre")){ // s'il y a inputGenre dans le nom de la clef
+                    $genre = $value;
                     $queryCategorizeMovie = $pdo -> prepare("
                     INSERT INTO categoriser (id_film, id_genre)
                     VALUES (:movieId, :genreId)
@@ -135,12 +143,15 @@ class CinemaController{
                         "movieId"=> $movieId,
                         "genreId"=> $genre
                     ]);
+                    }
                 }
                 
                 header("Location:index.php?action=listMovies");
             }
         }
 
+
+//-------------------------------------DIRECTORS-------------------------------------------
 
     //LIST OF DIRECTORS
     public function listDirectors(){
@@ -181,6 +192,60 @@ class CinemaController{
             require "view/infopage/infoDirector.php";
         }
 
+        //ADD DIRECTOR
+        public function addDirectorDisplay(){
+            require "view/addPage/addDirector.php";
+        }
+
+        public function submitDirector() {
+            if(isset($_POST['submitForm'])) {
+                $pdo = Connect::Connexion();
+
+                //sanitizing string inputs to avoid XSS vulnerability
+
+                //mandatory fields
+                $firstname = filter_input(INPUT_POST,"inputFirstname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $lastname = filter_input(INPUT_POST,"inputLastname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //converting retrieved release date as string to datetime
+                $DoB = new \DateTime(filter_input(INPUT_POST,"inputDoB", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+                $sex = filter_input(INPUT_POST,"inputSex", FILTER_VALIDATE_INT);
+                
+                //optional fields
+                $photo = filter_input(INPUT_POST,"inputPhoto", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $biography = filter_input(INPUT_POST,"inputBiography", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                $querySubmitDirector = $pdo -> prepare("
+                    INSERT INTO personne (prenom, nom, date_naissance, sexe, biographie, photo)
+                    VALUES (:firstname, :lastname, :dateOfBirth, :sex, :biography, :photo)
+                ");
+
+                $querySubmitDirector->execute([
+                    "firstname"=> $firstname,
+                    "lastname"=> $lastname->format("Y-m-d"),
+                    "dateOfBirth"=> $DoB,
+                    "sex"=>$sex,
+                    "biography"=> $biography,
+                    "photo"=> $photo
+                ]);
+
+                $DirectorId = $pdo->lastInsertId();
+
+                $queryCategorizeDirector = $pdo -> prepare("
+                    INSERT INTO realisateur (id_personne)
+                    VALUES (:DirectorId)
+                    ");
+
+                $queryCategorizeDirector->execute([
+                    "DirectorId"=> $DirectorId,
+                    ]);
+                
+                header("Location:index.php?action=listDirectors");
+            }
+        }
+
+
+
+//-------------------------------------ACTORS-------------------------------------------
 
     //LIST OF ACTORS
     public function listActors(){
@@ -224,6 +289,8 @@ class CinemaController{
         }
 
 
+//-------------------------------------ROLES-------------------------------------------
+
     //LIST OF ROLES
     public function listRoles(){
         $pdo = Connect::Connexion();
@@ -264,6 +331,8 @@ class CinemaController{
             require "view/infopage/infoRole.php";
         }
 
+
+//-------------------------------------GENRES-------------------------------------------
 
     //LIST OF GENRES
     public function listGenres(){
