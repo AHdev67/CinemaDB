@@ -16,7 +16,9 @@
         <label for="lastnameInput">Last name* :</label>
         <input type="text" name="inputLastname" id="lastnameInput">
 
-        <label for="DoBInput">Release date* :</label>
+        <br>
+    
+        <label for="DoBInput">Date of birth* :</label>
         <input type="date" name="inputDoB" id="DoBInput">
 
         <br>
