@@ -81,8 +81,8 @@ class CinemaController{
             //used for displaying list of director as select options in add movie form
             $queryInputDirector = $pdo -> query("
                 SELECT realisateur.id_realisateur, CONCAT(prenom, ' ', nom) AS realisateurFilm
-                FROM realisateur r
-                INNER JOIN personne p ON r.id_personne = p.id_personne
+                FROM realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
                 ORDER BY nom
             ");
             //query : selects name of genre
@@ -96,23 +96,41 @@ class CinemaController{
         }
 
         public function submitMovie() {
-            $pdo = Connect::Connexion();
-            //sanitizing string inputs to avoid XSS vulnerability
-            $title = filter_input(INPUT_POST,"inputTile", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $date = new \DateTime(filter_input(INPUT_POST,"inputReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-            $duration = filter_input(INPUT_POST,"inputDuration", FILTER_VALIDATE_INT);
-            
-            $querySubmitMovie = $pdo -> prepare("
-                INSERT INTO film (titre_film, date_sortie, duree)
-                VALUES (:title, :date, :duration)
-            ");
-            $querySubmitMovie->execute([
-                "title"=> $title,
-                "date"=> $date->format("Y-m-d"),
-                "duration"=> $duration
-            ]);
-            
-            header("Location:index.php?action=listMovies");
+            if(isset($_POST['submitForm'])) {
+                $pdo = Connect::Connexion();
+                //sanitizing string inputs to avoid XSS vulnerability
+                $title = filter_input(INPUT_POST,"inputTile", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $date = new \DateTime(filter_input(INPUT_POST,"inputReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+                $duration = filter_input(INPUT_POST,"inputDuration", FILTER_VALIDATE_INT);
+                
+                //retrieving values of director select
+                $director = $_POST["inputDirector"];
+                // foreach($_POST["inputGenre"] as $inputGenre){
+                //     $genre = $inputGenre;
+                // }
+
+                $querySubmitMovie = $pdo -> prepare("
+                    INSERT INTO film (titre_film, date_sortie, duree, id_realisateur)
+                    VALUES (:title, :date, :duration, :director)
+                ");
+                $querySubmitMovie->execute([
+                    "title"=> $title,
+                    "date"=> $date->format("Y-m-d"),
+                    "duration"=> $duration,
+                    "director"=> $director
+                ]);
+
+                $queryCategorizeMovie = $pdo -> prepare("
+                    INSERT INTO categoriser (id_film, id_genre)
+                    VALUES (:movieid, :genreid)
+                ");
+                $queryCategorizeMovie->execute([
+                    "movieid"=> $pdo->lastInsertId(),
+                    "genreid"=> $genre
+                ]);
+                
+                header("Location:index.php?action=listMovies");
+            }
         }
 
 
