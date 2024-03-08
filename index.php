@@ -20,11 +20,12 @@ if(isset($_GET["action"])){
         case "homePage" :
             $ctrlCinema-> homePage();
             break;
-
+        
+//--------------------------------MOVIES-----------------------------------
         case "listMovies" :
             $ctrlCinema -> listMovies();
             break;
-
+            
             case "infoMovie" :
                 $ctrlCinema -> infoMovie($id);
                 break;
@@ -36,6 +37,7 @@ if(isset($_GET["action"])){
                 case "submitMovie" :
                     $ctrlCinema -> submitMovie();
 
+//--------------------------------DIRECTORS-----------------------------------
         case "listDirectors" :
             $ctrlCinema -> listDirectors();
             break;   
@@ -44,6 +46,15 @@ if(isset($_GET["action"])){
                 $ctrlCinema -> infoDirector($id);
                 break;
 
+                case "addDirectorDisplay" :
+                    $ctrlCinema -> addDirectorDisplay();
+                    break;
+                
+                case "submitDirector" :
+                    $ctrlCinema -> submitDirector();
+                    break;
+
+//--------------------------------ACTORS-----------------------------------
         case "listActors" :
             $ctrlCinema -> listActors();
             break;
@@ -52,6 +63,7 @@ if(isset($_GET["action"])){
                 $ctrlCinema -> infoActor($id);
                 break;
 
+//--------------------------------ROLES-----------------------------------
         case "listRoles" :
             $ctrlCinema -> listRoles();
             break;
@@ -60,6 +72,7 @@ if(isset($_GET["action"])){
                 $ctrlCinema -> infoRole($id);
                 break;
 
+//--------------------------------GENRES-----------------------------------
         case "listGenres" :
             $ctrlCinema -> listGenres();
             break;
