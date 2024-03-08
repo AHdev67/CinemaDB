@@ -5,7 +5,7 @@ use Controller\CinemaController;
 //autoloader for any class bearing the same name as their file
 spl_autoload_register(function ($class_name) {
     //utilizing include to avoid nuking whole code in case of error
-    include $class_name . '.php';
+    require str_replace("\\", DIRECTORY_SEPARATOR, $class_name) . '.php';
 });
 
 $ctrlCinema = new CinemaController();
