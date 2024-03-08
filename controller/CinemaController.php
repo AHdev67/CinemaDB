@@ -102,32 +102,40 @@ class CinemaController{
                 $title = filter_input(INPUT_POST,"inputTile", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $date = new \DateTime(filter_input(INPUT_POST,"inputReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
                 $duration = filter_input(INPUT_POST,"inputDuration", FILTER_VALIDATE_INT);
-                
-                //retrieving values of director select
+                $synopsis = filter_input(INPUT_POST,"inputSynopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //retrieving values of select fields
                 $director = $_POST["inputDirector"];
-                // foreach($_POST["inputGenre"] as $inputGenre){
-                //     $genre = $inputGenre;
-                // }
+                $score = $_POST["inputScore"];
 
                 $querySubmitMovie = $pdo -> prepare("
-                    INSERT INTO film (titre_film, date_sortie, duree, id_realisateur)
-                    VALUES (:title, :date, :duration, :director)
+                    INSERT INTO film (titre_film, date_sortie, duree, note, synopsis, id_realisateur)
+                    VALUES (:title, :date, :duration, :score, :synopsis, :director)
                 ");
+
                 $querySubmitMovie->execute([
                     "title"=> $title,
                     "date"=> $date->format("Y-m-d"),
                     "duration"=> $duration,
+                    "score"=>$score,
+                    "synopsis"=> $synopsis,
                     "director"=> $director
                 ]);
 
-                $queryCategorizeMovie = $pdo -> prepare("
+                $movieId = $pdo->lastInsertId();
+
+
+                foreach($_POST["inputGenre"] as $inputGenre){
+                    $genre = $inputGenre; 
+
+                    $queryCategorizeMovie = $pdo -> prepare("
                     INSERT INTO categoriser (id_film, id_genre)
-                    VALUES (:movieid, :genreid)
-                ");
-                $queryCategorizeMovie->execute([
-                    "movieid"=> $pdo->lastInsertId(),
-                    "genreid"=> $genre
-                ]);
+                    VALUES (:movieId, :genreId)
+                    ");
+                    $queryCategorizeMovie->execute([
+                        "movieId"=> $movieId,
+                        "genreId"=> $genre
+                    ]);
+                }
                 
                 header("Location:index.php?action=listMovies");
             }
