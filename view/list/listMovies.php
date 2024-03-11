@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<div class="wrapper">
+<div class="container">
     <h1 class="maintitle">MOVIES</h1>
 
     <div class="options">

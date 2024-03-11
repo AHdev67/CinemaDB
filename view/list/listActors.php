@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="wrapper">
-    <h1 class="maintitle">ACTORS</h1>
+    <h1 class="container">ACTORS</h1>
 
     <div class="options">
         <form action="controller/CinemaController.php" method="post">

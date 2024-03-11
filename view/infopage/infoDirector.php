@@ -4,7 +4,7 @@
     $filmography = $queryFilmography->fetchAll();
 ?>
 
-<div class="wrapper">
+<div class="container">
     
     <div class="infobox">
         <div class="info">
