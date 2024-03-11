@@ -6,6 +6,7 @@ use Controller\CinemaController;
 spl_autoload_register(function ($class_name) {
     //utilizing include to avoid nuking whole code in case of error
     require str_replace("\\", DIRECTORY_SEPARATOR, $class_name) . '.php';
+    // include $class_name . '.php';
 });
 
 $ctrlCinema = new CinemaController();
@@ -63,6 +64,14 @@ if(isset($_GET["action"])){
                 $ctrlCinema -> infoActor($id);
                 break;
 
+                case "addActorDisplay" :
+                    $ctrlCinema -> addActorDisplay();
+                    break;
+                
+                case "submitActor" :
+                    $ctrlCinema -> submitActor();
+                    break;
+
 //--------------------------------ROLES-----------------------------------
         case "listRoles" :
             $ctrlCinema -> listRoles();
@@ -71,6 +80,14 @@ if(isset($_GET["action"])){
             case "infoRole" :
                 $ctrlCinema -> infoRole($id);
                 break;
+
+                case "addRoleDisplay" :
+                    $ctrlCinema -> addRoleDisplay();
+                    break;
+                
+                case "submitRole" :
+                    $ctrlCinema -> submitRole();
+                    break;
 
 //--------------------------------GENRES-----------------------------------
         case "listGenres" :

@@ -6,6 +6,7 @@ namespace Model;
 abstract class Connect {
 
     const HOST = "db";
+    //const HOST = "localhost";
     const DB = "antoine_cinema";
     const USER = "root";
     const PASS = "";
