@@ -14,15 +14,36 @@ class CinemaController{
             $pdo = Connect::Connexion();
             //query : selects a movie's poster, title, release year, and director's name 
             //used for movie cards in sections 1,2 and 3 of the home page
-            $queryMovieCard = $pdo -> query("
+            $queryMovieCaroussel = $pdo->query("
                 SELECT affiche, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                LIMIT 3
+            ");
+
+            $queryMovieLatest = $pdo->query("
+                SELECT affiche, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                FROM film
+                INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                GROUP BY film.id_film
+                HAVING date_sortie >= ALL(
+                    SELECT date_sortie
+                    FROM film
+                );
+            ");
+
+            $queryMovieChoice = $pdo->query("
+                SELECT affiche, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                FROM film
+                INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                WHERE film.id_film = 7
             ");
             //query : selects surname and name of any given person
             //used for person cards in sections 4 and 5 of the home page
-            $queryPersonCard = $pdo -> query("
+            $queryPersonCard = $pdo->query("
                 SELECT prenom, nom
                 FROM personne
             ");
@@ -288,6 +309,56 @@ class CinemaController{
             require "view/infopage/infoActor.php";
         }
 
+        //ADD ACTOR
+        public function addActorDisplay(){
+            require "view/addPage/addActor.php";
+        }
+
+        public function submitActor() {
+            if(isset($_POST['submitForm'])) {
+                $pdo = Connect::Connexion();
+
+                //sanitizing string inputs to avoid XSS vulnerability
+
+                //mandatory fields
+                $firstname = filter_input(INPUT_POST,"inputFirstname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $lastname = filter_input(INPUT_POST,"inputLastname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                //converting retrieved release date as string to datetime
+                $DoB = new \DateTime(filter_input(INPUT_POST,"inputDoB", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+                $sex = filter_input(INPUT_POST,"inputSex", FILTER_VALIDATE_INT);
+                
+                //optional fields
+                $photo = filter_input(INPUT_POST,"inputPhoto", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $biography = filter_input(INPUT_POST,"inputBiography", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                $querySubmitActor = $pdo -> prepare("
+                    INSERT INTO personne (prenom, nom, date_naissance, sexe, biographie, photo)
+                    VALUES (:firstname, :lastname, :dateOfBirth, :sex, :biography, :photo)
+                ");
+
+                $querySubmitActor->execute([
+                    "firstname"=> $firstname,
+                    "lastname"=> $lastname->format("Y-m-d"),
+                    "dateOfBirth"=> $DoB,
+                    "sex"=>$sex,
+                    "biography"=> $biography,
+                    "photo"=> $photo
+                ]);
+
+                $ActorId = $pdo->lastInsertId();
+
+                $queryCategorizeActor = $pdo -> prepare("
+                    INSERT INTO acteur (id_personne)
+                    VALUES (:ActorId)
+                    ");
+
+                $queryCategorizeActor->execute([
+                    "ActorId"=> $ActorId,
+                    ]);
+                
+                header("Location:index.php?action=listActors");
+            }
+        }
 
 //-------------------------------------ROLES-------------------------------------------
 
@@ -329,6 +400,37 @@ class CinemaController{
             ");
             $queryRoleActor->execute(["id" => $id]);
             require "view/infopage/infoRole.php";
+        }
+
+        //ADD ROLE
+        public function addRoleDisplay(){
+            require "view/addPage/addRole.php";
+        }
+
+        public function submitRole() {
+            if(isset($_POST['submitForm'])) {
+                $pdo = Connect::Connexion();
+
+                //sanitizing string inputs to avoid XSS vulnerability
+
+                //mandatory fields
+                $rolename = filter_input(INPUT_POST,"inputFirstname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                
+                //optional fields
+                $roledesc = filter_input(INPUT_POST,"inputLastname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+                $querySubmitRole = $pdo -> prepare("
+                    INSERT INTO role (nom_role, description_role)
+                    VALUES (:rolename, :roledesc)
+                ");
+
+                $querySubmitRole->execute([
+                    "rolename"=> $rolename,
+                    "roledesc"=> $roledesc
+                ]);
+                
+                header("Location:index.php?action=listRoles");
+            }
         }
 
 
