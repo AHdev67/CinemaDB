@@ -1,7 +1,7 @@
 <?php
     ob_start();
 ?>
-<div class="wrapper">
+<div class="container">
     <div class="title">
         <h1>ADD NEW MOVIE</h1>
         <span>(fields with * are mandatory)</span>
