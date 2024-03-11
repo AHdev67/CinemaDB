@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+#wrapper{
+    margin: 0;
+    padding: 0;
+}
+
+/* --------------------------------NAVBAR-------------------------------- */
+
+nav{
+    background-color: #393939;
+}
+
+#navbarContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between ;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#navbarContent a{
+    color: white;
+    text-decoration: none;
+}
+
+#navlogo{
+    color: white;
+    margin-left: 10px;
+    padding-right: 10px;
+}
+
+#navtitle a{
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+#searchbar{
+    height: 30px;
+    width: 60px;
+    border-style: none;
+    text-align: center;
+}
+
+#searchbutton{
+    height: 30px;
+    width: 30px;
+    border-style: none;
+}
+
+#burger{
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    border-style: none;
+    background-color: #393939;
+}
+
+#menuIcon{
+    font-size: 200%;
+    color: white;
+}
+
+#closeIcon{
+    display: none;
+    font-size: 200%;
+    color: white;
+}
+
+#menu{
+    position: fixed;
+    transition: transform 0.2s;
+    top: 50px;
+    right: 0;
+    background-color: #393939;
+    list-style: none;
+    padding: 10px;
+
+}
+
+.hideMenu {
+    transform: translateY(-150%);
+}
+
+#menu li{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* --------------------------------MAIN-------------------------------- */
+
+#wrapper{
+    display: flex;
+    flex-direction: column;
+}
