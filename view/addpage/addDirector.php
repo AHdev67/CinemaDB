@@ -1,13 +1,13 @@
 <?php
     ob_start();
 ?>
-<div class="wrapper">
+<div class="container">
     <div class="title">
         <h1>ADD NEW DIRECTOR</h1>
         <span>(fields with * are mandatory)</span>
     </div>
 
-    <form action="index.php?action=submitMovie" method="post">
+    <form action="index.php?action=submitDirector" method="post">
         <label for="firstnameInput">First name* :</label>
         <input type="text" name="inputFirstname" id="firstnameInput">
 
