@@ -1,8 +1,10 @@
 <?php 
     ob_start();
-    $movie = $queryMovieCard->fetch();
-    $person = $queryPersonCard->fetch();
-?>
+    // $movieLatest = $queryMovieCard->fetch();
+    // $movieChoice = $queryMovieCard->fetch();
+    // $actors = $queryMovieCaroussel->fetchALL();
+    // $directors = $queryPersonCard->fetchALL();
+?>  
 
 <!-- SECTION 1 : CAROUSSEL -->
 <div id="section1">
@@ -10,12 +12,15 @@
     <div class="caroussel">
         <div class="arrow" id="next"><i class="fa-solid fa-chevron-right"></i></div>
             <div class="carousselitem">
-                <figure class="carousselimage">
-                    <img src="<?= $movie["affiche"]?>" alt="background caroussel">
-                </figure>
-                <div class="carousseltitle">
-                    <?= $movie["titre_film"]?> (<?= $movie["date"]?>), <?= $movie["realisateurFilm"]?>
-                </div>
+                <?php
+                foreach($queryMovieCaroussel->fetchALL() as $movieCaroussel){?>
+                    <figure class="carousselimage">
+                        <img src="" alt="background caroussel">
+                    </figure>
+                    <div class="carousseltitle">
+                        <?= $movieCaroussel["titre_film"]?> (<?= $movieCaroussel["date"]?>), <?= $movieCaroussel["realisateurFilm"]?>
+                    </div>
+                <?php } ?>
             </div>
         <div class="arrow" id="previous"><i class="fa-solid fa-chevron-left"></i></div>
     </div>
