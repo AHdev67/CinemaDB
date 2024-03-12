@@ -19,7 +19,7 @@ class CinemaController{
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-                LIMIT 3
+                LIMIT 5
             ");
 
             $queryMovieLatest = $pdo->query("
