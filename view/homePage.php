@@ -1,7 +1,7 @@
 <?php 
     ob_start();
-    // $movieLatest = $queryMovieCard->fetch();
-    // $movieChoice = $queryMovieCard->fetch();
+    $movieLatest = $queryMovieLatest->fetch();
+    $movieChoice = $queryMovieChoice->fetch();
 ?>  
 
 <!-- SECTION 1 : CAROUSSEL -->
@@ -18,9 +18,9 @@
                     <img src="" alt="background caroussel">
                 </figure>
 
-                <div class="carousselTitle">
+                <p class="titleCard">
                     <?= $movieCaroussel["titre_film"]?> (<?= $movieCaroussel["date"]?>), <?= $movieCaroussel["realisateurFilm"]?>
-                </div>
+                </p>
             <?php } ?>
         </div>
 
@@ -41,10 +41,16 @@
     <div id="section2" class="section">
 
         <h2 class="sectionTitle">LATEST RELEASE</h2>
+        
+        <div class="posterContainer">
+             <figure class="poster">
+                <img src="<?= $movieLatest["affiche"] ?>" alt="poster movie latest">
+            </figure>
+        </div>
 
-        <figure class="poster">
-            <img src="" alt="poster movie latest">
-        </figure>
+        <p class="titleCard">
+            <?= $movieLatest["titre_film"]?> (<?= $movieLatest["date"]?>), <?= $movieLatest["realisateurFilm"] ?>
+        </p>
     </div>
 
     <!-- SECTION 3 : ADMIN'S CHOICE -->
@@ -52,11 +58,15 @@
 
         <h2 class="sectionTitle">ADMIN'S CHOICE</h2>
 
-        <div class="postercontainer">
+        <div class="posterContainer">
             <figure class="poster">
-                <img src="" alt="poster movie choice">
+                <img src="<?= $movieChoice["affiche"] ?>" alt="poster movie choice">
             </figure>
         </div>
+
+        <p class="titleCard">
+            <?= $movieChoice["titre_film"]?> (<?= $movieChoice["date"]?>), <?= $movieChoice["realisateurFilm"] ?>
+        </p>
     </div>
 </div>
 
