@@ -11,16 +11,19 @@
 
         <div class="arrow" id="next"><i class="fa-solid fa-chevron-left"></i></div>
             
-        <div class="carousselItem">
+        <div class="carousselContainer">
             <?php
             foreach($queryMovieCaroussel->fetchALL() as $movieCaroussel){?>
-                <figure class="carousselImage">
-                    <img src="" alt="background caroussel">
-                </figure>
+                <div class="carousselItem carousselHidden">
 
-                <p class="titleCard">
-                    <?= $movieCaroussel["titre_film"]?> (<?= $movieCaroussel["date"]?>), <?= $movieCaroussel["realisateurFilm"]?>
-                </p>
+                    <figure class="carousselImage">
+                        <img src="" alt="background caroussel">
+                    </figure>
+
+                    <p class="titleCard">
+                        <?= $movieCaroussel["titre_film"]?> (<?= $movieCaroussel["date"]?>), <?= $movieCaroussel["realisateurFilm"]?>
+                    </p>
+                </div>
             <?php } ?>
         </div>
 
@@ -49,7 +52,9 @@
         </div>
 
         <p class="titleCard">
-            <?= $movieLatest["titre_film"]?> (<?= $movieLatest["date"]?>), <?= $movieLatest["realisateurFilm"] ?>
+            <a href="index.php?action=infoMovie&id=<?= $movieLatest["id_film"] ?>">
+                <b><?= $movieLatest["titre_film"]?></b> (<?= $movieLatest["date"]?>), <?= $movieLatest["realisateurFilm"] ?>
+            </a>
         </p>
     </div>
 
@@ -65,7 +70,9 @@
         </div>
 
         <p class="titleCard">
-            <?= $movieChoice["titre_film"]?> (<?= $movieChoice["date"]?>), <?= $movieChoice["realisateurFilm"] ?>
+            <a href="index.php?action=infoMovie&id=<?= $movieChoice["id_film"] ?>">
+                <b><?= $movieChoice["titre_film"]?></b> (<?= $movieChoice["date"]?>), <?= $movieChoice["realisateurFilm"] ?>
+            </a>
         </p>
     </div>
 </div>
@@ -76,19 +83,22 @@
 
         <h2 class="sectionTitle">POPULAR ACTORS</h2>
 
-        <div class="popularselection">
 
-            <figure class="portrait">
-                <img src="" alt="photo actor 1">
-            </figure>
+        <div class="popularSelection">
+            <?php
+            foreach($queryActorCard->fetchALL() as $actor){?> 
+                <div class="personCard">
+                    <figure class="portrait">
+                        <img src="<?= $actor["photo"] ?>" alt="actor photo">
+                    </figure>
 
-            <figure class="portrait">
-                <img src="" alt="photo actor 2">
-            </figure>
-
-            <figure class="portrait">
-                <img src="" alt="photo actor 3">
-            </figure>
+                    <p class="nameCard">
+                        <a href="index.php?action=infoActor&id=<?= $actor["id_acteur"] ?>">
+                            <?= $actor["actorName"]?>
+                        </a>
+                    </p>
+                </div>
+            <?php } ?>
         </div>
     </div>
 
@@ -97,19 +107,21 @@
 
         <h2 class="sectionTitle">POPULAR DIRECTORS</h2>
 
-        <div class="popularselection">
+        <div class="popularSelection">
+            <?php
+            foreach($queryDirectorCard->fetchALL() as $director){?> 
+                <div class="personCard">
+                    <figure class="portrait">
+                        <img src="<?= $director["photo"] ?>" alt="director photo">
+                    </figure>
 
-            <figure class="portrait">
-                <img src="" alt="photo director 1">
-            </figure>
-
-            <figure class="portrait">
-                <img src="" alt="photo director 2">
-            </figure>
-
-            <figure class="portrait">
-                <img src="" alt="photo director 3">
-            </figure>
+                    <p class="nameCard">
+                        <a href="index.php?action=infoDirector&id=<?= $director["id_realisateur"] ?>">
+                            <?= $director["directorName"]?>
+                        </a>
+                    </p>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>
