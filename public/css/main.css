@@ -1,37 +1,47 @@
+
 *{
+    
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     vertical-align: top;
+    font-family: var(--police);
 }
+
+
+:root{
+    --police : "Montserrat", sans-serif, Arial, sans-serif;
+    --bgColor : #393939;
+}
+
+
 #wrapper{
     margin: 0;
     padding: 0;
 }
 
 /* --------------------------------NAVBAR-------------------------------- */
-
-nav{
-    background-color: #393939;
+header{
+    background-color: var(--bgColor);
 }
 
-#navbarContent{
+nav{
     display: flex;
     flex-direction: row;
     justify-content: space-between ;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
-#navbarContent a{
+nav a{
     color: white;
     text-decoration: none;
 }
 
 #navlogo{
-    color: white;
-    margin-left: 10px;
-    padding-right: 10px;
+    color: #CFAE4A;
+    margin-left: 15px;
+    padding-right: 5px;
 }
 
 #navtitle a{
@@ -58,7 +68,7 @@ nav{
     width: 30px;
     margin-right: 10px;
     border-style: none;
-    background-color: #393939;
+    background-color: var(--bgColor);
 }
 
 #menuIcon{
@@ -77,10 +87,9 @@ nav{
     transition: transform 0.2s;
     top: 50px;
     right: 0;
-    background-color: #393939;
+    background-color: var(--bgColor);
     list-style: none;
     padding: 10px;
-
 }
 
 .hideMenu {
@@ -93,8 +102,102 @@ nav{
 }
 
 /* --------------------------------MAIN-------------------------------- */
-
 #wrapper{
     display: flex;
     flex-direction: column;
+}
+
+    /* ----------------------------HOME PAGE---------------------------- */
+    .section{
+        background-color: #DACEAA;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .sectionTitle{
+        font-size: larger;
+        padding: 15px;
+    }
+
+    .arrow{
+        display: flex;
+        align-items: center;
+        font-size: 200%;
+        font-weight: bold;
+        padding: 15px;
+    }
+
+    .caroussel{
+        display: flex;
+        background-color: rgb(0, 0, 0, 0.3);
+    }
+
+    #carousselPosition{
+        display: flex;
+        justify-content: center;
+    }
+
+    .positionNode{
+        border-radius: 100%;
+        padding: 15px;
+    }
+
+    .nodePassive{
+        background-color: gray;
+    }
+
+
+
+
+
+/* --------------------------------FOOTER-------------------------------- */
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--bgColor);
+    color: white;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    padding: 10px;
+    font-family: Montserrat;
+}
+
+footer a{
+    text-decoration: none;
+    color: white;
+}
+
+footer h2{
+    font-size: medium;
+}
+
+#footer1 h2{
+    margin-bottom: 5px;
+}
+
+#footer1 p{
+    font-weight: lighter;
+    font-size: small;
+    line-height: 20px;
+}
+
+#footer2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#footer2 p{
+    font-weight: lighter;
+    font-size: small;
+    line-height: 20px;
+}
+
+#footer3 p{
+    display: flex;
+    justify-content: space-around;
+    font-size: 150%;
+    margin-top: 10px;
 }
