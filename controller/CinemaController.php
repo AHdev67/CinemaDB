@@ -15,7 +15,7 @@ class CinemaController{
             //query : selects a movie's poster, title, release year, and director's name 
             //used for movie cards in sections 1,2 and 3 of the home page
             $queryMovieCaroussel = $pdo->query("
-                SELECT affiche, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                SELECT film.id_film, affiche, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
@@ -23,7 +23,7 @@ class CinemaController{
             ");
 
             $queryMovieLatest = $pdo->query("
-                SELECT affiche, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                SELECT film.id_film, affiche, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
@@ -35,7 +35,7 @@ class CinemaController{
             ");
 
             $queryMovieChoice = $pdo->query("
-                SELECT affiche, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                SELECT film.id_film, affiche, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
@@ -43,10 +43,27 @@ class CinemaController{
             ");
             //query : selects surname and name of any given person
             //used for person cards in sections 4 and 5 of the home page
-            $queryPersonCard = $pdo->query("
-                SELECT prenom, nom
+            $queryActorCard = $pdo->query("
+                SELECT acteur.id_acteur, photo, CONCAT(prenom, ' ', nom) AS actorName, MAX(film.date_sortie) AS filmRecent
                 FROM personne
+                INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+                INNER JOIN casting ON acteur.id_acteur = casting.id_acteur
+                INNER JOIN film ON casting.id_film = film.id_film
+                GROUP BY acteur.id_acteur
+                ORDER BY filmRecent DESC
+                LIMIT 3
             ");
+
+            $queryDirectorCard = $pdo->query("
+                SELECT realisateur.id_realisateur, photo, CONCAT(prenom, ' ', nom) AS directorName, MAX(film.date_sortie) AS filmRecent
+                FROM personne
+                INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
+                INNER JOIN film ON realisateur.id_realisateur = film.id_realisateur
+                GROUP BY realisateur.id_realisateur
+                ORDER BY filmRecent DESC
+                LIMIT 3
+            ");
+
             require "view/homePage.php";
         }
 
