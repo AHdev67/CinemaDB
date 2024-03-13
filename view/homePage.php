@@ -47,15 +47,19 @@
         
         <div class="posterContainer">
              <figure class="poster">
-                <img src="<?= $movieLatest["affiche"] ?>" alt="poster movie latest">
+                <a href="index.php?action=infoMovie&id=<?= $movieLatest["id_film"] ?>">
+                    <img src="<?= $movieLatest["affiche"] ?>" alt="poster movie latest">
+                </a>
             </figure>
+
+            <p class="titleCard">
+                <a href="index.php?action=infoMovie&id=<?= $movieLatest["id_film"] ?>">
+                    <b><?= $movieLatest["titre_film"]?></b> (<?= $movieLatest["date"]?>), <?= $movieLatest["realisateurFilm"] ?>
+                </a>
+            </p>
         </div>
 
-        <p class="titleCard">
-            <a href="index.php?action=infoMovie&id=<?= $movieLatest["id_film"] ?>">
-                <b><?= $movieLatest["titre_film"]?></b> (<?= $movieLatest["date"]?>), <?= $movieLatest["realisateurFilm"] ?>
-            </a>
-        </p>
+        
     </div>
 
     <!-- SECTION 3 : ADMIN'S CHOICE -->
@@ -65,15 +69,19 @@
 
         <div class="posterContainer">
             <figure class="poster">
-                <img src="<?= $movieChoice["affiche"] ?>" alt="poster movie choice">
+                <a href="index.php?action=infoMovie&id=<?= $movieLatest["id_film"] ?>">
+                    <img src="<?= $movieChoice["affiche"] ?>" alt="poster movie choice">
+                </a>
             </figure>
+
+           <p class="titleCard">
+                <a href="index.php?action=infoMovie&id=<?= $movieChoice["id_film"] ?>">
+                    <b><?= $movieChoice["titre_film"]?></b> (<?= $movieChoice["date"]?>), <?= $movieChoice["realisateurFilm"] ?>
+                </a>
+            </p> 
         </div>
 
-        <p class="titleCard">
-            <a href="index.php?action=infoMovie&id=<?= $movieChoice["id_film"] ?>">
-                <b><?= $movieChoice["titre_film"]?></b> (<?= $movieChoice["date"]?>), <?= $movieChoice["realisateurFilm"] ?>
-            </a>
-        </p>
+        
     </div>
 </div>
 
