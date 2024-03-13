@@ -5,58 +5,58 @@
 ?>
 
 <div class="container">
+
+    <h1 class="mainTitle"><?= $movie["titre_film"] ?></h1>
     
-    <div class="infobox">
+    <div class="infoBox">
         <div class="info">
-            <h1 class="maintitle"><?= $movie["titre_film"] ?></h1>
-            <span>(<?= $movie["date"] ?>)</span>
             <p>
-                Directed by :
-                <?= $movie["realisateurFilm"] ?>
+                Directed by : <?= $movie["realisateurFilm"] ?>
             </p>
 
             <p>
-                Duration :
-                <?= $movie["duree"] ?>
+                Release date : <?= $movie["date"] ?>
             </p>
 
             <p>
-                Score :
-                <?= $movie["note"] ?>
+                Duration : <?= $movie["duree"] ?> minutes
+            </p>
+
+            <p>
+                Score : <?= $movie["note"] ?>
             </p>
         </div>
 
-        <figure class="infoimg">
-            <img src="<?= $movie["affiche"] ?>" alt="">
+        <figure class="infoImg">
+            <img src="<?= $movie["affiche"] ?>" alt="movie poster">
         </figure>
+
+        <article>
+            <h3>Synopsis :</h3>
+            <p>
+                <?= $movie["synopsis"] ?>
+            </p>
+        </article>
     </div>
 
-    <article>
-        <h3>Synopsis :</h3>
-        <p>
-            <?= $movie["synopsis"] ?>
-        </p>
-    </article>
-
-    <div class="casting">
+    <div class="subInfo">
         <h3>Casting :</h3>
     <?php
     foreach ($casting as $c) {?>
-        <div class="castingitem">
+        <div class="subInfoItem">
             <div class="actorinfomini">
+                <figure class="actorphotomini">
+                    <img src="" alt="photo acteur">
+                </figure>
+
                 <p>
-                    <?=$c["prenom"]?>
-                    <?=$c["nom"]?>
+                    <b><?=$c["nomActeur"]?></b>
                 </p>
-                
+
                 <p>
-                    , playing : <?=$c["nom_role"]?>
+                    In the role of : <?=$c["nom_role"]?>
                 </p>
             </div>
-
-            <figure class="actorphotomini">
-                <img src="" alt="photo acteur">
-            </figure>
         </div>
     <?php } ?>
 

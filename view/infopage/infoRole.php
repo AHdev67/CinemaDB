@@ -5,28 +5,28 @@
 ?>
 
 <div class="container">
-    
-    <div class="infobox">
-        <div class="info">
-            <h1 class="maintitle"><?= $role["nom_role"] ?></h1>
-        </div>
+
+    <h1 class="mainTitle"><?= $role["nom_role"] ?></h1>
+
+    <div class="infoBox">
+
+         <article>
+            <h3>Character :</h3>
+            <p>
+                <?= $role["description_role"] ?>
+            </p>
+        </article>
+
     </div>
 
-    <article>
-        <h3>Character :</h3>
-        <p>
-            <?= $role["description_role"] ?>
-        </p>
-    </article>
-
-    <div class="role">
+    <div class="subInfo">
         <h3>Played by :</h3>
     <?php
     foreach ($roleActeur as $r) {?>
-        <div class="roleitem">
-            <div class="roleinfomini">
+        <div class="subInfoItem">
+            <div class="roleInfoMini">
                 <p>
-                <?= $r["nomActeur"] ?> in : <?=$r["titre_film"]?>, (<?=$r["date"]?>)
+                <b><?= $r["nomActeur"] ?></b> in : <?=$r["titre_film"]?>, (<?=$r["date"]?>)
                 </p>
             </div>
         </div>

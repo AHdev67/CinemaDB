@@ -5,34 +5,35 @@
 ?>
 
 <div class="container">
+
+    <h1 class="mainTitle"><?= $actor["nomActeur"] ?></h1>
     
-    <div class="infobox">
+    <div class="infoBox">
         <div class="info">
-            <h1 class="maintitle"><?= $actor["nomActeur"] ?></h1>
-            <span>(<?= $actor["DoB"] ?>)</span>
+            <p>(<?= $actor["DoB"] ?>)</p>
             <p><?= $actor["sexe"] ?></p>
         </div>
 
-        <figure class="infoimg">
-            <img src="" alt="photo of actor">
+        <figure class="infoImg">
+            <img src="<?= $actor["photo"] ?>" alt="photo of actor">
         </figure>
+
+         <article>
+            <h3>Biography :</h3>
+            <p>
+            <?= $actor["biographie"] ?>
+            </p>
+        </article>
     </div>
 
-    <article>
-        <h3>Biography :</h3>
-        <p>
-        <?= $actor["biographie"] ?>
-        </p>
-    </article>
-
-    <div class="filmography">
+    <div class="subInfo">
         <h3>Filmography :</h3>
     <?php
     foreach ($filmography as $f) {?>
-        <div class="filmographyitem">
-            <div class="movieinfomini">
+        <div class="subInfoItem">
+            <div class="movieInfoMini">
                 <p>
-                    <?=$f["titre_film"]?>, (<?=$f["date"]?>), playing : <?=$f["nom_role"]?>
+                    <b><?=$f["titre_film"]?></b> (<?=$f["date"]?>), playing : <?=$f["nom_role"]?>
                 </p>
             </div>
         </div>

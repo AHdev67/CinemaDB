@@ -6,41 +6,39 @@
 
 <div class="container">
     
-    <div class="infobox">
+    <h1 class="mainTitle"><?= $director["nomRealisateur"] ?></h1>
+
+    <div class="infoBox">
         <div class="info">
-            <h1 class="maintitle"><?= $director["nomRealisateur"] ?></h1>
-            <span>(<?= $director["DoB"] ?>)</span>
+            <p>(<?= $director["DoB"] ?>)</p>
             <p><?= $director["sexe"] ?></p>
         </div>
 
-        <figure class="infoimg">
-            <img src="" alt="photo of director">
+        <figure class="infoImg">
+            <img src="<?= $director["photo"] ?>" alt="photo of director">
         </figure>
+
+        <article>
+            <h3>Biography :</h3>
+            <p>
+                <?= $director["biographie"] ?>
+            </p>
+        </article>
     </div>
 
-    <article>
-        <h3>Biography :</h3>
-        <p>
-        <?= $director["biographie"] ?>
-        </p>
-    </article>
-
-    <div class="filmography">
+    <div class="subInfo">
         <h3>Filmography :</h3>
     <?php
     foreach ($filmography as $f) {?>
-        <div class="filmographyitem">
-            <div class="movieinfomini">
+        <div class="subInfoItem">
+            <div class="movieInfoMini">
                 <p>
-                    <?=$f["titre_film"]?>
-                    , (
-                    <?=$f["date"]?>
-                    )
+                    <b><?=$f["titre_film"]?></b>, (<?=$f["date"]?>)
                 </p>
             </div>
 
-            <figure class="moviepostermini">
-                <img src="" alt="poster film">
+            <figure class="moviePosterMini">
+                <img src="<?= $f["affiche"] ?>" alt="poster film">
             </figure>
         </div>
     <?php } ?>
