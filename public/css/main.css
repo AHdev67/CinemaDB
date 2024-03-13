@@ -12,9 +12,9 @@
 :root{
     --police : "Montserrat", sans-serif, Arial, sans-serif;
     --bgColor : #393939;
-    --secColor : #d8cdac;
+    --secColor : #eee3cf;
     --mainColor : #e7c253;
-    --cardColor : #a1905c;
+    --cardColor : #b4a581;
 }
 
 #wrapper{
@@ -259,12 +259,12 @@ nav{
         align-items: center;
     }
 
-    .portrait{
+    .portrait a{
         height: 150px;
         width: 100px;
     }
 
-    .portrait img{
+    .portrait a img{
         height: inherit;
         width: inherit;
         object-fit: cover;
@@ -290,13 +290,17 @@ nav{
     /* ----------------------------LISTS---------------------------- */
     .container{
         margin-top: 70px;
-        margin-bottom: 10px;
         padding: 10px;
         height: 100%;
         background-color: var(--secColor);
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    .mainTitle{
+        color: var(--bgColor);
+        margin-bottom: 25px;
     }
 
     .options{
@@ -351,16 +355,168 @@ nav{
         color: rgb(0, 0, 0);
     }
 
-    .movieListTitle{
+    .mainLink{
         font-weight: bolder;
     }
 
-    .movieListYear{
+    .smallCol{
         width: 10%;
     }
 
-    .personListName{
+    /* ------------------------------INFO PAGE------------------------------ */
+    .infoBox{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--cardColor);
+        padding-top: 25px;
+        padding-bottom: 5px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 25px;
+        border-radius: 7px;
+    }
+
+    .info{
+        width: 300px;
+    }
+
+    .info p{
+        margin-bottom: 10px;
+    }
+
+    .infoImg{
+        height: auto;
+        width: 300px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .infoImg img{
+        height: inherit;
+        width: inherit;
+        object-fit: cover;
+        border-radius: 7px;
+    }
+
+    .infoBox article{
+        width: 300px;
+    }
+
+    .infoBox article p{
+        margin-top: 10px;
+    }
+
+    .subInfo{
+        background-color: var(--bgColor);
+        color: white;
+        padding: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        border-radius: 7px;
+    }
+
+    .subInfoItem{
+        margin-top: 10px;
+    }
+
+    .subInfo figure{
+        height: auto;
+        width: 110px;
+    }
+
+    .subInfo figure img{
+        height: inherit;
+        width: inherit;
+        object-fit: cover;
+    }
+
+    /* --------------------------------FOOTER-------------------------------- */
+    .customForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: baseline;
+        background-color: var(--cardColor);
+        padding: 15px;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 25px;
+        border-radius: 7px;
+    }
+
+    .customForm label{
         font-weight: bolder;
+    }
+
+    .strayTitle{
+        font-weight: bolder;
+        margin-top: 15px;
+    }
+
+    .formTitle{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .formDirector{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .formDate{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .formDuration{
+        display: flex;
+        flex-direction: row;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        gap: 5px;
+    }
+
+    .formDuration input{
+        width: 50px;
+    }
+
+    .formGenre{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding-left: 15px;
+    }
+
+    .formGenre label{
+        font-weight: normal;
+    }
+
+    .formScore{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .formSynopsis{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .formPoster{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .formSubmit{
+        margin-top: 15px;
+        margin-bottom: 15px;
     }
 
 /* --------------------------------FOOTER-------------------------------- */
