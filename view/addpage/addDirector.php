@@ -2,12 +2,12 @@
     ob_start();
 ?>
 <div class="container">
-    <div class="title">
+    <div class="mainTitle">
         <h1>ADD NEW DIRECTOR</h1>
         <span>(fields with * are mandatory)</span>
     </div>
 
-    <form action="index.php?action=submitDirector" method="post">
+    <form class="customForm" action="index.php?action=submitDirector" method="post">
         <label for="firstnameInput">First name* :</label>
         <input type="text" name="inputFirstname" id="firstnameInput">
 

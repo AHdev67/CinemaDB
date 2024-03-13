@@ -2,12 +2,12 @@
     ob_start();
 ?>
 <div class="container">
-    <div class="title">
+    <div class="mainTitle">
         <h1>ADD NEW ACTOR</h1>
         <span>(fields with * are mandatory)</span>
     </div>
 
-    <form action="index.php?action=submitActor" method="post">
+    <form class="customForm" action="index.php?action=submitActor" method="post">
         <label for="firstnameInput">First name* :</label>
         <input type="text" name="inputFirstname" id="firstnameInput">
 
