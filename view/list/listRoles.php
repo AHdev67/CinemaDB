@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="container">
-    <h1 class="maintitle">ROLES</h1>
+    <h1 class="mainTitle">ROLES</h1>
 
     <div class="options">
         <form action="controller/CinemaController.php" method="post">
@@ -15,19 +15,26 @@
                 <option value="asc">Ascendent</option>
                 <option value="desc">Descendent</option>
             </select>
+
+            <input type="submit" class="opt" name="submitSort" id="sortSubmit" value="Sort">
         </form>
 
-        <div class="opt">
-            <a href="">Add role</a>
+        <div class="add">
+            <a href="index.php?action=addRoleDisplay">Add role</a>
         </div>
     </div>
 
     <table class="list">
+        <thead>
+            <tr>
+                <th>ROLE NAME</th>
+            </tr>
+        </thead>
         <tbody>
             <?php
                 foreach($queryRole -> fetchALL() as $role){?>
                     <tr>
-                        <td><a href="index.php?action=infoRole&id=<?= $role["id_role"] ?>"><?= $role["nom_role"] ?></a></td>
+                        <td class="mainLink"><a href="index.php?action=infoRole&id=<?= $role["id_role"] ?>"><?= $role["nom_role"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>

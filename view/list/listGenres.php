@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="container">
-    <h1 class="maintitle">GENRES</h1>
+    <h1 class="mainTitle">GENRES</h1>
 
     <div class="options">
         <form action="controller/CinemaController.php" method="post">
@@ -15,19 +15,22 @@
                 <option value="asc">Ascendent</option>
                 <option value="desc">Descendent</option>
             </select>
-        </form>
 
-        <div class="opt">
-            <a href="">Add genre</a>
-        </div>
+            <input type="submit" class="opt" name="submitSort" id="sortSubmit" value="Sort">
+        </form>
     </div>
 
     <table class="list">
+        <thead>
+            <tr>
+                <th>GENRE NAME</th>
+            </tr>
+        </thead>
         <tbody>
             <?php
                 foreach($queryGenre -> fetchALL() as $genre){?>
                     <tr>
-                        <td><a href="index.php?action=infoGenre&id=<?= $genre["id_genre"] ?>"><?= $genre["nom_genre"] ?></a></td>
+                        <td class="mainLink"><a href="index.php?action=infoGenre&id=<?= $genre["id_genre"] ?>"><?= $genre["nom_genre"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>

@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="container">
-    <h1 class="maintitle">MOVIES</h1>
+    <h1 class="mainTitle">MOVIES</h1>
 
     <div class="options">
         <form action="controller/CinemaController.php" method="post">
@@ -37,9 +37,9 @@
             <?php
                 foreach($queryMovie -> fetchALL() as $film){?>
                     <tr>
-                        <td class="movieListTitle"><a href="index.php?action=infoMovie&id=<?= $film["id_film"] ?>"><?= $film["titre_film"] ?></a></td>
-                        <td class="movieListYear"><?= $film["date"] ?></td>
-                        <td class="movieListDirector"><a href="index.php?action=infoDirector&id=<?= $film["id_realisateur"] ?>"><?= $film["realisateurFilm"] ?></a></td>
+                        <td class="mainLink"><a href="index.php?action=infoMovie&id=<?= $film["id_film"] ?>"><?= $film["titre_film"] ?></a></td>
+                        <td class="smallCol"><?= $film["date"] ?></td>
+                        <td><a href="index.php?action=infoDirector&id=<?= $film["id_realisateur"] ?>"><?= $film["realisateurFilm"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>

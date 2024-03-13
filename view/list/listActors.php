@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
-<div class="wrapper">
-    <h1 class="container">ACTORS</h1>
+<div class="container">
+    <h1 class="mainTitle">ACTORS</h1>
 
     <div class="options">
         <form action="controller/CinemaController.php" method="post">
@@ -16,19 +16,26 @@
                 <option value="asc">Ascendent</option>
                 <option value="desc">Descendent</option>
             </select>
+
+            <input type="submit" class="opt" name="submitSort" id="sortSubmit" value="Sort">
         </form>
 
-        <div class="opt">
-            <a href="">Add actor</a>
+        <div class="add">
+            <a href="index.php?action=addActorDisplay">Add actor</a>
         </div>
     </div>
 
     <table class="list">
+        <thead>
+            <tr>
+                <th>ACTOR NAME</th>
+            </tr>
+        </thead>
         <tbody>
             <?php
                 foreach($queryActor -> fetchALL() as $actor){?>
                     <tr>
-                        <td><a href="index.php?action=infoActor&id=<?= $actor["id_acteur"] ?>"><?= $actor["nomActeur"] ?></a></td>
+                        <td class="mainLink"><a href="index.php?action=infoActor&id=<?= $actor["id_acteur"] ?>"><?= $actor["nomActeur"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>

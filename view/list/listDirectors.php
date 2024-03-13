@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <div class="container">
-    <h1 class="maintitle">DIRECTORS</h1>
+    <h1 class="mainTitle">DIRECTORS</h1>
 
     <div class="options">
         <form action="controller/CinemaController.php" method="post">
@@ -28,14 +28,14 @@
     <table class="list">
         <thead>
             <tr>
-                <th>NOM</th>
+                <th>DIRECTOR NAME</th>
             </tr>
         </thead>
         <tbody>
             <?php
                 foreach($queryDirector -> fetchALL() as $director){?>
                     <tr>
-                        <td class="personListName"><a href="index.php?action=infoDirector&id=<?= $director["id_realisateur"] ?>"><?= $director["nomRealisateur"] ?></a></td>
+                        <td class="mainLink"><a href="index.php?action=infoDirector&id=<?= $director["id_realisateur"] ?>"><?= $director["nomRealisateur"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>
