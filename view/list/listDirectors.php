@@ -13,22 +13,29 @@
 
             <select name="orderby" id="order1" class="opt">
                 <option value="" disabled selected>Order</option>
-                <option value="asc">Ascendent</option>
-                <option value="desc">Descendent</option>
+                <option value="ASC">Asc</option>
+                <option value="DESC">Desc</option>
             </select>
+
+            <input type="submit" class="opt" name="submitSort" id="sortSubmit" value="Sort">
         </form>
 
-        <div class="opt">
+        <div class="add">
             <a href="index.php?action=addDirectorDisplay">Add director</a>
         </div>
     </div>
 
     <table class="list">
+        <thead>
+            <tr>
+                <th>NOM</th>
+            </tr>
+        </thead>
         <tbody>
             <?php
                 foreach($queryDirector -> fetchALL() as $director){?>
                     <tr>
-                        <td><a href="index.php?action=infoDirector&id=<?= $director["id_realisateur"] ?>"><?= $director["nomRealisateur"] ?></a></td>
+                        <td class="personListName"><a href="index.php?action=infoDirector&id=<?= $director["id_realisateur"] ?>"><?= $director["nomRealisateur"] ?></a></td>
                     </tr>
             <?php } ?>
         </tbody>
