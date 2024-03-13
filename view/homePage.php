@@ -69,7 +69,7 @@
 
         <div class="posterContainer">
             <figure class="poster">
-                <a href="index.php?action=infoMovie&id=<?= $movieLatest["id_film"] ?>">
+                <a href="index.php?action=infoMovie&id=<?= $movieChoice["id_film"] ?>">
                     <img src="<?= $movieChoice["affiche"] ?>" alt="poster movie choice">
                 </a>
             </figure>
@@ -97,7 +97,9 @@
             foreach($queryActorCard->fetchALL() as $actor){?> 
                 <div class="personCard">
                     <figure class="portrait">
-                        <img src="<?= $actor["photo"] ?>" alt="actor photo">
+                        <a href="index.php?action=infoActor&id=<?= $actor["id_acteur"] ?>">
+                            <img src="<?= $actor["photo"] ?>" alt="actor photo">
+                        </a>
                     </figure>
 
                     <p class="nameCard">
@@ -120,7 +122,9 @@
             foreach($queryDirectorCard->fetchALL() as $director){?> 
                 <div class="personCard">
                     <figure class="portrait">
-                        <img src="<?= $director["photo"] ?>" alt="director photo">
+                        <a href="index.php?action=infoDirector&id=<?= $director["id_realisateur"] ?>">
+                            <img src="<?= $director["photo"] ?>" alt="director photo">
+                        </a>
                     </figure>
 
                     <p class="nameCard">
