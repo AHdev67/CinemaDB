@@ -42,6 +42,7 @@ header{
     position: fixed;
     width: 100%;
     background-color: var(--bgColor);
+    z-index: 99;
 }
 
 nav{
@@ -154,60 +155,13 @@ nav{
         margin-top: 70px;
     }
 
-    .arrow{
-        display: flex;
-        align-items: center;
-        font-size: 200%;
-        font-weight: bold;
-        padding: 15px;
-        color: var(--mainColor);
-    }
-
-    .caroussel{
-        display: flex;
-        justify-content: center;
-        background-color: var(--cardColor);
-    }
-
-    .carousselContainer{
-        display: flex;
-        flex-direction: row;
-    }
-
-    .carousselItem{
-        display: flex;
-        flex-direction: column;
-    }
-
-    .carousselHidden{
-        display: none;
-    }
-
-    #carousselPosition{
-        display: flex;
-        justify-content: center;
-        gap : 15px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .positionNode{
-        border-radius: 100%;
-        padding: 5px;
-        height: 5px;
-        width: 5px;
-    }
-
-    .nodePassive{
-        background-color: gray;
-    }
-
     .posterContainer{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         background-color: var(--cardColor);
+        height: 500px;
         padding-top: 25px;
         padding-bottom: 25px;
         margin-left: 15px;
@@ -216,7 +170,7 @@ nav{
     }
 
     .poster a{
-        height: auto;
+        height: 400px;
         width: 300px;
     }
 
@@ -433,7 +387,7 @@ nav{
         object-fit: cover;
     }
 
-    /* --------------------------------FOOTER-------------------------------- */
+    /* --------------------------------FORMS-------------------------------- */
     .customForm{
         display: flex;
         flex-direction: column;
@@ -456,17 +410,7 @@ nav{
         margin-top: 15px;
     }
 
-    .formTitle{
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-
-    .formDirector{
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-
-    .formDate{
+    .formBasicField{
         margin-top: 15px;
         margin-bottom: 15px;
     }
@@ -504,15 +448,16 @@ nav{
         margin-bottom: 15px;
     }
 
-    .formSynopsis{
+    .formBigText{
         margin-top: 15px;
         margin-bottom: 15px;
+        width: 300px;
     }
 
-    .formPoster{
-        margin-top: 15px;
-        margin-bottom: 15px;
+    .formBigText textarea{
+        margin-top: 5px;
     }
+
 
     .formSubmit{
         margin-top: 15px;
