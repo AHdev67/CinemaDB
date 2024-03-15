@@ -9,12 +9,12 @@
 
     <form class="customForm" action="index.php?action=submitMovie" method="post">
 
-        <p class="formTitle">
+        <p class="formBasicField">
             <label for="titleInput">Title* :</label>
             <input type="text" name="inputTile" id="titleInput">
         </p>
 
-        <p class="formDirector">
+        <p class="formBasicField">
             <label for="directorInput">Director* :</label>
             <select name="inputDirector" id="directorInput">
                 <option value="" disabled selected>Select director</option>
@@ -25,7 +25,7 @@
             </select>
         </p>
         
-        <p class="formDate">
+        <p class="formBasicField">
             <label for="releasedateInput">Release date* :</label>
             <input type="date" name="inputReleaseDate" id="releasedateInput">
         </p>
@@ -57,14 +57,14 @@
             <span> stars</span>
         </p>
        
-        <p class="formSynopsis">
+        <p class="formBigText">
             <label for="synopsisInput">Synopsis :</label>
-            <input type="text" name="inputSynopsis" id="synopsisInput">
+            <textarea name="inputSynopsis" id="synopsisInput" cols="43" rows="10"></textarea>
         </p>
         
-        <p class="formPoster">
+        <p class="formBasicField">
             <label for="posterInput">Poster URL :</label>
-            <input type="text" name="inputPoster" id="posterInput">
+            <input type="url" name="inputPoster" id="posterInput">
         </p>
         
         <input type="submit" name="submitForm" id="formSubmit" value="Add movie to DB" class="formSubmit">

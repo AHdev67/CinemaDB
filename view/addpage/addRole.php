@@ -8,15 +8,18 @@
     </div>
 
     <form class="customForm" action="index.php?action=submitRole" method="post">
-        <label for="firstnameInput">Role name* :</label>
-        <input type="text" name="inputFirstname" id="firstnameInput">
 
-        <br>
+        <p class="formBasicField">
+            <label for="roleNameInput">Role name* :</label>
+            <input type="text" name="inputRoleName" id="roleNameInput">
+        </p>
 
-        <label for="lastnameInput">Role description :</label>
-        <input type="text" name="inputLastname" id="lastnameInput">
-
-        <input type="submit" name="submitForm" id="formSubmit" value="Add movie to DB">
+        <p class="formBigText">
+            <label for="roleDescInput">Role description :</label>
+            <textarea name="inputRoleDesc" id="roleDescInput" cols="43" rows="10"></textarea>
+        </p>
+        
+        <input type="submit" name="submitForm" id="formSubmit" value="Add role to DB" class="formSubmit">
     </form>
 </div>
 
