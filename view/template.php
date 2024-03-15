@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/b28c0a82b5.js" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="/public/css/main.css"> -->
-
-   <link rel="stylesheet" href="public\css\main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="public\css\main.css">
     <title><?= $title ?></title>
 </head>
 
@@ -53,9 +52,6 @@
                     </li>
                     <li>
                         <a class="menuItem" href="index.php?action=listGenres">GENRES</a>
-                    </li>
-                    <li>
-                        <a class="menuItem" href="">CONTACT US</a>
                     </li>
                 </ul>
             </nav>
@@ -110,6 +106,26 @@
             </div>
         </footer>
     </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            loop: true,
+            // If we need pagination
+            pagination: {
+            el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 
 <!-- ---------------------------SCRIPT MENU BURGER--------------------------- -->
     <script>
