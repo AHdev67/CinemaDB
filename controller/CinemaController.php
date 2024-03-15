@@ -106,7 +106,7 @@ class CinemaController{
             //query : selects movie's title, release year, full name of director, duration, score, poster and synopsis
             //used to display movie's info in infoMovie page
             $queryMovieInfo = $pdo -> prepare("
-                SELECT film.id_realisateur, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%m/%d/%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm, duree, note, affiche, synopsis
+                SELECT film.id_film, film.id_realisateur, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%m/%d/%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm, duree, note, affiche, synopsis
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
@@ -126,6 +126,43 @@ class CinemaController{
             ");
             $queryCasting->execute(["id" => $id]);
             require "view/infopage/infoMovie.php";
+        }
+
+        //MODIFIY MOVIE
+        public function modMovieDisplay($id){
+            $pdo = Connect::Connexion();
+            $queryModForm = $pdo -> prepare("
+                SELECT film.id_film, titre_film, date_sortie, duree, synopsis, note, affiche, CONCAT(prenom, ' ', nom) AS realisateurFilm, film.id_realisateur
+                FROM film
+                INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                WHERE film.id_film = :id
+            ");
+
+            $queryMovieCategorization = $pdo -> prepare("
+                SELECT categoriser.id_genre
+                FROM categoriser
+                WHERE categoriser.id_film = :id
+            ");
+
+            $queryInputDirector = $pdo -> query("
+                SELECT realisateur.id_realisateur, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                FROM realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                ORDER BY nom
+            ");
+            //query : selects name of genre
+            //used for displaying list of genres as checkboxes in add movie form
+            $queryInputGenre = $pdo -> query("
+                SELECT genre.id_genre, nom_genre
+                FROM genre
+                ORDER BY nom_genre
+            ");
+
+            $queryModForm->execute(["id" => $id]);
+            $queryMovieCategorization->execute(["id" => $id]);
+
+            require "view/modpage/modMovie.php";
         }
 
         //ADD MOVIE
@@ -203,7 +240,6 @@ class CinemaController{
                 header("Location:index.php?action=listMovies");
             }
         }
-
 
 //-------------------------------------DIRECTORS-------------------------------------------
 
@@ -296,8 +332,6 @@ class CinemaController{
                 header("Location:index.php?action=listDirectors");
             }
         }
-
-
 
 //-------------------------------------ACTORS-------------------------------------------
 
@@ -465,7 +499,6 @@ class CinemaController{
                 header("Location:index.php?action=listRoles");
             }
         }
-
 
 //-------------------------------------GENRES-------------------------------------------
 
