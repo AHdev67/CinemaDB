@@ -320,6 +320,23 @@ nav{
     }
 
     /* ------------------------------INFO PAGE------------------------------ */
+    .infoHeader{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .options{
+        display: flex;
+        gap: 20px;
+        margin-right: 5px;
+        padding-top: 5px;
+    }
+
+    .infoHeader a{
+        color: var(--bgColor);
+        font-size: 150%;
+    }
+    
     .infoBox{
         display: flex;
         flex-direction: column;
@@ -405,7 +422,7 @@ nav{
         color: white;
         background-color: var(--bgColor);
         height: 30px;
-        width: 120px;
+        width: 160px;
         border: 1px solid white;
         margin-bottom: 15px;
     }
@@ -476,6 +493,7 @@ nav{
 
     .formBigText textarea{
         margin-top: 5px;
+        padding: 5px;
     }
 
     .formSubmit{
