@@ -33,12 +33,17 @@
         <div class="subInfoItem">
             <div class="movieInfoMini">
                 <p>
-                    <b><?=$f["titre_film"]?></b>, (<?=$f["date"]?>)
+                    <a href="index.php?action=infoMovie&id=<?= $f["id_film"] ?>">
+                        <b><?=$f["titre_film"]?></b>, (<?=$f["date"]?>)
+                    </a>
+                    
                 </p>
             </div>
 
             <figure class="moviePosterMini">
-                <img src="<?= $f["affiche"] ?>" alt="poster film">
+                <a href="index.php?action=infoMovie&id=<?= $f["id_film"] ?>">
+                    <img src="<?= $f["affiche"] ?>" alt="poster film">
+                </a>
             </figure>
         </div>
     <?php } ?>

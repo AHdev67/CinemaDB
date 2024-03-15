@@ -33,7 +33,13 @@
         <div class="subInfoItem">
             <div class="movieInfoMini">
                 <p>
-                    <b><?=$f["titre_film"]?></b> (<?=$f["date"]?>), playing : <?=$f["nom_role"]?>
+                    <a href="index.php?action=infoMovie&id=<?= $f["id_film"] ?>">
+                        <b><?=$f["titre_film"]?></b> (<?=$f["date"]?>)
+                    </a>
+                    , playing : 
+                    <a href="index.php?action=infoRole&id=<?= $f["id_role"] ?>">
+                        <?=$f["nom_role"]?>
+                    </a>
                 </p>
             </div>
         </div>

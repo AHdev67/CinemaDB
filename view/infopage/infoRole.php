@@ -26,7 +26,13 @@
         <div class="subInfoItem">
             <div class="roleInfoMini">
                 <p>
-                <b><?= $r["nomActeur"] ?></b> in : <?=$r["titre_film"]?>, (<?=$r["date"]?>)
+                    <a href="index.php?action=infoActor&id=<?= $r["id_acteur"] ?>">
+                        <b><?= $r["nomActeur"] ?></b> 
+                    </a>
+                    in : 
+                    <a href="index.php?action=infoMovie&id=<?= $r["id_film"] ?>">
+                        <?=$r["titre_film"]?>, (<?=$r["date"]?>)
+                    </a>
                 </p>
             </div>
         </div>

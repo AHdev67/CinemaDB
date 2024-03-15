@@ -26,7 +26,13 @@
         <div class="subInfoItem">
             <div class="genreinfomini">
                 <p>
-                    <b><?= $m["titre_film"] ?></b> (<?=$m["date"]?>), directed by <?= $m["nomRealisateur"] ?>
+                    <a href="index.php?action=infoMovie&id=<?= $m["id_film"] ?>">
+                        <b><?= $m["titre_film"] ?></b> (<?=$m["date"]?>), 
+                    </a>
+                    directed by 
+                    <a href="index.php?action=infoDirector&id=<?= $m["id_realisateur"] ?>">
+                        <?= $m["nomRealisateur"] ?>
+                    </a>
                 </p>
             </div>
         </div>

@@ -11,7 +11,10 @@
     <div class="infoBox">
         <div class="info">
             <p>
-                Directed by : <?= $movie["realisateurFilm"] ?>
+                Directed by : 
+                <a href="index.php?action=infoDirector&id=<?= $movie["id_realisateur"]?>">
+                    <?= $movie["realisateurFilm"] ?>
+                </a>
             </p>
 
             <p>
@@ -50,11 +53,16 @@
                 </figure>
 
                 <p>
-                    <b><?=$c["nomActeur"]?></b>
+                    <a href="index.php?action=infoActor&id=<?= $c["id_acteur"] ?>">
+                        <b><?=$c["nomActeur"]?></b>
+                    </a>
                 </p>
 
                 <p>
-                    In the role of : <?=$c["nom_role"]?>
+                    In the role of : 
+                    <a href="index.php?action=infoRole&id=<?= $c["id_role"] ?>">
+                        <?=$c["nom_role"]?>
+                    </a>
                 </p>
             </div>
         </div>
