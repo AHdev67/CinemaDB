@@ -3,27 +3,7 @@
 <div class="container">
     <h1 class="mainTitle">MOVIES</h1>
 
-    <div class="options">
-        <form action="controller/CinemaController.php" method="post">
-            <select name="sortby" id="sort1" class="opt">
-                <option value="" disabled selected>Sort by</option>
-                <option value="title">Title</option>
-                <option value="date">Date</option>
-            </select>
-
-            <select name="orderby" id="order1" class="opt">
-                <option value="" disabled selected>Order</option>
-                <option value="asc">Asc</option>
-                <option value="desc">Desc</option>
-            </select>
-
-            <input type="submit" class="opt" name="submitSort" id="sortSubmit" value="Sort">
-        </form>
-
-        <div class="add">
-            <a href="index.php?action=addMovieDisplay">Add movie ></a>
-        </div>
-    </div>
+    <a class="add" href="index.php?action=addMovieDisplay">Add movie ></a>    
 
     <table class="list">
         <thead>

@@ -3,23 +3,6 @@
 <div class="container">
     <h1 class="mainTitle">GENRES</h1>
 
-    <div class="options">
-        <form action="controller/CinemaController.php" method="post">
-            <select name="sortby" id="sort1" class="opt">
-                <option value="" disabled selected>Sort by</option>
-                <option value="title">Name</option>
-            </select>
-
-            <select name="orderby" id="order1" class="opt">
-                <option value="" disabled selected>Order</option>
-                <option value="asc">Ascendent</option>
-                <option value="desc">Descendent</option>
-            </select>
-
-            <input type="submit" class="opt" name="submitSort" id="sortSubmit" value="Sort">
-        </form>
-    </div>
-
     <table class="list">
         <thead>
             <tr>
