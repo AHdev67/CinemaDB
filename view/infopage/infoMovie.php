@@ -6,7 +6,20 @@
 
 <div class="container">
 
-    <h1 class="mainTitle"><?= $movie["titre_film"] ?></h1>
+    <div class="infoHeader">
+        <h1 class="mainTitle"><?= $movie["titre_film"] ?></h1>
+
+        <div class="options">
+            <a href="index.php?action=modMovieDisplay&id=<?= $movie["id_film"]?>">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+
+            <a href="">
+                <i class="fa-solid fa-trash"></i>
+            </a>
+        </div>
+    </div>
+    
     
     <div class="infoBox">
         <div class="info">
