@@ -19,7 +19,7 @@ class CinemaController{
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-                WHERE film.id_film = 2
+                WHERE film.id_film = 4
             ");
 
             $queryMovieCaroussel2 = $pdo->query("
@@ -27,7 +27,7 @@ class CinemaController{
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-                WHERE film.id_film = 4
+                WHERE film.id_film = 9
             ");
 
             $queryMovieCaroussel3 = $pdo->query("
@@ -35,7 +35,7 @@ class CinemaController{
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-                WHERE film.id_film = 9
+                WHERE film.id_film = 3
             ");
 
             $queryMovieLatest = $pdo->query("
@@ -106,7 +106,7 @@ class CinemaController{
             //query : selects movie's title, release year, full name of director, duration, score, poster and synopsis
             //used to display movie's info in infoMovie page
             $queryMovieInfo = $pdo -> prepare("
-                SELECT titre_film, date_sortie, DATE_FORMAT (date_sortie, '%m/%d/%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm, duree, note, affiche, synopsis
+                SELECT film.id_realisateur, titre_film, date_sortie, DATE_FORMAT (date_sortie, '%m/%d/%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm, duree, note, affiche, synopsis
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
@@ -117,7 +117,7 @@ class CinemaController{
             //query : selects person's surname, name, and name of role they played in a given movie
             // used to display movie's casting
             $queryCasting = $pdo -> prepare("
-                SELECT CONCAT(prenom, ' ', nom) AS nomActeur, nom_role
+                SELECT casting.id_acteur, casting.id_role, CONCAT(prenom, ' ', nom) AS nomActeur, nom_role
                 FROM casting
                 INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
                 INNER JOIN personne ON acteur.id_personne = personne.id_personne
@@ -237,7 +237,7 @@ class CinemaController{
             //query : selects movie's title, release year, duration, score, poster
             //used to display director's filmography
             $queryFilmography = $pdo -> prepare("
-                SELECT affiche, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, duree, note, affiche
+                SELECT film.id_film, affiche, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, duree, note, affiche
                 FROM film
                 WHERE film.id_realisateur = :id
                 ORDER BY date
@@ -331,7 +331,7 @@ class CinemaController{
             //query : selects movie's title, release year and role played by the actor
             //used to display actor's filmography
             $queryFilmography = $pdo -> prepare("
-                SELECT titre_film, DATE_FORMAT (date_sortie, '%Y') as date, nom_role
+                SELECT casting.id_film, casting.id_role, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, nom_role
                 FROM casting
                 INNER JOIN film ON casting.id_film = film.id_film
                 INNER JOIN role ON casting.id_role = role.id_role
@@ -423,12 +423,12 @@ class CinemaController{
             //query : selects actor's full name, movie's title, release year and director's name
             //used to display all actors having played that role, and the movie they played it in
             $queryRoleActor = $pdo -> prepare("
-                SELECT CONCAT(prenom, ' ', nom) AS nomActeur, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                SELECT casting.id_acteur, film.id_film, CONCAT(prenom, ' ', nom) AS nomActeur, titre_film, DATE_FORMAT (date_sortie, '%Y') as date
                 FROM role
                 INNER JOIN casting ON role.id_role = casting.id_role
                 INNER JOIN film ON casting.id_film = film.id_film
                 INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
-                INNER JOIN personne ON acteur.id_personne = personne.id_personne
+                INNER JOIN personne ON acteur.id_personne = personne.id_personne 
                 WHERE role.id_role = :id
             ");
             $queryRoleActor->execute(["id" => $id]);
@@ -497,7 +497,7 @@ class CinemaController{
             //query : selects movie's title, release year and director's full name
             //used to display all movies belonging to that genre
             $queryMoviesPerGenre = $pdo -> prepare("
-                SELECT titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS nomRealisateur
+                SELECT film.id_film, film.id_realisateur, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS nomRealisateur
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
