@@ -14,12 +14,28 @@ class CinemaController{
             $pdo = Connect::Connexion();
             //query : selects a movie's poster, title, release year, and director's name 
             //used for movie cards in sections 1,2 and 3 of the home page
-            $queryMovieCaroussel = $pdo->query("
+            $queryMovieCaroussel1 = $pdo->query("
                 SELECT film.id_film, affiche, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
                 FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
-                LIMIT 5
+                WHERE film.id_film = 2
+            ");
+
+            $queryMovieCaroussel2 = $pdo->query("
+                SELECT film.id_film, affiche, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                FROM film
+                INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                WHERE film.id_film = 4
+            ");
+
+            $queryMovieCaroussel3 = $pdo->query("
+                SELECT film.id_film, affiche, titre_film, DATE_FORMAT (date_sortie, '%Y') as date, CONCAT(prenom, ' ', nom) AS realisateurFilm
+                FROM film
+                INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                WHERE film.id_film = 9
             ");
 
             $queryMovieLatest = $pdo->query("
