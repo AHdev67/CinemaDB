@@ -1,7 +1,7 @@
 <?php
     ob_start();
     $movie = $queryModForm->fetch();
-    $movieCategorization = $queryMovieCategorization->fetch();
+    $movieCategorization = $queryMovieCategorization->fetchALL();
 ?>
 
 <div class="container">
@@ -43,7 +43,8 @@
         
         <span class="strayTitle">Genre* :</span><br>
         <?php
-        foreach($queryInputGenre->fetchALL() as $genre) { 
+        foreach($queryInputGenre->fetchALL() as $genre) {
+            //possibly add another foreach here, i don't know, figure it out
             if($genre["id_genre"] = $movieCategorization["id_genre"]){
                 $isChecked="checked";
             }else{
