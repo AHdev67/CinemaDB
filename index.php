@@ -30,6 +30,18 @@ if(isset($_GET["action"])){
             case "infoMovie" :
                 $ctrlCinema -> infoMovie($id);
                 break;
+
+                case "modMovieDisplay" :
+                    $ctrlCinema -> modMovieDisplay($id);
+                    break;
+                
+                // case "submitModMovie" :
+                //     $ctrlCinema -> submitModMovie();
+                //     break;
+
+                // case "deleteMovie" :
+                //     $ctrlCinema -> deleteMovie();
+                //     break;
             
                 case "addMovieDisplay" :
                     $ctrlCinema -> addMovieDisplay();
@@ -37,6 +49,7 @@ if(isset($_GET["action"])){
                 
                 case "submitMovie" :
                     $ctrlCinema -> submitMovie();
+                    break;
 
 //--------------------------------DIRECTORS-----------------------------------
         case "listDirectors" :
