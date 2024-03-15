@@ -7,6 +7,8 @@
         <span>(fields with * are mandatory)</span>
     </div>
 
+    <a class="return" href="index.php?action=listMovies">< Return to list</a>
+
     <form class="customForm" action="index.php?action=submitDirector" method="post">
         
         <p class="formBasicField">
