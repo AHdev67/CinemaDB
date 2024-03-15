@@ -1,47 +1,82 @@
 <?php 
     ob_start();
+    $carouselItem1 = $queryMovieCaroussel1->fetch();
+    $carouselItem2 = $queryMovieCaroussel2->fetch();
+    $carouselItem3 = $queryMovieCaroussel3->fetch();
+
     $movieLatest = $queryMovieLatest->fetch();
     $movieChoice = $queryMovieChoice->fetch();
 ?>  
 
 <!-- SECTION 1 : CAROUSSEL -->
-<div id="section1" class="section">
+<section id="section1" class="section">
     <h1 class="sectionTitle">DISCOVER</h1>
-    <div class="caroussel">
 
-        <div class="arrow" id="next"><i class="fa-solid fa-chevron-left"></i></div>
-            
-        <div class="carousselContainer">
-            <?php
-            foreach($queryMovieCaroussel->fetchALL() as $movieCaroussel){?>
-                <div class="carousselItem carousselHidden">
+    <div class="swiper">
+        <div class="swiper-wrapper">
 
-                    <figure class="carousselImage">
-                        <img src="" alt="background caroussel">
+            <div class="swiper-slide" id="slide1">
+                <div class="posterContainer">
+                    <figure class="poster">
+                        <a href="index.php?action=infoMovie&id=<?= $carouselItem1["id_film"] ?>">
+                            <img src="<?= $carouselItem1["affiche"] ?>" alt="poster movie latest">
+                        </a>
                     </figure>
 
                     <p class="titleCard">
-                        <?= $movieCaroussel["titre_film"]?> (<?= $movieCaroussel["date"]?>), <?= $movieCaroussel["realisateurFilm"]?>
+                        <a href="index.php?action=infoMovie&id=<?= $carouselItem1["id_film"] ?>">
+                            <b><?= $carouselItem1["titre_film"]?></b> (<?= $carouselItem1["date"]?>), <?= $carouselItem1["realisateurFilm"] ?>
+                        </a>
                     </p>
                 </div>
-            <?php } ?>
+            </div>
+
+            <div class="swiper-slide" id="slide2">
+                <div class="posterContainer">
+                    <figure class="poster">
+                        <a href="index.php?action=infoMovie&id=<?= $carouselItem2["id_film"] ?>">
+                            <img src="<?= $carouselItem2["affiche"] ?>" alt="poster movie latest">
+                        </a>
+                    </figure>
+
+                    <p class="titleCard">
+                        <a href="index.php?action=infoMovie&id=<?= $carouselItem2["id_film"] ?>">
+                            <b><?= $carouselItem2["titre_film"]?></b> (<?= $carouselItem2["date"]?>), <?= $carouselItem2["realisateurFilm"] ?>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="swiper-slide" id="slide3">
+                <div class="posterContainer">
+                    <figure class="poster">
+                        <a href="index.php?action=infoMovie&id=<?= $carouselItem3["id_film"] ?>">
+                            <img src="<?= $carouselItem3["affiche"] ?>" alt="poster movie latest">
+                        </a>
+                    </figure>
+
+                    <p class="titleCard">
+                        <a href="index.php?action=infoMovie&id=<?= $carouselItem3["id_film"] ?>">
+                            <b><?= $carouselItem3["titre_film"]?></b> (<?= $carouselItem3["date"]?>), <?= $carouselItem3["realisateurFilm"] ?>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
         </div>
 
-        <div class="arrow" id="previous"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
     </div>
 
-    <div id="carousselPosition">
-        <span class="positionNode nodePassive"></span>
-        <span class="positionNode nodePassive"></span>
-        <span class="positionNode nodePassive"></span>
-        <span class="positionNode nodePassive"></span>
-        <span class="positionNode nodePassive"></span>
-    </div>
-</div>
+</section>
 
 <div id="moviepresentation">
     <!-- SECTION 2 : LATEST RELEASE -->
-    <div id="section2" class="section">
+    <section id="section2" class="section">
 
         <h2 class="sectionTitle">LATEST RELEASE</h2>
         
@@ -60,10 +95,10 @@
         </div>
 
         
-    </div>
+    </section>
 
     <!-- SECTION 3 : ADMIN'S CHOICE -->
-    <div id="section3" class="section">
+    <section id="section3" class="section">
 
         <h2 class="sectionTitle">ADMIN'S CHOICE</h2>
 
@@ -82,7 +117,7 @@
         </div>
 
         
-    </div>
+    </section>
 </div>
 
 <div class="peoplepresentation">
