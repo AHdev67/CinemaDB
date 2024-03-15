@@ -16,7 +16,7 @@
         <div class="swiper-wrapper">
 
             <div class="swiper-slide" id="slide1">
-                <div class="posterContainer">
+                <div class="posterContainerCarousel">
                     <figure class="poster">
                         <a href="index.php?action=infoMovie&id=<?= $carouselItem1["id_film"] ?>">
                             <img src="<?= $carouselItem1["affiche"] ?>" alt="poster movie latest">
@@ -32,7 +32,7 @@
             </div>
 
             <div class="swiper-slide" id="slide2">
-                <div class="posterContainer">
+                <div class="posterContainerCarousel">
                     <figure class="poster">
                         <a href="index.php?action=infoMovie&id=<?= $carouselItem2["id_film"] ?>">
                             <img src="<?= $carouselItem2["affiche"] ?>" alt="poster movie latest">
@@ -48,7 +48,7 @@
             </div>
 
             <div class="swiper-slide" id="slide3">
-                <div class="posterContainer">
+                <div class="posterContainerCarousel">
                     <figure class="poster">
                         <a href="index.php?action=infoMovie&id=<?= $carouselItem3["id_film"] ?>">
                             <img src="<?= $carouselItem3["affiche"] ?>" alt="poster movie latest">
