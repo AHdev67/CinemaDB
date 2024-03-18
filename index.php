@@ -51,6 +51,14 @@ if(isset($_GET["action"])){
                     $ctrlCinema -> submitMovie();
                     break;
 
+                case "addCastingDisplay" :
+                    $ctrlCinema -> addCastingDisplay($id);
+                    break;
+                
+                case "submitCasting" :
+                    $ctrlCinema -> submitCasting($id);
+                    break;
+
 //--------------------------------DIRECTORS-----------------------------------
         case "listDirectors" :
             $ctrlCinema -> listDirectors();
