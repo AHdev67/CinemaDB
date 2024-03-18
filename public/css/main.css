@@ -275,8 +275,9 @@ nav{
         color: white;
         background-color: var(--bgColor);
         height: 30px;
-        width: 120px;
+        width: 140px;
         border: 1px solid white;
+        cursor: pointer;
     }
 
     .list{
@@ -335,6 +336,11 @@ nav{
     .infoHeader a{
         color: var(--bgColor);
         font-size: 150%;
+    }
+
+    .subInfoHeader{
+        display: flex;
+        justify-content: space-between;
     }
     
     .infoBox{
