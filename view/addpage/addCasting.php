@@ -63,6 +63,10 @@
                         </a>
                     </p>
                 </div>
+
+                <a href="index.php?action=deleteCasting&id=<?= $id .",". $c["id_acteur"] .",". $c["id_role"] ?>">
+                    <i class="fa-solid fa-trash"></i>
+                </a>
             </div>
         <?php } ?>
         
