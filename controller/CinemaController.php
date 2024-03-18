@@ -174,6 +174,75 @@ class CinemaController{
             require "view/modpage/modMovie.php";
         }
 
+        public function submitUpdateMovie($id){
+            if(isset($_POST['submitUpdate'])) {
+                $pdo = Connect::Connexion();
+
+                //sanitizing string inputs to avoid XSS vulnerability
+
+                //mandatory fields
+                $title = filter_input(INPUT_POST,"inputTile", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $director = $_POST["inputDirector"];
+                //converting retrieved release date as string to datetime
+                $date = new \DateTime(filter_input(INPUT_POST,"inputReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+                $duration = filter_input(INPUT_POST,"inputDuration", FILTER_VALIDATE_INT);
+                $score = $_POST["inputScore"];
+
+                //optional fields
+                $synopsis = filter_input(INPUT_POST,"inputSynopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $poster = filter_input(INPUT_POST,"inputPoster", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $querySubmitMovieUpdate = $pdo->prepare("
+                    UPDATE film 
+                    SET 
+                        titre_film = :title,
+                        date_sortie = :date,
+                        duree = :duration,
+                        note = :score,
+                        synopsis = :synopsis,
+                        affiche = :poster,
+                        id_realisateur = :director
+                    WHERE film.id_film = :id
+                ");
+
+                $querySubmitMovieUpdate->execute([
+                    "title" => $title,
+                    "date" => $date->format("Y-m-d"),
+                    "duration" => $duration,
+                    "score" => $score,
+                    "synopsis" => $synopsis,
+                    "poster" => $poster,
+                    "director" => $director,
+                    "id" => $id
+                ]);
+
+                $queryClearMovieGenres = $pdo->prepare("
+                    DELETE FROM categoriser
+                    WHERE categoriser.id_film = :id
+                ");
+
+                $queryClearMovieGenres -> execute([
+                    "id" => $id
+                ]);
+
+
+                foreach($_POST as $name =>$value){
+                     
+                    if (str_contains($name, "inputGenre")){ // s'il y a inputGenre dans le nom de la clef
+                        $genre = $value;
+                        $queryCategorizeMovie = $pdo -> prepare("
+                        INSERT INTO categoriser (id_film, id_genre)
+                        VALUES (:movieId, :genreId)
+                        ");
+                        $queryCategorizeMovie->execute([
+                        "movieId"=> $id,
+                        "genreId"=> $genre
+                        ]);
+                    }
+                }
+                header("Location:index.php?action=infoMovie&id=$id");
+            }
+        }
+
         //ADD MOVIE
         public function addMovieDisplay(){
             $pdo = Connect::Connexion();
@@ -251,6 +320,27 @@ class CinemaController{
                 header("Location:index.php?action=addCastingDisplay&id=$id");
             }
 
+            public function deleteCasting($id){
+                $ids = explode(",",$id);
+                $movieId = $ids[0];
+                $actorId = $ids[1];
+                $roleId = $ids[2];
+                
+                $pdo = Connect::Connexion();
+                $queryDeleteCasting = $pdo -> prepare("
+                DELETE FROM casting
+                WHERE casting.id_film = :movieId AND casting.id_acteur = :actorId AND casting.id_role = :roleId
+                ");
+
+                $queryDeleteCasting -> execute([
+                    "movieId" => $movieId,
+                    "actorId"=> $actorId,
+                    "roleId" => $roleId
+                ]);
+                
+                header("Location:index.php?action=addCastingDisplay&id=$movieId");
+            }
+
 
         public function submitMovie() {
             if(isset($_POST['submitForm'])) {
@@ -304,6 +394,20 @@ class CinemaController{
                 
                 header("Location:index.php?action=listMovies");
             }
+        }
+
+        public function deleteMovie($id){
+            $pdo = Connect::Connexion();
+            $queryDeleteMovie = $pdo->prepare("
+                 DELETE FROM film
+                 WHERE film.id_film = :id
+            ");
+
+            $queryDeleteMovie -> execute([
+                "id" => $id
+            ]);
+
+            header("Location:index.php?action=listMovies");
         }
 
 //-------------------------------------DIRECTORS-------------------------------------------
