@@ -151,16 +151,25 @@ class CinemaController{
                 INNER JOIN personne ON realisateur.id_personne = personne.id_personne
                 ORDER BY nom
             ");
-            //query : selects name of genre
-            //used for displaying list of genres as checkboxes in add movie form
+         
             $queryInputGenre = $pdo -> query("
                 SELECT genre.id_genre, nom_genre
                 FROM genre
                 ORDER BY nom_genre
             ");
 
+            $queryThisCasting = $pdo -> prepare("
+                SELECT casting.id_acteur, casting.id_role, CONCAT(prenom, ' ', nom) AS nomActeur, nom_role
+                FROM casting
+                INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
+                INNER JOIN personne ON acteur.id_personne = personne.id_personne
+                INNER JOIN role ON casting.id_role = role.id_role
+                WHERE casting.id_film = :id
+            ");
+
             $queryModForm->execute(["id" => $id]);
             $queryMovieCategorization->execute(["id" => $id]);
+            $queryThisCasting->execute(["id" => $id]);
 
             require "view/modpage/modMovie.php";
         }
@@ -186,6 +195,62 @@ class CinemaController{
 
             require "view/addPage/addMovie.php";
         }
+
+            //ADD CASTING
+            public function addCastingDisplay($id){
+                $pdo = Connect::Connexion();
+
+                $queryInputActor = $pdo->query("
+                    SELECT acteur.id_acteur, CONCAT(prenom, ' ', nom) AS nomActeur
+                    FROM personne
+                    INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+                    ORDER BY nomActeur
+                ");
+
+                $queryInputRole = $pdo->query("
+                    SELECT role.id_role, nom_role
+                    FROM role
+                ");
+
+                $queryCasting = $pdo -> prepare("
+                SELECT casting.id_acteur, casting.id_role, CONCAT(prenom, ' ', nom) AS nomActeur, nom_role
+                FROM casting
+                INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
+                INNER JOIN personne ON acteur.id_personne = personne.id_personne
+                INNER JOIN role ON casting.id_role = role.id_role
+                WHERE casting.id_film = :id
+                ");
+                $queryCasting->execute(["id" => $id]);
+            
+                require "view/addPage/addCasting.php";
+            }
+
+            public function submitCasting($id){
+                if(isset($_POST['submitForm'])){
+                    $pdo = Connect::Connexion();
+
+                    $actor = $_POST["inputActor"];
+                    $role = $_POST["inputRole"];
+
+                    $querySubmitCasting = $pdo -> prepare("
+                    INSERT INTO casting (id_film, id_acteur, id_role)
+                    VALUES (:idFilm, :idActeur, :idRole)
+                    ");
+                    try {
+                        $querySubmitCasting->execute([
+                            "idFilm" => $id,
+                            "idActeur" => $actor,
+                            "idRole" => $role
+                        ]);
+                    }
+                    catch(\PDOException $ex){
+
+                    }
+                }
+
+                header("Location:index.php?action=addCastingDisplay&id=$id");
+            }
+
 
         public function submitMovie() {
             if(isset($_POST['submitForm'])) {
