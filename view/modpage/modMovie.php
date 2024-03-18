@@ -1,7 +1,6 @@
 <?php
     ob_start();
     $movie = $queryModForm->fetch();
-    $movieCategorization = $queryMovieCategorization->fetchALL();
 ?>
 
 <div class="container">
@@ -43,13 +42,20 @@
         
         <span class="strayTitle">Genre* :</span><br>
         <?php
+
+        $genresThisMovie = [];
+        foreach($queryMovieCategorization->fetchALL() as $c){
+            $genresThisMovie[] = $c["id_genre"];
+        }
+
         foreach($queryInputGenre->fetchALL() as $genre) {
-            //possibly add another foreach here, i don't know, figure it out
-            if($genre["id_genre"] = $movieCategorization["id_genre"]){
-                $isChecked="checked";
+
+            if(in_array($genre["id_genre"] ,$genresThisMovie)){
+            $isChecked="checked";
             }else{
                 $isChecked="";
             }?>
+            
             <p class="formGenre">
                 <input type="checkbox" <?= $isChecked?> value="<?= $genre["id_genre"]?>" name="<?= "inputGenre".$genre["id_genre"] ?>" id="<?= $genre["id_genre"] ?>">
                 <label for="<?= $genre["id_genre"] ?>"><?= $genre["nom_genre"] ?></label>
@@ -79,7 +85,7 @@
             <input type="url" name="inputPoster" id="posterInput" value="<?= $movie["affiche"]?>">
         </p>
         
-        <input type="submit" name="submitForm" id="formSubmit" value="Add movie to DB" class="formSubmit">
+        <input type="submit" name="submitForm" id="formSubmit" value="Update movie info" class="formSubmit">
     </form>
 </div>
 
