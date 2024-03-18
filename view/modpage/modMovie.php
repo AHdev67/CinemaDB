@@ -11,7 +11,7 @@
 
     <a class="return" href="index.php?action=infoMovie&id=<?= $movie["id_film"] ?>">< Return to movie</a>
 
-    <form class="customForm" action="index.php?action=submitMovie" method="post">
+    <form class="customForm" action="index.php?action=submitUpdateMovie&id=<?= $movie["id_film"] ?>" method="post">
 
         <p class="formBasicField">
             <label for="titleInput">Title* :</label>
@@ -21,10 +21,14 @@
         <p class="formBasicField">
             <label for="directorInput">Director* :</label>
             <select name="inputDirector" id="directorInput">
-                <option value="<?= $movie["id_realisateur"]?>" disabled selected><?= $movie["realisateurFilm"]?></option>
                 <?php
-                foreach($queryInputDirector->fetchALL() as $director) { ?>
-                    <option value="<?= $director["id_realisateur"]?>"><?= $director["realisateurFilm"] ?></option>
+                foreach($queryInputDirector->fetchALL() as $director) { 
+                    if($movie["id_realisateur"] == $director["id_realisateur"]){
+                        $selectedDirector = "selected";
+                    }else{
+                        $selectedDirector = "";
+                    } ?>
+                    <option value="<?= $director["id_realisateur"]?>" <?= $selectedDirector ?>><?= $director["realisateurFilm"] ?></option>
                 <?php } ?>
             </select>
         </p>
@@ -63,14 +67,21 @@
         <?php } ?>
 
         <p class="formScore">
-             <label for="scoreInput">Score :</label>
+            <?php
+            $scores = [1,2,3,4,5];
+            ?>
+            <label for="scoreInput">Score :</label>
             <select name="inputScore" id="scoreInput">
-                <option value="<?= $movie["note"]?>" disabled selected><?= $movie["note"]?></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <?php
+                foreach($scores as $s){
+                    if($movie["note"] == $s){
+                        $selectedScore = "selected";
+                    }else{
+                        $selectedScore = "";
+                    }?>
+                    <option value=<?= $s ?> <?= $selectedScore ?>><?= $s ?></option>
+                <?php } ?>
+                
             </select>
             <span> stars</span>
         </p>
@@ -82,10 +93,10 @@
         
         <p class="formBasicField">
             <label for="posterInput">Poster URL :</label>
-            <input type="url" name="inputPoster" id="posterInput" value="<?= $movie["affiche"]?>">
+            <input type="text" name="inputPoster" id="posterInput" value="<?= $movie["affiche"]?>">
         </p>
         
-        <input type="submit" name="submitForm" id="formSubmit" value="Update movie info" class="formSubmit">
+        <input type="submit" name="submitUpdate" id="updateSubmit" value="Update movie" class="formSubmit">
     </form>
 </div>
 
