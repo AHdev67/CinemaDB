@@ -109,45 +109,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <script>
-        const swiper = new Swiper('.swiper', {
-            // Optional parameters
-            loop: true,
-            // If we need pagination
-            pagination: {
-            el: '.swiper-pagination',
-            },
-
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
-
-<!-- ---------------------------SCRIPT MENU BURGER--------------------------- -->
-    <script>
-        const menu = document.querySelector("#menu");
-        const menuItems = document.querySelectorAll(".menuItem");
-        const hamburger= document.querySelector("#burger");
-        const closeIcon= document.querySelector("#closeIcon");
-        const menuIcon = document.querySelector("#menuIcon");
-
-        function toggleMenu() {
-            if (menu.classList.contains("hideMenu")) {
-                menu.classList.remove("hideMenu");
-                closeIcon.style.display = "block";
-                menuIcon.style.display = "none";
-            } else {
-                menu.classList.add("hideMenu");
-                closeIcon.style.display = "none";
-                menuIcon.style.display = "block";
-            }
-        }
-
-        hamburger.addEventListener("click", toggleMenu);
-    </script>
+    <script src="public\js\main.js"></script>
+   
 </body>
 </html>
