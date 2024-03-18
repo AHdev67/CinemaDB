@@ -56,7 +56,14 @@
     </div>
 
     <div class="subInfo">
-        <h3>Casting :</h3>
+        <div class="subInfoHeader">
+            <h3>Casting :</h3>
+
+            <a href="index.php?action=addCastingDisplay&id=<?= $movie["id_film"] ?>">
+                <button class="add">Add actor to casting</button>
+            </a>
+        </div>
+        
     <?php
     foreach ($casting as $c) {?>
         <div class="subInfoItem">
