@@ -342,6 +342,11 @@ nav{
         display: flex;
         justify-content: space-between;
     }
+
+    .subInfoHeader a{
+        color: white;
+        font-size: 150%;
+    }
     
     .infoBox{
         display: flex;
@@ -403,6 +408,9 @@ nav{
 
     .subInfoItem{
         margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .subInfoItem a{
@@ -430,6 +438,7 @@ nav{
         height: 30px;
         width: 160px;
         border: 1px solid white;
+        margin-left: 15px;
         margin-bottom: 15px;
     }
     
@@ -440,6 +449,8 @@ nav{
         align-items: baseline;
         background-color: var(--cardColor);
         padding: 15px;
+        margin-left: 15px;
+        margin-right: 15px;
         margin-bottom: 25px;
         border-radius: 7px;
     }
