@@ -14,7 +14,7 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
 
-            <a href="">
+            <a href="index.php?action=deleteMovie&id=<?= $movie["id_film"]?>" class="delete">
                 <i class="fa-solid fa-trash"></i>
             </a>
         </div>
@@ -60,7 +60,7 @@
             <h3>Casting :</h3>
 
             <a href="index.php?action=addCastingDisplay&id=<?= $movie["id_film"] ?>">
-                <button class="add">Add actor to casting</button>
+                <i class="fa-solid fa-pen-to-square"></i>
             </a>
         </div>
         
