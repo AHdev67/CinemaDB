@@ -66,7 +66,7 @@
         
         <p class="formBasicField">
             <label for="posterInput">Poster URL :</label>
-            <input type="url" name="inputPoster" id="posterInput">
+            <input type="text" name="inputPoster" id="posterInput">
         </p>
         
         <input type="submit" name="submitForm" id="formSubmit" value="Add movie to DB" class="formSubmit">
