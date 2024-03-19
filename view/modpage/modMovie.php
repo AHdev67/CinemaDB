@@ -14,12 +14,12 @@
     <form class="customForm" action="index.php?action=submitUpdateMovie&id=<?= $movie["id_film"] ?>" method="post">
 
         <p class="formBasicField">
-            <label for="titleInput">Title* :</label>
+            <label for="titleInput">Title* : </label>
             <input type="text" name="inputTile" id="titleInput" value="<?= $movie["titre_film"] ?>">
         </p>
 
         <p class="formBasicField">
-            <label for="directorInput">Director* :</label>
+            <label for="directorInput">Director* : </label>
             <select name="inputDirector" id="directorInput">
                 <?php
                 foreach($queryInputDirector->fetchALL() as $director) { 
@@ -34,17 +34,17 @@
         </p>
         
         <p class="formBasicField">
-            <label for="releasedateInput">Release date* :</label>
+            <label for="releasedateInput">Release date* : </label>
             <input type="date" name="inputReleaseDate" id="releasedateInput" value="<?= $movie["date_sortie"]?>">
         </p>
        
         <p class="formDuration">
-            <label for="durationInput">Duration* :</label>
+            <label for="durationInput">Duration* : </label>
             <input type="text" name="inputDuration" id="durationInput" value="<?= $movie["duree"]?>">
             minutes
         </p>
         
-        <span class="strayTitle">Genre* :</span><br>
+        <span class="strayTitle">Genre* : </span><br>
         <?php
 
         $genresThisMovie = [];
@@ -70,7 +70,7 @@
             <?php
             $scores = [1,2,3,4,5];
             ?>
-            <label for="scoreInput">Score :</label>
+            <label for="scoreInput">Score : </label>
             <select name="inputScore" id="scoreInput">
                 <?php
                 foreach($scores as $s){
@@ -87,12 +87,12 @@
         </p>
        
         <p class="formBigText">
-            <label for="synopsisInput">Synopsis :</label>
+            <label for="synopsisInput">Synopsis : </label>
             <textarea name="inputSynopsis" id="synopsisInput" cols="43" rows="10"><?= $movie["synopsis"]?></textarea>
         </p>
         
         <p class="formBasicField">
-            <label for="posterInput">Poster URL :</label>
+            <label for="posterInput">Poster URL : </label>
             <input type="text" name="inputPoster" id="posterInput" value="<?= $movie["affiche"]?>">
         </p>
         
