@@ -21,41 +21,42 @@
     
     
     <div class="infoBox">
-        <div class="info">
-            <p>
-                Directed by : 
-                <a href="index.php?action=infoDirector&id=<?= $movie["id_realisateur"]?>">
-                    <?= $movie["realisateurFilm"] ?>
-                </a>
-            </p>
+        <div class="infoTop">
+            <div class="info">
+                <p>
+                    Directed by : 
+                    <a href="index.php?action=infoDirector&id=<?= $movie["id_realisateur"]?>">
+                        <?= $movie["realisateurFilm"] ?>
+                    </a>
+                </p>
 
-            <p>
-                Release date : <?= $movie["date"] ?>
-            </p>
+                <p>
+                    Release date : <?= $movie["date"] ?>
+                </p>
 
-            <p>
-                Duration : <?= $movie["duree"] ?> minutes
-            </p>
+                <p>
+                    Duration : <?= $movie["duree"] ?> minutes
+                </p>
 
-            <p>
-                Score : <?= $movie["note"] ?>
-            </p>
+                <p>
+                    Score : <?= $movie["note"] ?>/5
+                </p>
 
-            <div class="genresList">
-                <span>Genre(s) : </span>
-                <ul>
-                    <?php
-                    foreach($queryGenres->fetchAll() as $genre){ ?>
-                        <li><?= $genre["nom_genre"] ?></li>
-                    <?php }?>  
-                </ul>
+                <div class="genresList">
+                    <span>Genre(s) : </span>
+                    <ul>
+                        <?php
+                        foreach($queryGenres->fetchAll() as $genre){ ?>
+                            <li><?= $genre["nom_genre"] ?> </li>
+                        <?php }?>  
+                    </ul>
+                </div>
             </div>
-            
-        </div>
 
-        <figure class="infoImg">
-            <img src="<?= $movie["affiche"] ?>" alt="movie poster">
-        </figure>
+            <figure class="infoImg">
+                <img src="<?= $movie["affiche"] ?>" alt="movie poster">
+            </figure>
+        </div>
 
         <article>
             <h3>Synopsis :</h3>
@@ -73,30 +74,33 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </a>
         </div>
-        
-    <?php
-    foreach ($queryCasting->fetchAll() as $c) {?>
-        <div class="subInfoItem">
-            <div class="actorinfomini">
-                <figure class="actorphotomini">
-                    <img src="" alt="photo acteur">
-                </figure>
+    
+        <div class="subInfoContent">
 
-                <p>
-                    <a href="index.php?action=infoActor&id=<?= $c["id_acteur"] ?>">
-                        <b><?=$c["nomActeur"]?></b>
-                    </a>
-                </p>
+        <?php
+        foreach ($queryCasting->fetchAll() as $c) {?>
+            <div class="subInfoItem">
+                <div class="actorinfomini">
+                    <figure class="actorphotomini">
+                        <img src="" alt="photo acteur">
+                    </figure>
 
-                <p>
-                    In the role of : 
-                    <a href="index.php?action=infoRole&id=<?= $c["id_role"] ?>">
-                        <?=$c["nom_role"]?>
-                    </a>
-                </p>
+                    <p>
+                        <a href="index.php?action=infoActor&id=<?= $c["id_acteur"] ?>">
+                            <b><?=$c["nomActeur"]?></b>
+                        </a>
+                    </p>
+
+                    <p>
+                        In the role of : 
+                        <a href="index.php?action=infoRole&id=<?= $c["id_role"] ?>">
+                            <?=$c["nom_role"]?>
+                        </a>
+                    </p>
+                </div>
             </div>
+        <?php } ?>
         </div>
-    <?php } ?>
 
     </div>
 
