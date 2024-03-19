@@ -14,64 +14,67 @@
     <section id="section1" class="section">
         <h1 class="sectionTitle">DISCOVER</h1>
 
-        <div class="swiper">
-            <div class="swiper-wrapper">
+        <div class="carousel">
 
-                <div class="swiper-slide" id="slide1">
-                    <div class="posterContainerCarousel">
-                        <figure class="poster">
-                            <a href="index.php?action=infoMovie&id=<?= $carouselItem1["id_film"] ?>">
-                                <img src="<?= $carouselItem1["affiche"] ?>" alt="poster movie latest">
-                            </a>
-                        </figure>
+            <div class="swiper">
+                <div class="swiper-wrapper">
 
-                        <p class="titleCard">
-                            <a href="index.php?action=infoMovie&id=<?= $carouselItem1["id_film"] ?>">
-                                <b><?= $carouselItem1["titre_film"]?></b> (<?= $carouselItem1["date"]?>), <?= $carouselItem1["realisateurFilm"] ?>
-                            </a>
-                        </p>
+                    <div class="swiper-slide" id="slide1">
+                        <div class="posterContainerCarousel">
+                            <figure class="poster">
+                                <a href="index.php?action=infoMovie&id=<?= $carouselItem1["id_film"] ?>">
+                                    <img src="<?= $carouselItem1["affiche"] ?>" alt="poster movie latest">
+                                </a>
+                            </figure>
+
+                            <p class="titleCard">
+                                <a href="index.php?action=infoMovie&id=<?= $carouselItem1["id_film"] ?>">
+                                    <b><?= $carouselItem1["titre_film"]?></b> (<?= $carouselItem1["date"]?>), <?= $carouselItem1["realisateurFilm"] ?>
+                                </a>
+                            </p>
+                        </div>
                     </div>
+
+                    <div class="swiper-slide" id="slide2">
+                        <div class="posterContainerCarousel">
+                            <figure class="poster">
+                                <a href="index.php?action=infoMovie&id=<?= $carouselItem2["id_film"] ?>">
+                                    <img src="<?= $carouselItem2["affiche"] ?>" alt="poster movie latest">
+                                </a>
+                            </figure>
+
+                            <p class="titleCard">
+                                <a href="index.php?action=infoMovie&id=<?= $carouselItem2["id_film"] ?>">
+                                    <b><?= $carouselItem2["titre_film"]?></b> (<?= $carouselItem2["date"]?>), <?= $carouselItem2["realisateurFilm"] ?>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide" id="slide3">
+                        <div class="posterContainerCarousel">
+                            <figure class="poster">
+                                <a href="index.php?action=infoMovie&id=<?= $carouselItem3["id_film"] ?>">
+                                    <img src="<?= $carouselItem3["affiche"] ?>" alt="poster movie latest">
+                                </a>
+                            </figure>
+
+                            <p class="titleCard">
+                                <a href="index.php?action=infoMovie&id=<?= $carouselItem3["id_film"] ?>">
+                                    <b><?= $carouselItem3["titre_film"]?></b> (<?= $carouselItem3["date"]?>), <?= $carouselItem3["realisateurFilm"] ?>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="swiper-slide" id="slide2">
-                    <div class="posterContainerCarousel">
-                        <figure class="poster">
-                            <a href="index.php?action=infoMovie&id=<?= $carouselItem2["id_film"] ?>">
-                                <img src="<?= $carouselItem2["affiche"] ?>" alt="poster movie latest">
-                            </a>
-                        </figure>
+                <div class="swiper-pagination"></div>
 
-                        <p class="titleCard">
-                            <a href="index.php?action=infoMovie&id=<?= $carouselItem2["id_film"] ?>">
-                                <b><?= $carouselItem2["titre_film"]?></b> (<?= $carouselItem2["date"]?>), <?= $carouselItem2["realisateurFilm"] ?>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="swiper-slide" id="slide3">
-                    <div class="posterContainerCarousel">
-                        <figure class="poster">
-                            <a href="index.php?action=infoMovie&id=<?= $carouselItem3["id_film"] ?>">
-                                <img src="<?= $carouselItem3["affiche"] ?>" alt="poster movie latest">
-                            </a>
-                        </figure>
-
-                        <p class="titleCard">
-                            <a href="index.php?action=infoMovie&id=<?= $carouselItem3["id_film"] ?>">
-                                <b><?= $carouselItem3["titre_film"]?></b> (<?= $carouselItem3["date"]?>), <?= $carouselItem3["realisateurFilm"] ?>
-                            </a>
-                        </p>
-                    </div>
-                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
 
             </div>
-
-            <div class="swiper-pagination"></div>
-
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-
         </div>
 
     </section>
@@ -124,7 +127,7 @@
             </section>
         </div>
 
-        <div class="peoplePresentation">
+        <div class="peopleresentation">
             <!-- SECTION 4 : POPULAR ACTORS -->
             <div id="section4" class="section">
 
