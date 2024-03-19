@@ -287,6 +287,7 @@ class CinemaController{
                 $queryInputRole = $pdo->query("
                     SELECT role.id_role, nom_role
                     FROM role
+                    ORDER BY nom_role
                 ");
 
                 $queryCasting = $pdo -> prepare("
@@ -475,7 +476,7 @@ class CinemaController{
                 $lastname = filter_input(INPUT_POST,"inputLastname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 //converting retrieved release date as string to datetime
                 $DoB = new \DateTime(filter_input(INPUT_POST,"inputDoB", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-                $sex = filter_input(INPUT_POST,"inputSex", FILTER_VALIDATE_INT);
+                $sex = $_POST["inputSex"];
                 
                 //optional fields
                 $photo = filter_input(INPUT_POST,"inputPhoto", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -488,8 +489,8 @@ class CinemaController{
 
                 $querySubmitDirector->execute([
                     "firstname"=> $firstname,
-                    "lastname"=> $lastname->format("Y-m-d"),
-                    "dateOfBirth"=> $DoB,
+                    "lastname"=> $lastname,
+                    "dateOfBirth"=> $DoB->format("Y-m-d"),
                     "sex"=>$sex,
                     "biography"=> $biography,
                     "photo"=> $photo
@@ -508,6 +509,20 @@ class CinemaController{
                 
                 header("Location:index.php?action=listDirectors");
             }
+        }
+
+        public function deleteDirector($id){
+            $pdo = Connect::Connexion();
+            $queryDeleteDirector = $pdo->prepare("
+                 DELETE FROM personne
+                 WHERE personne.id_personne = :id
+            ");
+
+            $queryDeleteDirector -> execute([
+                "id" => $id
+            ]);
+
+            header("Location:index.php?action=listDirectors");
         }
 
 //-------------------------------------ACTORS-------------------------------------------
@@ -569,7 +584,7 @@ class CinemaController{
                 $lastname = filter_input(INPUT_POST,"inputLastname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 //converting retrieved release date as string to datetime
                 $DoB = new \DateTime(filter_input(INPUT_POST,"inputDoB", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-                $sex = filter_input(INPUT_POST,"inputSex", FILTER_VALIDATE_INT);
+                $sex = $_POST["inputSex"];
                 
                 //optional fields
                 $photo = filter_input(INPUT_POST,"inputPhoto", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -582,8 +597,8 @@ class CinemaController{
 
                 $querySubmitActor->execute([
                     "firstname"=> $firstname,
-                    "lastname"=> $lastname->format("Y-m-d"),
-                    "dateOfBirth"=> $DoB,
+                    "lastname"=> $lastname,
+                    "dateOfBirth"=> $DoB->format("Y-m-d"),
                     "sex"=>$sex,
                     "biography"=> $biography,
                     "photo"=> $photo
@@ -603,6 +618,21 @@ class CinemaController{
                 header("Location:index.php?action=listActors");
             }
         }
+
+        public function deleteActor($id){
+            $pdo = Connect::Connexion();
+            $queryDeleteActor = $pdo->prepare("
+                 DELETE FROM personne
+                 WHERE personne.id_personne = :id
+            ");
+
+            $queryDeleteActor -> execute([
+                "id" => $id
+            ]);
+
+            header("Location:index.php?action=listActors");
+        }
+
 
 //-------------------------------------ROLES-------------------------------------------
 
@@ -625,7 +655,7 @@ class CinemaController{
             //query : selects role's name and description
             //used to display role's info
             $queryRoleInfo = $pdo -> prepare("
-                SELECT nom_role, description_role
+                SELECT role.id_role, nom_role, description_role
                 FROM role
                 WHERE role.id_role = :id
             ");
@@ -658,10 +688,10 @@ class CinemaController{
                 //sanitizing string inputs to avoid XSS vulnerability
 
                 //mandatory fields
-                $rolename = filter_input(INPUT_POST,"inputFirstname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $rolename = filter_input(INPUT_POST,"inputRoleName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 
                 //optional fields
-                $roledesc = filter_input(INPUT_POST,"inputLastname", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $roledesc = filter_input(INPUT_POST,"inputRoleDesc", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                 $querySubmitRole = $pdo -> prepare("
                     INSERT INTO role (nom_role, description_role)
@@ -675,6 +705,20 @@ class CinemaController{
                 
                 header("Location:index.php?action=listRoles");
             }
+        }
+
+        public function deleteRole($id){
+            $pdo = Connect::Connexion();
+            $queryDeleteRole = $pdo->prepare("
+                 DELETE FROM role
+                 WHERE role.id_role = :id
+            ");
+
+            $queryDeleteRole -> execute([
+                "id" => $id
+            ]);
+
+            header("Location:index.php?action=listActors");
         }
 
 //-------------------------------------GENRES-------------------------------------------
