@@ -18,10 +18,12 @@
 }
 
 #wrapper{
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: var(--secColor);
 }
 
 main{
@@ -114,43 +116,49 @@ nav{
     transition: transform 0.2s;
     top: 50px;
     right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: var(--bgColor);
     list-style: none;
-    padding: 10px;
+    padding: 20px;
+    width: 50%;
 }
 
 .hideMenu {
-    transform: translateY(-150%);
+    transform: translateX(150%);
 }
 
 #menu li{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .menuItem{
     color: white;
+    font-size: larger;
 }
 
 /* --------------------------------MAIN-------------------------------- */
-#wrapper{
-    display: flex;
-    flex-direction: column;
+.container{
+    margin-top: 60px;
+    height: 100%;
+    min-height: 83vh;
     background-color: var(--secColor);
+    display: flex;
+    padding-bottom: 15px;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
     /* ----------------------------HOME PAGE---------------------------- */
     .section{
         background-color: var(--secColor);
-        padding-bottom: 25px;
-    }
-
-    #section1{
-        padding-top: 75px;
     }
 
     .sectionTitle{
-        font-size: larger;
+        font-size: 175%;
         padding: 15px;
         color: var(--bgColor);
     }
@@ -253,19 +261,12 @@ nav{
     }
 
     /* ----------------------------LISTS---------------------------- */
-    .container{
-        margin-top: 70px;
-        padding: 10px;
-        height: 100%;
-        background-color: var(--secColor);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
 
     .mainTitle{
         color: var(--bgColor);
+        margin-top: 15px;
         margin-bottom: 25px;
+        margin-left: 10px;
     }
 
     .add{
@@ -278,12 +279,13 @@ nav{
         width: 140px;
         border: 1px solid white;
         cursor: pointer;
+        margin-left: 10px;
     }
 
     .list{
         background-color: var(--cardColor);
         padding: 5px;
-        margin-top: 10px;
+        margin: 10px;
         border-radius: 7px;
         border-spacing: 0;
     }
@@ -368,6 +370,18 @@ nav{
 
     .info p{
         margin-bottom: 10px;
+    }
+
+    .genresList{
+        display: flex;
+        gap: 5px;
+    }
+
+    .genresList ul{
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        gap: 10px;
     }
 
     .info a{
@@ -565,4 +579,184 @@ footer h2{
     justify-content: space-around;
     font-size: 150%;
     margin-top: 10px;
+}
+
+/* --------------------------------DESKTOP-------------------------------- */
+@media only screen and (min-device-width : 1024px){
+
+    #wrapper{
+        background-color: #4d4d4d;
+    }
+
+    main{
+        background-color: #4d4d4d;
+        padding-left: 250px;
+        padding-right: 250px;
+    }
+
+    /* --------------------------------NAVBAR-------------------------------- */
+    #searchbar{
+        height: 30px;
+        width: 350px;
+        border-style: none;
+        text-align: center;
+        color: white;
+        background-color: black;
+    }
+    
+    #searchButton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        width: 30px;
+        border-style: none;
+        background-color: #e7c253;
+        color: var(--bgColor);
+    }
+    
+    #burger{
+        cursor: pointer;
+        height: 30px;
+        width: 30px;
+        margin-right: 10px;
+        border-style: none;
+        background-color: var(--bgColor);
+        display: none;
+    }
+    
+    #menu{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        top: 0px;
+        right: 0;
+        background-color: var(--bgColor);
+        list-style: none;
+        padding: 0px;
+        margin-left: 25px;
+        margin-right: 3%;
+        width: 50%;
+    }
+    
+    .hideMenu {
+        transform: translateX(0);
+    }
+    
+    #menu li{
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    
+    .menuItem{
+        color: white;
+        font-size: larger;
+    }
+
+    /* --------------------------------HOMEPAGE-------------------------------- */
+    .section{
+        background-color: var(--secColor);
+    }
+
+    .sectionTitle{
+        font-size: 200%;
+        padding: 15px;
+        color: var(--bgColor);
+    }
+
+    #moviePresentation{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .posterContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--cardColor);
+        padding: 25px;
+        border-radius: 7px;
+    }
+
+    .posterContainerCarousel{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--cardColor);
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    .poster a{
+        height: 400px;
+        width: 300px;
+    }
+
+    .poster a img{
+        height: inherit;
+        width: inherit;
+        object-fit: cover;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+
+    .titleCard{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 300px;
+        background-color: var(--bgColor);
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+    }
+
+    .titleCard a{
+        color: white;
+    }
+
+    .popularSelection{
+        display: flex;
+        justify-content: space-evenly;
+        gap: 10px;
+        background-color: var(--cardColor);
+        padding: 25px;
+        border-radius: 7px;
+    }
+
+    .personCard{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .portrait a{
+        height: 200px;
+        width: 150px;
+    }
+
+    .portrait a img{
+        height: inherit;
+        width: inherit;
+        object-fit: cover;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+    }
+
+    .nameCard{
+        width: 150px;
+        height: 56px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: var(--bgColor);
+        text-align: center;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
+    }
+
+    .nameCard a{
+        color: white;
+    }
 }
