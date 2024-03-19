@@ -1,7 +1,6 @@
 <?php
     ob_start();
     $movie = $queryMovieInfo->fetch();
-    $casting = $queryCasting->fetchAll();
 ?>
 
 <div class="container">
@@ -41,6 +40,17 @@
             <p>
                 Score : <?= $movie["note"] ?>
             </p>
+
+            <div class="genresList">
+                <span>Genre(s) : </span>
+                <ul>
+                    <?php
+                    foreach($queryGenres->fetchAll() as $genre){ ?>
+                        <li><?= $genre["nom_genre"] ?></li>
+                    <?php }?>  
+                </ul>
+            </div>
+            
         </div>
 
         <figure class="infoImg">
@@ -65,7 +75,7 @@
         </div>
         
     <?php
-    foreach ($casting as $c) {?>
+    foreach ($queryCasting->fetchAll() as $c) {?>
         <div class="subInfoItem">
             <div class="actorinfomini">
                 <figure class="actorphotomini">
