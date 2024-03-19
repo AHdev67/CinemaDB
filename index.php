@@ -79,6 +79,10 @@ if(isset($_GET["action"])){
                 case "submitDirector" :
                     $ctrlCinema -> submitDirector();
                     break;
+                
+                case "deleteDirector" :
+                    $ctrlCinema -> deleteDirector($id);
+                    break;
 
 //--------------------------------ACTORS-----------------------------------
         case "listActors" :
@@ -97,6 +101,10 @@ if(isset($_GET["action"])){
                     $ctrlCinema -> submitActor();
                     break;
 
+                case "deleteActor" :
+                    $ctrlCinema -> deleteActor($id);
+                    break;
+
 //--------------------------------ROLES-----------------------------------
         case "listRoles" :
             $ctrlCinema -> listRoles();
@@ -112,6 +120,10 @@ if(isset($_GET["action"])){
                 
                 case "submitRole" :
                     $ctrlCinema -> submitRole();
+                    break;
+
+                case "deleteRole" :
+                    $ctrlCinema -> deleteRole($id);
                     break;
 
 //--------------------------------GENRES-----------------------------------
