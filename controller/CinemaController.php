@@ -114,6 +114,14 @@ class CinemaController{
             ");
             $queryMovieInfo->execute(["id" => $id]);
 
+            $queryGenres = $pdo -> prepare("
+                SELECT nom_genre
+                FROM genre
+                INNER JOIN categoriser ON genre.id_genre = categoriser.id_genre
+                WHERE categoriser.id_film = :id
+            ");
+            $queryGenres->execute(["id" => $id]);
+
             //query : selects person's surname, name, and name of role they played in a given movie
             // used to display movie's casting
             $queryCasting = $pdo -> prepare("
