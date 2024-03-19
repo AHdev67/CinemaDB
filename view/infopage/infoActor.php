@@ -6,17 +6,26 @@
 
 <div class="container">
 
-    <h1 class="mainTitle"><?= $actor["nomActeur"] ?></h1>
+    <div class="infoHeader">
+        <h1 class="mainTitle"><?= $actor["nomActeur"] ?></h1>
+
+        <div class="options">
+            <a href="index.php?action=deleteActor&id=<?= $actor["id_acteur"]?>" class="delete">
+                <i class="fa-solid fa-trash"></i>
+            </a>
+        </div>
+    </div>
     
     <div class="infoBox">
-        <div class="info">
-            <p>(<?= $actor["DoB"] ?>)</p>
-            <p><?= $actor["sexe"] ?></p>
-        </div>
+        <div class="infoTop">
+            <div class="info">
+                <p>Date of birth : (<?= $actor["DoB"] ?>)</p>
+            </div>
 
-        <figure class="infoImg">
-            <img src="<?= $actor["photo"] ?>" alt="photo of actor">
-        </figure>
+            <figure class="infoImg">
+                <img src="<?= $actor["photo"] ?>" alt="photo of actor">
+            </figure>
+        </div>
 
          <article>
             <h3>Biography :</h3>
@@ -28,6 +37,7 @@
 
     <div class="subInfo">
         <h3>Filmography :</h3>
+        
     <?php
     foreach ($filmography as $f) {?>
         <div class="subInfoItem">

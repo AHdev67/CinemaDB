@@ -6,7 +6,15 @@
 
 <div class="container">
 
-    <h1 class="mainTitle"><?= $role["nom_role"] ?></h1>
+    <div class="infoHeader">
+        <h1 class="mainTitle"><?= $role["nom_role"] ?></h1>
+
+        <div class="options">
+            <a href="index.php?action=deleteRole&id=<?= $role["id_role"]?>" class="delete">
+                <i class="fa-solid fa-trash"></i>
+            </a>
+        </div>
+    </div>
 
     <div class="infoBox">
 
