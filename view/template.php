@@ -17,7 +17,7 @@
         <header>
             <nav>
                 <div id="navtitle">
-                    <a href="index.php?action=homePage">
+                    <a href="index.php?action=homePage" aria-label="main title">
                         <i id="navlogo" class="fa-solid fa-clapperboard"></i>
                         CINEMA DB
                     </a>
@@ -25,11 +25,11 @@
 
                 <div id="search">
                     <input type="text" placeholder="search" id="searchbar"></input>
-                    <a id="searchButton" href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a id="searchButton" href="" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </div> 
                     
 
-                <button id="burger">
+                <button id="burger" aria-label="burger menu button">
                     <i id="menuIcon" class="fa-solid fa-bars"></i>
                     <i id="closeIcon" class="fa-solid fa-xmark"></i>
                 </button>
@@ -37,22 +37,22 @@
                 <ul id="menu" class="hideMenu">
 
                     <li>
-                        <a class="menuItem" href="index.php?action=homePage">HOME</a>
+                        <a class="menuItem" href="index.php?action=homePage" aria-label="to homepage">HOME</a>
                     </li>                
                     <li>
-                        <a class="menuItem" href="index.php?action=listMovies">MOVIES</a>
+                        <a class="menuItem" href="index.php?action=listMovies" aria-label="to movies list">MOVIES</a>
                     </li>
                     <li>
-                        <a class="menuItem" href="index.php?action=listDirectors">DIRECTORS</a>
+                        <a class="menuItem" href="index.php?action=listDirectors" aria-label="to directors list">DIRECTORS</a>
                     </li>
                     <li>
-                        <a class="menuItem" href="index.php?action=listActors">ACTORS</a>
+                        <a class="menuItem" href="index.php?action=listActors" aria-label="to actors list">ACTORS</a>
                     </li>
                     <li>
-                        <a class="menuItem" href="index.php?action=listRoles">ROLES</a>
+                        <a class="menuItem" href="index.php?action=listRoles" aria-label="to roles list">ROLES</a>
                     </li>
                     <li>
-                        <a class="menuItem" href="index.php?action=listGenres">GENRES</a>
+                        <a class="menuItem" href="index.php?action=listGenres" aria-label="to genres list">GENRES</a>
                     </li>
                 </ul>
             </nav>
@@ -93,15 +93,15 @@
 
                 <p>
                     <span id="insta" class="socialIcon">
-                        <a href=""><i class="fa-brands fa-instagram"></i></a>
+                        <a href="" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a>
                     </span>
 
                     <span id="twitter" class="socialIcon">
-                        <a href=""><i class="fa-brands fa-square-twitter"></i></a>
+                        <a href="" aria-label="twitter"><i class="fa-brands fa-square-twitter"></i></a>
                     </span>
 
                     <span id="fb" class="socialIcon">
-                        <a href=""><i class="fa-brands fa-square-facebook"></i></a>
+                        <a href="" aria-label="facebook"><i class="fa-brands fa-square-facebook"></i></a>
                     </span>
                 </p>
             </div>
