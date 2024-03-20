@@ -190,15 +190,16 @@ class CinemaController{
 
                 //mandatory fields
                 $title = filter_input(INPUT_POST,"inputTile", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $director = $_POST["inputDirector"];
+                $director = filter_input(INPUT_POST,"inputDirector", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 //converting retrieved release date as string to datetime
                 $date = new \DateTime(filter_input(INPUT_POST,"inputReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
                 $duration = filter_input(INPUT_POST,"inputDuration", FILTER_VALIDATE_INT);
-                $score = $_POST["inputScore"];
 
                 //optional fields
                 $synopsis = filter_input(INPUT_POST,"inputSynopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $poster = filter_input(INPUT_POST,"inputPoster", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $score = filter_input(INPUT_POST,"inputScore", FILTER_VALIDATE_INT);
+
                 $querySubmitMovieUpdate = $pdo->prepare("
                     UPDATE film 
                     SET 
@@ -212,16 +213,22 @@ class CinemaController{
                     WHERE film.id_film = :id
                 ");
 
-                $querySubmitMovieUpdate->execute([
-                    "title" => $title,
-                    "date" => $date->format("Y-m-d"),
-                    "duration" => $duration,
-                    "score" => $score,
-                    "synopsis" => $synopsis,
-                    "poster" => $poster,
-                    "director" => $director,
-                    "id" => $id
-                ]);
+                if($title && $date && $duration && $director){
+                    $querySubmitMovieUpdate->execute([
+                        "title" => $title,
+                        "date" => $date->format("Y-m-d"),
+                        "duration" => $duration,
+                        "score" => $score,
+                        "synopsis" => $synopsis,
+                        "poster" => $poster,
+                        "director" => $director,
+                        "id" => $id
+                    ]);
+                    $_SESSION['alerte'] = "<div class='alert'>Movie information updated</div>";
+                }
+                else{
+                    $_SESSION['alerte'] = "<div class='alert'>Error, incorrect value</div>";
+                }
 
                 $queryClearMovieGenres = $pdo->prepare("
                     DELETE FROM categoriser
@@ -310,20 +317,27 @@ class CinemaController{
                     $actor = $_POST["inputActor"];
                     $role = $_POST["inputRole"];
 
-                    $querySubmitCasting = $pdo -> prepare("
-                    INSERT INTO casting (id_film, id_acteur, id_role)
-                    VALUES (:idFilm, :idActeur, :idRole)
-                    ");
-                    try {
-                        $querySubmitCasting->execute([
-                            "idFilm" => $id,
-                            "idActeur" => $actor,
-                            "idRole" => $role
-                        ]);
-                    }
-                    catch(\PDOException $ex){
+                    if($actor && $role){
+                        $querySubmitCasting = $pdo -> prepare("
+                        INSERT INTO casting (id_film, id_acteur, id_role)
+                        VALUES (:idFilm, :idActeur, :idRole)
+                        ");
+                        try {
+                            $querySubmitCasting->execute([
+                                "idFilm" => $id,
+                                "idActeur" => $actor,
+                                "idRole" => $role
+                            ]);
+                        }
+                        catch(\PDOException $ex){
 
+                        }
                     }
+                    else{
+                        $_SESSION['alerte'] = "<div class='alert'>Error, incorrect value</div>";
+                        header("Location:index.php?action=addMovieDisplay");
+                    }
+                    
                 }
 
                 header("Location:index.php?action=addCastingDisplay&id=$id");
@@ -359,49 +373,55 @@ class CinemaController{
 
                 //mandatory fields
                 $title = filter_input(INPUT_POST,"inputTile", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-                $director = $_POST["inputDirector"];
+                $director = filter_input(INPUT_POST,"inputDirector", FILTER_VALIDATE_INT);
                 //converting retrieved release date as string to datetime
                 $date = new \DateTime(filter_input(INPUT_POST,"inputReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS));
                 $duration = filter_input(INPUT_POST,"inputDuration", FILTER_VALIDATE_INT);
-                $score = $_POST["inputScore"];
 
                 //optional fields
                 $synopsis = filter_input(INPUT_POST,"inputSynopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $poster = filter_input(INPUT_POST,"inputPoster", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $score = filter_input(INPUT_POST,"inputScore", FILTER_VALIDATE_INT);
 
-                $querySubmitMovie = $pdo -> prepare("
+                if($title && $date && $duration && $director){
+
+                    $querySubmitMovie = $pdo -> prepare("
                     INSERT INTO film (titre_film, date_sortie, duree, note, synopsis, affiche, id_realisateur)
                     VALUES (:title, :date, :duration, :score, :synopsis, :poster, :director)
-                ");
-
-                $querySubmitMovie->execute([
-                    "title"=> $title,
-                    "date"=> $date->format("Y-m-d"),
-                    "duration"=> $duration,
-                    "score"=>$score,
-                    "synopsis"=> $synopsis,
-                    "poster"=> $poster,
-                    "director"=> $director
-                ]);
-
-                $movieId = $pdo->lastInsertId();
-
-                foreach($_POST as $name =>$value){
-                     
-                    if (str_contains($name, "inputGenre")){ // s'il y a inputGenre dans le nom de la clef
-                    $genre = $value;
-                    $queryCategorizeMovie = $pdo -> prepare("
-                    INSERT INTO categoriser (id_film, id_genre)
-                    VALUES (:movieId, :genreId)
                     ");
-                    $queryCategorizeMovie->execute([
-                        "movieId"=> $movieId,
-                        "genreId"=> $genre
+
+                    $querySubmitMovie->execute([
+                        "title"=> $title,
+                        "date"=> $date->format("Y-m-d"),
+                        "duration"=> $duration,
+                        "score"=>$score,
+                        "synopsis"=> $synopsis,
+                        "poster"=> $poster,
+                        "director"=> $director
                     ]);
+
+                    $movieId = $pdo->lastInsertId();
+
+                    foreach($_POST as $name =>$value){
+                        
+                        if (str_contains($name, "inputGenre")){ // s'il y a inputGenre dans le nom de la clef
+                        $genre = $value;
+                        $queryCategorizeMovie = $pdo -> prepare("
+                        INSERT INTO categoriser (id_film, id_genre)
+                        VALUES (:movieId, :genreId)
+                        ");
+                        $queryCategorizeMovie->execute([
+                            "movieId"=> $movieId,
+                            "genreId"=> $genre
+                        ]);
+                        }
                     }
+                    header("Location:index.php?action=listMovies");
                 }
-                
-                header("Location:index.php?action=listMovies");
+                else{
+                    $_SESSION['alerte'] = "<div class='alert'>Error, incorrect value</div>";
+                    header("Location:index.php?action=addMovieDisplay");
+                }
             }
         }
 
@@ -482,40 +502,49 @@ class CinemaController{
                 $photo = filter_input(INPUT_POST,"inputPhoto", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $biography = filter_input(INPUT_POST,"inputBiography", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-                $querySubmitDirector = $pdo -> prepare("
+                if($firstname && $lastname && $DoB && $sex){
+                    $querySubmitDirector = $pdo -> prepare("
                     INSERT INTO personne (prenom, nom, date_naissance, sexe, biographie, photo)
                     VALUES (:firstname, :lastname, :dateOfBirth, :sex, :biography, :photo)
-                ");
-
-                $querySubmitDirector->execute([
-                    "firstname"=> $firstname,
-                    "lastname"=> $lastname,
-                    "dateOfBirth"=> $DoB->format("Y-m-d"),
-                    "sex"=>$sex,
-                    "biography"=> $biography,
-                    "photo"=> $photo
-                ]);
-
-                $DirectorId = $pdo->lastInsertId();
-
-                $queryCategorizeDirector = $pdo -> prepare("
-                    INSERT INTO realisateur (id_personne)
-                    VALUES (:DirectorId)
                     ");
 
-                $queryCategorizeDirector->execute([
-                    "DirectorId"=> $DirectorId,
+                    $querySubmitDirector->execute([
+                        "firstname"=> $firstname,
+                        "lastname"=> $lastname,
+                        "dateOfBirth"=> $DoB->format("Y-m-d"),
+                        "sex"=>$sex,
+                        "biography"=> $biography,
+                        "photo"=> $photo
                     ]);
-                
-                header("Location:index.php?action=listDirectors");
+
+                    $DirectorId = $pdo->lastInsertId();
+
+                    $queryCategorizeDirector = $pdo -> prepare("
+                        INSERT INTO realisateur (id_personne)
+                        VALUES (:DirectorId)
+                        ");
+
+                    $queryCategorizeDirector->execute([
+                        "DirectorId"=> $DirectorId,
+                        ]);
+                    
+                    header("Location:index.php?action=listDirectors");
+                }
+                else{
+                    $_SESSION['alerte'] = "<div class='alert'>Error, incorrect value</div>";
+                    header("Location:index.php?action=addDirectorDisplay");
+                }
             }
         }
 
         public function deleteDirector($id){
             $pdo = Connect::Connexion();
             $queryDeleteDirector = $pdo->prepare("
-                 DELETE FROM personne
-                 WHERE personne.id_personne = :id
+                DELETE FROM personne
+                WHERE personne.id_personne IN
+                    (SELECT realisateur.id_personne
+                    FROM realisateur
+                    WHERE realisateur.id_realisateur = :id)
             ");
 
             $queryDeleteDirector -> execute([
@@ -590,40 +619,49 @@ class CinemaController{
                 $photo = filter_input(INPUT_POST,"inputPhoto", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 $biography = filter_input(INPUT_POST,"inputBiography", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-                $querySubmitActor = $pdo -> prepare("
+                if($firstname && $lastname && $DoB && $sex){
+                    $querySubmitActor = $pdo -> prepare("
                     INSERT INTO personne (prenom, nom, date_naissance, sexe, biographie, photo)
                     VALUES (:firstname, :lastname, :dateOfBirth, :sex, :biography, :photo)
-                ");
-
-                $querySubmitActor->execute([
-                    "firstname"=> $firstname,
-                    "lastname"=> $lastname,
-                    "dateOfBirth"=> $DoB->format("Y-m-d"),
-                    "sex"=>$sex,
-                    "biography"=> $biography,
-                    "photo"=> $photo
-                ]);
-
-                $ActorId = $pdo->lastInsertId();
-
-                $queryCategorizeActor = $pdo -> prepare("
-                    INSERT INTO acteur (id_personne)
-                    VALUES (:ActorId)
                     ");
 
-                $queryCategorizeActor->execute([
-                    "ActorId"=> $ActorId,
+                    $querySubmitActor->execute([
+                        "firstname"=> $firstname,
+                        "lastname"=> $lastname,
+                        "dateOfBirth"=> $DoB->format("Y-m-d"),
+                        "sex"=>$sex,
+                        "biography"=> $biography,
+                        "photo"=> $photo
                     ]);
-                
-                header("Location:index.php?action=listActors");
+
+                    $ActorId = $pdo->lastInsertId();
+
+                    $queryCategorizeActor = $pdo -> prepare("
+                        INSERT INTO acteur (id_personne)
+                        VALUES (:ActorId)
+                        ");
+
+                    $queryCategorizeActor->execute([
+                        "ActorId"=> $ActorId,
+                        ]);
+                    
+                    header("Location:index.php?action=listActors");
+                }
+                else{
+                    $_SESSION['alerte'] = "<div class='alert'>Error, incorrect value</div>";
+                    header("Location:index.php?action=addActorDisplay");
+                }
             }
         }
 
         public function deleteActor($id){
             $pdo = Connect::Connexion();
             $queryDeleteActor = $pdo->prepare("
-                 DELETE FROM personne
-                 WHERE personne.id_personne = :id
+            DELETE FROM personne
+            WHERE personne.id_personne IN
+                (SELECT acteur.id_personne
+                FROM acteur
+                WHERE acteur.id_acteur = :id)
             ");
 
             $queryDeleteActor -> execute([
@@ -632,7 +670,6 @@ class CinemaController{
 
             header("Location:index.php?action=listActors");
         }
-
 
 //-------------------------------------ROLES-------------------------------------------
 
@@ -693,17 +730,23 @@ class CinemaController{
                 //optional fields
                 $roledesc = filter_input(INPUT_POST,"inputRoleDesc", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-                $querySubmitRole = $pdo -> prepare("
+                if($rolename){
+                      $querySubmitRole = $pdo -> prepare("
                     INSERT INTO role (nom_role, description_role)
                     VALUES (:rolename, :roledesc)
-                ");
+                    ");
 
-                $querySubmitRole->execute([
-                    "rolename"=> $rolename,
-                    "roledesc"=> $roledesc
-                ]);
-                
-                header("Location:index.php?action=listRoles");
+                    $querySubmitRole->execute([
+                        "rolename"=> $rolename,
+                        "roledesc"=> $roledesc
+                    ]);
+                    
+                    header("Location:index.php?action=listRoles");
+                }
+                else{
+                    $_SESSION['alerte'] = "<div class='alert'>Error, incorrect value</div>";
+                    header("Location:index.php?action=addRoleDisplay");
+                }
             }
         }
 
@@ -718,7 +761,7 @@ class CinemaController{
                 "id" => $id
             ]);
 
-            header("Location:index.php?action=listActors");
+            header("Location:index.php?action=listRoles");
         }
 
 //-------------------------------------GENRES-------------------------------------------
