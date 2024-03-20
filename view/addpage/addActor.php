@@ -7,7 +7,14 @@
         <span>(fields with * are mandatory)</span>
     </div>
 
-    <a class="return" href="index.php?action=listMovies">< Return to list</a>
+    <a class="return" href="index.php?action=listActors">< Return to list</a>
+
+    <?php 
+        if(isset($_SESSION['alerte'])){
+            echo $_SESSION['alerte'];
+            unset($_SESSION['alerte']);
+        }
+    ?>
 
     <form class="customForm" action="index.php?action=submitActor" method="post">
 
@@ -51,4 +58,5 @@
 <?php
 $title= "ADD ACTOR";
 $content= ob_get_clean();
+$description= "Add an actor to the database.";
 require "view/template.php";

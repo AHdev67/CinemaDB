@@ -10,6 +10,13 @@
 
     <a class="return" href="index.php?action=infoMovie&id=<?= $id ?>">< Return to movie</a>
 
+    <?php 
+        if(isset($_SESSION['alerte'])){
+            echo $_SESSION['alerte'];
+            unset($_SESSION['alerte']);
+        }
+    ?>
+
     <form class="customForm" action="index.php?action=submitCasting&id=<?= $id ?>" method="post">
 
         <p class="formBasicField">
@@ -76,4 +83,5 @@
 <?php
 $title= "ADD CASTING";
 $content= ob_get_clean();
+$description= "Add an actor to a movie's casting.";
 require "view/template.php";

@@ -9,6 +9,13 @@
 
     <a class="return" href="index.php?action=listMovies">< Return to list</a>
 
+    <?php 
+        if(isset($_SESSION['alerte'])){
+            echo $_SESSION['alerte'];
+            unset($_SESSION['alerte']);
+        }
+    ?>
+
     <form class="customForm" action="index.php?action=submitMovie" method="post">
 
         <p class="formBasicField">
@@ -76,4 +83,5 @@
 <?php
 $title= "ADD MOVIE";
 $content= ob_get_clean();
+$description= "Add a movie to the database.";
 require "view/template.php";

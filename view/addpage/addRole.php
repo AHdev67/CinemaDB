@@ -7,7 +7,14 @@
         <span>(fields with * are mandatory)</span>
     </div>
 
-    <a class="return" href="index.php?action=listMovies">< Return to list</a>
+    <a class="return" href="index.php?action=listRoles">< Return to list</a>
+
+    <?php 
+        if(isset($_SESSION['alerte'])){
+            echo $_SESSION['alerte'];
+            unset($_SESSION['alerte']);
+        }
+    ?>
 
     <form class="customForm" action="index.php?action=submitRole" method="post">
 
@@ -28,4 +35,5 @@
 <?php
 $title= "ADD ROLE";
 $content= ob_get_clean();
+$description= "Add a role to the database.";
 require "view/template.php";
