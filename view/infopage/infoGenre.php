@@ -46,4 +46,5 @@
 
 $title= "GENRE INFO";
 $content= ob_get_clean();
+$description= "Movies categorized in ".$genre['nom_genre'].".";
 require "view/template.php";

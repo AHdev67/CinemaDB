@@ -54,4 +54,5 @@
 
 $title= "ROLE INFO";
 $content= ob_get_clean();
+$description= "Information on the role of ".$role['nom_role'].".";
 require "view/template.php";

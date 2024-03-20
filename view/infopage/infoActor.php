@@ -63,4 +63,5 @@
 
 $title= "ACTOR INFO";
 $content= ob_get_clean();
+$description= "Information on ".$actor['nomActeur'].".";
 require "view/template.php";

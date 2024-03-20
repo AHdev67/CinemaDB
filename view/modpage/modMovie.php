@@ -103,4 +103,5 @@
 <?php
 $title= "MODIFY MOVIE";
 $content= ob_get_clean();
+$description= "Modify a movie.";
 require "view/template.php";

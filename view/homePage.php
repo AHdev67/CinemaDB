@@ -185,4 +185,5 @@
 <?php
 $title= "HOME";
 $content= ob_get_clean();
+$description = "Need info on a movie, an actor perhaps ? We got it all at CinemaDB.";
 require "view/template.php";

@@ -110,4 +110,5 @@
 
 $title= "MOVIE INFO";
 $content= ob_get_clean();
+$description= "Information on".$movie['titre_film'].", by".$movie['realisateurFilm'].".";
 require "view/template.php";

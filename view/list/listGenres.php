@@ -25,4 +25,5 @@
 
 $title= "GENRES";
 $content= ob_get_clean();
+$description= "List of genres in database.";
 require "view/template.php";

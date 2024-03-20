@@ -27,4 +27,5 @@
 
 $title= "DIRECTORS";
 $content= ob_get_clean();
+$description= "List of directors in database.";
 require "view/template.php";

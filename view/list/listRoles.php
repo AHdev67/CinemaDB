@@ -26,4 +26,5 @@
 
 $title= "ROLES";
 $content= ob_get_clean();
+$description= "List of roles in database.";
 require "view/template.php";

@@ -26,4 +26,5 @@
 
 $title= "ACTORS";
 $content= ob_get_clean();
+$description= "List of actors in database.";
 require "view/template.php";

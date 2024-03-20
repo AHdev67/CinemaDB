@@ -68,4 +68,5 @@
 
 $title= "DIRECTOR INFO";
 $content= ob_get_clean();
+$description= "Information on ".$director['nomRealisateur'].".";
 require "view/template.php";

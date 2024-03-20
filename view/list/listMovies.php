@@ -1,4 +1,6 @@
-<?php ob_start(); ?>
+<?php
+ob_start();
+?>
 
 <div class="container">
     <h1 class="mainTitle">MOVIES</h1>
@@ -30,4 +32,5 @@
 
 $title= "MOVIES";
 $content= ob_get_clean();
+$description= "List of movies in database.";
 require "view/template.php";
